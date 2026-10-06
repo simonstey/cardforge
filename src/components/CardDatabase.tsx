@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Card, Rarity, CardColor } from '../types/card';
 import { CardItem } from './CardItem';
 import { determineColors, getRarityLabel, getColorBadge } from '../utils/cardHelpers';
+import { playClickSound } from '../utils/audioFeedback';
 import { Search, Plus, Download, Upload, Filter, Trash2, Edit3, Database, Sparkles, Check, X } from 'lucide-react';
 
 interface CardDatabaseProps {
@@ -316,11 +317,14 @@ export const CardDatabase: React.FC<CardDatabaseProps> = ({
           ].map(r => (
             <button
               key={r.id}
-              onClick={() => setSelectedRarity(r.id)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors shrink-0 cursor-pointer ${
+              onClick={() => {
+                playClickSound();
+                setSelectedRarity(r.id);
+              }}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all shrink-0 cursor-pointer ${
                 selectedRarity === r.id
-                  ? 'bg-cyan-950 text-cyan-300 border-cyan-500'
-                  : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                  ? 'bg-cyan-950 text-cyan-300 border-cyan-500 shadow-md shadow-cyan-950/40'
+                  : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200'
               }`}
             >
               {r.label}
@@ -335,11 +339,14 @@ export const CardDatabase: React.FC<CardDatabaseProps> = ({
             return (
               <button
                 key={col}
-                onClick={() => setSelectedColor(col)}
-                className={`px-2 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                onClick={() => {
+                  playClickSound();
+                  setSelectedColor(col);
+                }}
+                className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-slate-100 text-slate-950 border-white'
-                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                    ? 'bg-slate-100 text-slate-950 border-white shadow-md'
+                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200'
                 }`}
               >
                 {col === 'ALL' ? 'Any Color' : col === 'Multicolor' ? 'Multi' : col}

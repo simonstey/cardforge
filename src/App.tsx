@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, BoosterSlotConfig, BoosterPack } from './types/card';
 import { STAR_WARS_SET } from './data/starWarsSet';
 import { generateBoosterBox } from './utils/boosterCollation';
+import { setSoundEnabled } from './utils/audioFeedback';
 import { BoosterConfigurator } from './components/BoosterConfigurator';
 import { BoosterSimulator } from './components/BoosterSimulator';
 import { CardDatabase } from './components/CardDatabase';
@@ -54,6 +55,7 @@ export default function App() {
   const [inspectingCard, setInspectingCard] = useState<Card | null>(null);
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [isSoundEnabled, setIsSoundEnabled] = useState<boolean>(true);
 
   // Save cards to localStorage whenever modified
   useEffect(() => {
@@ -196,6 +198,12 @@ export default function App() {
               packs={packs}
               onOpenPrintModal={() => setIsPrintModalOpen(true)}
               onInspectCard={setInspectingCard}
+              isSoundEnabled={isSoundEnabled}
+              onToggleSound={() => {
+                const next = !isSoundEnabled;
+                setIsSoundEnabled(next);
+                setSoundEnabled(next);
+              }}
             />
           </>
         ) : (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BoosterSlotConfig } from '../types/card';
+import { playClickSound } from '../utils/audioFeedback';
 import { Sliders, Sparkles, Palette, ShieldCheck, RefreshCw, Box } from 'lucide-react';
 
 interface BoosterConfiguratorProps {
@@ -180,8 +181,11 @@ export const BoosterConfigurator: React.FC<BoosterConfiguratorProps> = ({
                 <button
                   key={opt.val}
                   type="button"
-                  onClick={() => updateSlot('mythicRatio', opt.val)}
-                  className={`px-1.5 py-1 rounded text-[10px] font-medium border transition-colors ${
+                  onClick={() => {
+                    playClickSound();
+                    updateSlot('mythicRatio', opt.val);
+                  }}
+                  className={`px-1.5 py-1 rounded-lg text-[10px] font-semibold border transition-all cursor-pointer ${
                     Math.abs(config.mythicRatio - opt.val) < 0.015
                       ? 'bg-orange-950 text-orange-300 border-orange-600 font-bold'
                       : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
@@ -248,11 +252,14 @@ export const BoosterConfigurator: React.FC<BoosterConfiguratorProps> = ({
               <button
                 key={num}
                 type="button"
-                onClick={() => onPackCountChange(num)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors ${
+                onClick={() => {
+                  playClickSound();
+                  onPackCountChange(num);
+                }}
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                   packCount === num
-                    ? 'bg-cyan-950 text-cyan-300 border-cyan-600'
-                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                    ? 'bg-cyan-950 text-cyan-300 border-cyan-500 shadow-md shadow-cyan-950/50'
+                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200'
                 }`}
               >
                 {num === 36 ? '36 (Box)' : num === 6 ? '6 (Sealed)' : num === 3 ? '3 (Draft)' : num}
@@ -265,13 +272,16 @@ export const BoosterConfigurator: React.FC<BoosterConfiguratorProps> = ({
             max={100}
             value={packCount}
             onChange={e => onPackCountChange(Math.max(1, Math.min(100, parseInt(e.target.value) || 1)))}
-            className="w-16 px-2 py-1 text-center font-mono text-xs bg-slate-900 border border-slate-700 rounded-lg text-white ml-1"
+            className="w-16 px-2.5 py-1.5 text-center font-mono text-xs bg-slate-900 border border-slate-700 rounded-xl text-white ml-1"
           />
         </div>
 
         <button
           type="button"
-          onClick={onGenerate}
+          onClick={() => {
+            playClickSound();
+            onGenerate();
+          }}
           disabled={isGenerating}
           className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/50 hover:shadow-cyan-900/60 active:scale-95 transition-all disabled:opacity-50 cursor-pointer"
         >

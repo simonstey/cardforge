@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card } from '../types/card';
 import { getRarityColor, getRarityLabel, getColorBadge } from '../utils/cardHelpers';
+import { playClickSound } from '../utils/audioFeedback';
 import { X, Sparkles, User, BookOpen, Layers } from 'lucide-react';
 
 interface CardModalProps {
@@ -11,6 +12,14 @@ interface CardModalProps {
 }
 
 export const CardModal: React.FC<CardModalProps> = ({ card, onClose, onEdit, onDelete }) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   if (!card) return null;
 
   const isMythic = card.rarity === 'M';
@@ -18,8 +27,16 @@ export const CardModal: React.FC<CardModalProps> = ({ card, onClose, onEdit, onD
   const colors = card.colors || ['Colorless'];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 text-slate-100 overflow-hidden">
+    <div
+      onClick={e => {
+        if (e.target === e.currentTarget) {
+          playClickSound();
+          onClose();
+        }
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+    >
+      <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl p-6 text-slate-100 overflow-hidden">
         {/* Glow ambient background */}
         {isMythic && (
           <div className="absolute -top-24 -right-24 w-60 h-60 bg-orange-600/20 rounded-full blur-3xl pointer-events-none" />
