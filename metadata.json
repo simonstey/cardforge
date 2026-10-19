@@ -1,6 +1,0 @@
-{
-  "name": "CardForge Booster Pack Creator & Print Sheet Generator",
-  "description": "Simulate balanced booster packs with realistic color distribution, customizable rarities, interactive pack opener, and export print-ready PDF sheets with cut guides.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
