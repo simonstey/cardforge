@@ -20,10 +20,6 @@ export function setSoundEnabled(enabled: boolean) {
   isSoundEnabled = enabled;
 }
 
-export function getSoundEnabled(): boolean {
-  return isSoundEnabled;
-}
-
 export function playCardFlipSound() {
   if (!isSoundEnabled) return;
   const ctx = getAudioContext();

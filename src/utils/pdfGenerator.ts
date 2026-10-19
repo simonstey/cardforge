@@ -1,6 +1,8 @@
 import jsPDF from 'jspdf';
 import { Card, BoosterPack } from '../types/card';
 import { getRarityLabel } from './cardHelpers';
+import { getCardArt } from './cardArt';
+import { plainRulesText } from './rulesText';
 
 export interface PdfExportOptions {
   paperSize: 'letter' | 'a4';
@@ -11,11 +13,57 @@ export interface PdfExportOptions {
   cardsPerSheet: 9; // 3x3 layout
   bleedMm: number; // 0 or 1.5mm
   customBackText?: string;
+  /** 'scan' prints the original card scan where one exists; 'layout' draws the generated card face. */
+  faceStyle?: 'scan' | 'layout';
+  /** Start every pack on a fresh sheet, leaving the rest of the previous sheet empty. */
+  newSheetPerPack?: boolean;
+}
+
+interface PreparedImage {
+  data: string;
+  /** jsPDF alias, so each distinct image is embedded in the file once. */
+  alias: string;
+}
+
+/** Decode an image and re-encode it as JPEG, center-cropped to `aspect` (w/h) when given. */
+async function loadAsJpeg(url: string, aspect?: number): Promise<string | null> {
+  try {
+    const img = new Image();
+    img.src = url;
+    await img.decode();
+    const sw = img.naturalWidth;
+    const sh = img.naturalHeight;
+    let sx = 0;
+    let sy = 0;
+    let cw = sw;
+    let ch = sh;
+    if (aspect) {
+      if (sw / sh > aspect) {
+        cw = Math.round(sh * aspect);
+        sx = Math.round((sw - cw) / 2);
+      } else {
+        ch = Math.round(sw / aspect);
+        sy = Math.round((sh - ch) / 2);
+      }
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = cw;
+    canvas.height = ch;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+    ctx.drawImage(img, sx, sy, cw, ch, 0, 0, cw, ch);
+    return canvas.toDataURL('image/jpeg', 0.92);
+  } catch {
+    return null;
+  }
 }
 
 // Standard MTG / Poker card dimensions in mm
 export const CARD_WIDTH_MM = 63;
 export const CARD_HEIGHT_MM = 88;
+
+/** Art box of the generated layout, in mm (see drawCardFace). */
+const LAYOUT_ART = { x: 4, y: 12.5, w: CARD_WIDTH_MM - 8, h: 28 };
 
 export async function generatePrintPdf(
   packs: BoosterPack[],
@@ -48,8 +96,11 @@ export async function generatePrintPdf(
     cardIndexInPack: number;
   }
 
-  const items: PrintableItem[] = [];
+  const items: (PrintableItem | null)[] = [];
   packs.forEach(pack => {
+    if (options.newSheetPerPack) {
+      while (items.length % 9 !== 0) items.push(null);
+    }
     pack.cards.forEach((card, idx) => {
       items.push({
         card,
@@ -58,6 +109,39 @@ export async function generatePrintPdf(
       });
     });
   });
+
+  // Load artwork once per distinct image before drawing.
+  const faceStyle = options.faceStyle ?? 'scan';
+  const artAspect = LAYOUT_ART.w / LAYOUT_ART.h;
+  const scanFor = new Map<PrintableItem, PreparedImage>();
+  const artFor = new Map<PrintableItem, PreparedImage>();
+  const cache = new Map<string, Promise<string | null>>();
+  const load = (key: string, url: string, aspect?: number) => {
+    if (!cache.has(key)) cache.set(key, loadAsJpeg(url, aspect));
+    return cache.get(key)!;
+  };
+
+  const printable = items.filter((i): i is PrintableItem => i !== null);
+  let loaded = 0;
+  await Promise.all(
+    printable.map(async item => {
+      // Same seed as the on-screen pack, so basic lands print with the art you saw.
+      const pack = packs.find(p => p.packNumber === item.packNumber);
+      const art = getCardArt(item.card, item.packNumber * 31 + (pack ? pack.cards.indexOf(item.card) : 0));
+      if (art?.fullSrc && faceStyle === 'scan') {
+        const data = await load(`scan:${art.fullSrc}`, art.fullSrc);
+        if (data) scanFor.set(item, { data, alias: `scan:${art.fullSrc}` });
+      }
+      if (art && !scanFor.has(item)) {
+        const data = await load(`art:${art.src}`, art.src, artAspect);
+        if (data) artFor.set(item, { data, alias: `art:${art.src}` });
+      }
+      loaded++;
+      if (onProgress && loaded % 9 === 0) {
+        onProgress(Math.round((loaded / printable.length) * 30), `Loading artwork (${loaded} of ${printable.length})…`);
+      }
+    })
+  );
 
   const totalPages = Math.ceil(items.length / 9);
   let isFirstPage = true;
@@ -69,10 +153,13 @@ export async function generatePrintPdf(
     isFirstPage = false;
 
     if (onProgress) {
-      onProgress(Math.round(((pageIdx + 1) / totalPages) * 100), `Rendering Sheet ${pageIdx + 1} of ${totalPages}...`);
+      onProgress(30 + Math.round(((pageIdx + 1) / totalPages) * 70), `Drawing sheet ${pageIdx + 1} of ${totalPages}…`);
+      // Yield so the progress bar can repaint between sheets.
+      await new Promise(resolve => setTimeout(resolve, 0));
     }
 
-    const pageCards = items.slice(pageIdx * 9, (pageIdx + 1) * 9);
+    const pageSlots = items.slice(pageIdx * 9, (pageIdx + 1) * 9);
+    const pageCards = pageSlots.filter((i): i is PrintableItem => i !== null);
 
     // Page Header / Pack Info
     if (options.includePackHeaders) {
@@ -88,13 +175,19 @@ export async function generatePrintPdf(
     }
 
     // Draw cards in 3x3 grid
-    pageCards.forEach((item, slotIdx) => {
+    pageSlots.forEach((item, slotIdx) => {
+      if (!item) return;
       const col = slotIdx % cols;
       const row = Math.floor(slotIdx / cols);
       const x = marginX + col * CARD_WIDTH_MM;
       const y = marginY + row * CARD_HEIGHT_MM;
 
-      drawCardFace(pdf, item.card, x, y, item.packNumber);
+      const scan = scanFor.get(item);
+      if (scan) {
+        pdf.addImage(scan.data, 'JPEG', x, y, CARD_WIDTH_MM, CARD_HEIGHT_MM, scan.alias);
+      } else {
+        drawCardFace(pdf, item.card, x, y, item.packNumber, artFor.get(item));
+      }
     });
 
     // Draw Cut Lines and Registration Crosshairs
@@ -106,7 +199,8 @@ export async function generatePrintPdf(
     if (options.includeBacks) {
       pdf.addPage(options.paperSize === 'a4' ? 'a4' : 'letter', 'portrait');
       // For double-sided alignment, mirror columns horizontally: col 0 -> col 2, col 2 -> col 0
-      pageCards.forEach((item, slotIdx) => {
+      pageSlots.forEach((item, slotIdx) => {
+        if (!item) return;
         const originalCol = slotIdx % cols;
         const mirroredCol = (cols - 1) - originalCol;
         const row = Math.floor(slotIdx / cols);
@@ -125,7 +219,7 @@ export async function generatePrintPdf(
   return pdf.output('blob');
 }
 
-function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: number): void {
+function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: number, art?: PreparedImage): void {
   const w = CARD_WIDTH_MM;
   const h = CARD_HEIGHT_MM;
 
@@ -172,16 +266,17 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
     pdf.text(card.cost, x + w - 5, y + 8.8, { align: 'right' });
   }
 
-  // Illustration Box Placeholder / Art frame
-  pdf.setFillColor(215, 222, 230);
-  pdf.setDrawColor(120, 120, 120);
-  pdf.rect(x + 4, y + 12.5, w - 8, 28, 'FD');
-
-  // Art silhouette or label
-  pdf.setFont('helvetica', 'italic');
-  pdf.setFontSize(6.5);
-  pdf.setTextColor(110, 120, 130);
-  pdf.text(card.type, x + w / 2, y + 27, { align: 'center' });
+  // Art box: the card's artwork, or a neutral panel for cards without art
+  if (art) {
+    pdf.addImage(art.data, 'JPEG', x + LAYOUT_ART.x, y + LAYOUT_ART.y, LAYOUT_ART.w, LAYOUT_ART.h, art.alias);
+    pdf.setDrawColor(60, 60, 60);
+    pdf.setLineWidth(0.2);
+    pdf.rect(x + LAYOUT_ART.x, y + LAYOUT_ART.y, LAYOUT_ART.w, LAYOUT_ART.h, 'D');
+  } else {
+    pdf.setFillColor(215, 222, 230);
+    pdf.setDrawColor(120, 120, 120);
+    pdf.rect(x + LAYOUT_ART.x, y + LAYOUT_ART.y, LAYOUT_ART.w, LAYOUT_ART.h, 'FD');
+  }
 
   // Type line bar
   pdf.setFillColor(255, 255, 255);
@@ -217,7 +312,7 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
   pdf.setFontSize(5.8);
   pdf.setTextColor(30, 30, 30);
 
-  const textLines = pdf.splitTextToSize(card.text || '', w - 10);
+  const textLines = pdf.splitTextToSize(plainRulesText(card.text || ''), w - 10);
   const maxLines = 6;
   const displayLines = textLines.slice(0, maxLines);
   let textY = y + 52.8;

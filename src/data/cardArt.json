@@ -1,0 +1,3285 @@
+{
+  "version": 1,
+  "cards": {
+    "swtg-base-0-basiclands.pdf::Forest": {
+      "art": "cards/art/land-forest-1.webp",
+      "full": "cards/full/land-forest-1.webp",
+      "w": 280,
+      "h": 338,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-base-0-basiclands.pdf::Island": {
+      "art": "cards/art/land-island-1.webp",
+      "full": "cards/full/land-island-1.webp",
+      "w": 280,
+      "h": 338,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-base-0-basiclands.pdf::Mountain": {
+      "art": "cards/art/land-mountain-1.webp",
+      "full": "cards/full/land-mountain-1.webp",
+      "w": 280,
+      "h": 338,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-base-0-basiclands.pdf::Plains": {
+      "art": "cards/art/land-plains-1.webp",
+      "full": "cards/full/land-plains-1.webp",
+      "w": 280,
+      "h": 338,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-base-0-basiclands.pdf::Swamp": {
+      "art": "cards/art/land-swamp-1.webp",
+      "full": "cards/full/land-swamp-1.webp",
+      "w": 280,
+      "h": 338,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-base-1-commons.pdf::Acquire Target": {
+      "art": "cards/art/base-1-acquire-target.webp",
+      "full": "cards/full/base-1-acquire-target.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Adroit Hateflayer": {
+      "art": "cards/art/base-1-adroit-hateflayer.webp",
+      "full": "cards/full/base-1-adroit-hateflayer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Aqualish Bounty Hunter": {
+      "art": "cards/art/base-1-aqualish-bounty-hunter.webp",
+      "full": "cards/full/base-1-aqualish-bounty-hunter.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Arrest": {
+      "art": "cards/art/base-1-arrest.webp",
+      "full": "cards/full/base-1-arrest.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Bathe in Bacta": {
+      "art": "cards/art/base-1-bathe-in-bacta.webp",
+      "full": "cards/full/base-1-bathe-in-bacta.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Cantina Band": {
+      "art": "cards/art/base-1-cantina-band.webp",
+      "full": "cards/full/base-1-cantina-band.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Capture": {
+      "art": "cards/art/base-1-capture.webp",
+      "full": "cards/full/base-1-capture.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Cloaking Device": {
+      "art": "cards/art/base-1-cloaking-device.webp",
+      "full": "cards/full/base-1-cloaking-device.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Crossfire": {
+      "art": "cards/art/base-1-crossfire.webp",
+      "full": "cards/full/base-1-crossfire.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Dagobah Maw Slug": {
+      "art": "cards/art/base-1-dagobah-maw-slug.webp",
+      "full": "cards/full/base-1-dagobah-maw-slug.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Dark Decision": {
+      "art": "cards/art/base-1-dark-decision.webp",
+      "full": "cards/full/base-1-dark-decision.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Droid Commando": {
+      "art": "cards/art/base-1-droid-commando.webp",
+      "full": "cards/full/base-1-droid-commando.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Droid Factory": {
+      "art": "cards/art/base-1-droid-factory.webp",
+      "full": "cards/full/base-1-droid-factory.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Drone Holocron": {
+      "art": "cards/art/base-1-drone-holocron.webp",
+      "full": "cards/full/base-1-drone-holocron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Escape Pod": {
+      "art": "cards/art/base-1-escape-pod.webp",
+      "full": "cards/full/base-1-escape-pod.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Ewok Ambush": {
+      "art": "cards/art/base-1-ewok-ambush.webp",
+      "full": "cards/full/base-1-ewok-ambush.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Ewok Firedancers": {
+      "art": "cards/art/base-1-ewok-firedancers.webp",
+      "full": "cards/full/base-1-ewok-firedancers.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Choke": {
+      "art": "cards/art/base-1-force-choke.webp",
+      "full": "cards/full/base-1-force-choke.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Denial": {
+      "art": "cards/art/base-1-force-denial.webp",
+      "full": "cards/full/base-1-force-denial.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Drain": {
+      "art": "cards/art/base-1-force-drain.webp",
+      "full": "cards/full/base-1-force-drain.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Healing": {
+      "art": "cards/art/base-1-force-healing.webp",
+      "full": "cards/full/base-1-force-healing.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Pull": {
+      "art": "cards/art/base-1-force-pull.webp",
+      "full": "cards/full/base-1-force-pull.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Reflex": {
+      "art": "cards/art/base-1-force-reflex.webp",
+      "full": "cards/full/base-1-force-reflex.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Force Spark": {
+      "art": "cards/art/base-1-force-spark.webp",
+      "full": "cards/full/base-1-force-spark.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Fulfill Contract": {
+      "art": "cards/art/base-1-fulfill-contract.webp",
+      "full": "cards/full/base-1-fulfill-contract.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Gifted Initiate": {
+      "art": "cards/art/base-1-gifted-initiate.webp",
+      "full": "cards/full/base-1-gifted-initiate.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Gungan Captain": {
+      "art": "cards/art/base-1-gungan-captain.webp",
+      "full": "cards/full/base-1-gungan-captain.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Head Hunting": {
+      "art": "cards/art/base-1-head-hunting.webp",
+      "full": "cards/full/base-1-head-hunting.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Heavy Trooper": {
+      "art": "cards/art/base-1-heavy-trooper.webp",
+      "full": "cards/full/base-1-heavy-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Hungry Dragonsnake": {
+      "art": "cards/art/base-1-hungry-dragonsnake.webp",
+      "full": "cards/full/base-1-hungry-dragonsnake.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Images of the Past": {
+      "art": "cards/art/base-1-images-of-the-past.webp",
+      "full": "cards/full/base-1-images-of-the-past.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Imperial Gunner": {
+      "art": "cards/art/base-1-imperial-gunner.webp",
+      "full": "cards/full/base-1-imperial-gunner.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Impulsive Wager": {
+      "art": "cards/art/base-1-impulsive-wager.webp",
+      "full": "cards/full/base-1-impulsive-wager.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Insatiable Rakghoul": {
+      "art": "cards/art/base-1-insatiable-rakghoul.webp",
+      "full": "cards/full/base-1-insatiable-rakghoul.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Interrogation": {
+      "art": "cards/art/base-1-interrogation.webp",
+      "full": "cards/full/base-1-interrogation.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Ion Cannon": {
+      "art": "cards/art/base-1-ion-cannon.webp",
+      "full": "cards/full/base-1-ion-cannon.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Ithorian Initiate": {
+      "art": "cards/art/base-1-ithorian-initiate.webp",
+      "full": "cards/full/base-1-ithorian-initiate.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jar'Kai Battle Stance": {
+      "art": "cards/art/base-1-jar-kai-battle-stance.webp",
+      "full": "cards/full/base-1-jar-kai-battle-stance.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jedi Enclave": {
+      "art": "cards/art/base-1-jedi-enclave.webp",
+      "full": "cards/full/base-1-jedi-enclave.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jedi Holocron": {
+      "art": "cards/art/base-1-jedi-holocron.webp",
+      "full": "cards/full/base-1-jedi-holocron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jedi Inquirer": {
+      "art": "cards/art/base-1-jedi-inquirer.webp",
+      "full": "cards/full/base-1-jedi-inquirer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jedi Instructor": {
+      "art": "cards/art/base-1-jedi-instructor.webp",
+      "full": "cards/full/base-1-jedi-instructor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jedi Sentinel": {
+      "art": "cards/art/base-1-jedi-sentinel.webp",
+      "full": "cards/full/base-1-jedi-sentinel.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Jungle Village": {
+      "art": "cards/art/base-1-jungle-village.webp",
+      "full": "cards/full/base-1-jungle-village.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Lightsaber": {
+      "art": "cards/art/base-1-lightsaber.webp",
+      "full": "cards/full/base-1-lightsaber.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Loyal Tauntaun": {
+      "art": "cards/art/base-1-loyal-tauntaun.webp",
+      "full": "cards/full/base-1-loyal-tauntaun.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Maintenance Droid": {
+      "art": "cards/art/base-1-maintenance-droid.webp",
+      "full": "cards/full/base-1-maintenance-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Massiff Swarm": {
+      "art": "cards/art/base-1-massiff-swarm.webp",
+      "full": "cards/full/base-1-massiff-swarm.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Mon Calamari Initiate": {
+      "art": "cards/art/base-1-mon-calamari-initiate.webp",
+      "full": "cards/full/base-1-mon-calamari-initiate.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::N-1 Starfighter": {
+      "art": "cards/art/base-1-n-1-starfighter.webp",
+      "full": "cards/full/base-1-n-1-starfighter.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Nebulon-B Frigate": {
+      "art": "cards/art/base-1-nebulon-b-frigate.webp",
+      "full": "cards/full/base-1-nebulon-b-frigate.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Neophyte Hateflayer": {
+      "art": "cards/art/base-1-neophyte-hateflayer.webp",
+      "full": "cards/full/base-1-neophyte-hateflayer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Nightspider": {
+      "art": "cards/art/base-1-nightspider.webp",
+      "full": "cards/full/base-1-nightspider.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::No Contest": {
+      "art": "cards/art/base-1-no-contest.webp",
+      "full": "cards/full/base-1-no-contest.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Novice Bounty Hunter": {
+      "art": "cards/art/base-1-novice-bounty-hunter.webp",
+      "full": "cards/full/base-1-novice-bounty-hunter.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Ortolan Keyboardist": {
+      "art": "cards/art/base-1-ortolan-keyboardist.webp",
+      "full": "cards/full/base-1-ortolan-keyboardist.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Outer Rim Slaver": {
+      "art": "cards/art/base-1-outer-rim-slaver.webp",
+      "full": "cards/full/base-1-outer-rim-slaver.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Outlaw Holocron": {
+      "art": "cards/art/base-1-outlaw-holocron.webp",
+      "full": "cards/full/base-1-outlaw-holocron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Personal Energy Shield": {
+      "art": "cards/art/base-1-personal-energy-shield.webp",
+      "full": "cards/full/base-1-personal-energy-shield.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Predator's Strike": {
+      "art": "cards/art/base-1-predator-s-strike.webp",
+      "full": "cards/full/base-1-predator-s-strike.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Primal Instinct": {
+      "art": "cards/art/base-1-primal-instinct.webp",
+      "full": "cards/full/base-1-primal-instinct.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Probe Droid": {
+      "art": "cards/art/base-1-probe-droid.webp",
+      "full": "cards/full/base-1-probe-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Raging Reek": {
+      "art": "cards/art/base-1-raging-reek.webp",
+      "full": "cards/full/base-1-raging-reek.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Rallying Fire": {
+      "art": "cards/art/base-1-rallying-fire.webp",
+      "full": "cards/full/base-1-rallying-fire.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Republic Frigate": {
+      "art": "cards/art/base-1-republic-frigate.webp",
+      "full": "cards/full/base-1-republic-frigate.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Repurpose": {
+      "art": "cards/art/base-1-repurpose.webp",
+      "full": "cards/full/base-1-repurpose.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Revenge": {
+      "art": "cards/art/base-1-revenge.webp",
+      "full": "cards/full/base-1-revenge.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Rumination": {
+      "art": "cards/art/base-1-rumination.webp",
+      "full": "cards/full/base-1-rumination.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Salvage Squad": {
+      "art": "cards/art/base-1-salvage-squad.webp",
+      "full": "cards/full/base-1-salvage-squad.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sand Trooper": {
+      "art": "cards/art/base-1-sand-trooper.webp",
+      "full": "cards/full/base-1-sand-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Scout Trooper": {
+      "art": "cards/art/base-1-scout-trooper.webp",
+      "full": "cards/full/base-1-scout-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Scout the Perimeter": {
+      "art": "cards/art/base-1-scout-the-perimeter.webp",
+      "full": "cards/full/base-1-scout-the-perimeter.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Security Droid": {
+      "art": "cards/art/base-1-security-droid.webp",
+      "full": "cards/full/base-1-security-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Shaak Herd": {
+      "art": "cards/art/base-1-shaak-herd.webp",
+      "full": "cards/full/base-1-shaak-herd.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Shadow Trooper": {
+      "art": "cards/art/base-1-shadow-trooper.webp",
+      "full": "cards/full/base-1-shadow-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Evoker": {
+      "art": "cards/art/base-1-sith-evoker.webp",
+      "full": "cards/full/base-1-sith-evoker.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Holocron": {
+      "art": "cards/art/base-1-sith-holocron.webp",
+      "full": "cards/full/base-1-sith-holocron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Inquisitor": {
+      "art": "cards/art/base-1-sith-inquisitor.webp",
+      "full": "cards/full/base-1-sith-inquisitor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Ravager": {
+      "art": "cards/art/base-1-sith-ravager.webp",
+      "full": "cards/full/base-1-sith-ravager.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Ruins": {
+      "art": "cards/art/base-1-sith-ruins.webp",
+      "full": "cards/full/base-1-sith-ruins.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Sorcerer": {
+      "art": "cards/art/base-1-sith-sorcerer.webp",
+      "full": "cards/full/base-1-sith-sorcerer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Sith Thoughtseeker": {
+      "art": "cards/art/base-1-sith-thoughtseeker.webp",
+      "full": "cards/full/base-1-sith-thoughtseeker.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Speeder Trooper": {
+      "art": "cards/art/base-1-speeder-trooper.webp",
+      "full": "cards/full/base-1-speeder-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Strike Team Commando": {
+      "art": "cards/art/base-1-strike-team-commando.webp",
+      "full": "cards/full/base-1-strike-team-commando.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Super Battle Droid": {
+      "art": "cards/art/base-1-super-battle-droid.webp",
+      "full": "cards/full/base-1-super-battle-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Surprise Maneuver": {
+      "art": "cards/art/base-1-surprise-maneuver.webp",
+      "full": "cards/full/base-1-surprise-maneuver.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Swarm the Skies": {
+      "art": "cards/art/base-1-swarm-the-skies.webp",
+      "full": "cards/full/base-1-swarm-the-skies.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Syndicate Enforcer": {
+      "art": "cards/art/base-1-syndicate-enforcer.webp",
+      "full": "cards/full/base-1-syndicate-enforcer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::TIE Interceptor": {
+      "art": "cards/art/base-1-tie-interceptor.webp",
+      "full": "cards/full/base-1-tie-interceptor.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Terentatek Cub": {
+      "art": "cards/art/base-1-terentatek-cub.webp",
+      "full": "cards/full/base-1-terentatek-cub.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Tri-Fighter": {
+      "art": "cards/art/base-1-tri-fighter.webp",
+      "full": "cards/full/base-1-tri-fighter.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Twi'lek Seductress": {
+      "art": "cards/art/base-1-twi-lek-seductress.webp",
+      "full": "cards/full/base-1-twi-lek-seductress.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Ugnaught Scrap Worker": {
+      "art": "cards/art/base-1-ugnaught-scrap-worker.webp",
+      "full": "cards/full/base-1-ugnaught-scrap-worker.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Underworld Slums": {
+      "art": "cards/art/base-1-underworld-slums.webp",
+      "full": "cards/full/base-1-underworld-slums.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::V-Wing": {
+      "art": "cards/art/base-1-v-wing.webp",
+      "full": "cards/full/base-1-v-wing.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Vapor Snag": {
+      "art": "cards/art/base-1-vapor-snag.webp",
+      "full": "cards/full/base-1-vapor-snag.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Wild Holocron": {
+      "art": "cards/art/base-1-wild-holocron.webp",
+      "full": "cards/full/base-1-wild-holocron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Womp Rat": {
+      "art": "cards/art/base-1-womp-rat.webp",
+      "full": "cards/full/base-1-womp-rat.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Wookiee Bounty Hunter": {
+      "art": "cards/art/base-1-wookiee-bounty-hunter.webp",
+      "full": "cards/full/base-1-wookiee-bounty-hunter.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::Wookiee Raidleader": {
+      "art": "cards/art/base-1-wookiee-raidleader.webp",
+      "full": "cards/full/base-1-wookiee-raidleader.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-1-commons.pdf::X-Wing": {
+      "art": "cards/art/base-1-x-wing.webp",
+      "full": "cards/full/base-1-x-wing.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::A-Wing": {
+      "art": "cards/art/base-2-a-wing.webp",
+      "full": "cards/full/base-2-a-wing.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::AAT-1": {
+      "art": "cards/art/base-2-aat-1.webp",
+      "full": "cards/full/base-2-aat-1.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Ancient Holocron": {
+      "art": "cards/art/base-2-ancient-holocron.webp",
+      "full": "cards/full/base-2-ancient-holocron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Armed Protocol Droid": {
+      "art": "cards/art/base-2-armed-protocol-droid.webp",
+      "full": "cards/full/base-2-armed-protocol-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Battle Tactics": {
+      "art": "cards/art/base-2-battle-tactics.webp",
+      "full": "cards/full/base-2-battle-tactics.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Black Market Dealer": {
+      "art": "cards/art/base-2-black-market-dealer.webp",
+      "full": "cards/full/base-2-black-market-dealer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Bounty Collector": {
+      "art": "cards/art/base-2-bounty-collector.webp",
+      "full": "cards/full/base-2-bounty-collector.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Bounty Sniper": {
+      "art": "cards/art/base-2-bounty-sniper.webp",
+      "full": "cards/full/base-2-bounty-sniper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Bounty Spotter": {
+      "art": "cards/art/base-2-bounty-spotter.webp",
+      "full": "cards/full/base-2-bounty-spotter.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Carbonite Chamber": {
+      "art": "cards/art/base-2-carbonite-chamber.webp",
+      "full": "cards/full/base-2-carbonite-chamber.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Condemn": {
+      "art": "cards/art/base-2-condemn.webp",
+      "full": "cards/full/base-2-condemn.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Corellian Corvette": {
+      "art": "cards/art/base-2-corellian-corvette.webp",
+      "full": "cards/full/base-2-corellian-corvette.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Cruelty of the Sith": {
+      "art": "cards/art/base-2-cruelty-of-the-sith.webp",
+      "full": "cards/full/base-2-cruelty-of-the-sith.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Dark Apprenticeship": {
+      "art": "cards/art/base-2-dark-apprenticeship.webp",
+      "full": "cards/full/base-2-dark-apprenticeship.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Dark Trooper": {
+      "art": "cards/art/base-2-dark-trooper.webp",
+      "full": "cards/full/base-2-dark-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Death Trooper": {
+      "art": "cards/art/base-2-death-trooper.webp",
+      "full": "cards/full/base-2-death-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Deploy The Troops": {
+      "art": "cards/art/base-2-deploy-the-troops.webp",
+      "full": "cards/full/base-2-deploy-the-troops.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Doom Blade": {
+      "art": "cards/art/base-2-doom-blade.webp",
+      "full": "cards/full/base-2-doom-blade.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Droid Foundry": {
+      "art": "cards/art/base-2-droid-foundry.webp",
+      "full": "cards/full/base-2-droid-foundry.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Droideka": {
+      "art": "cards/art/base-2-droideka.webp",
+      "full": "cards/full/base-2-droideka.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::EMP Blast": {
+      "art": "cards/art/base-2-emp-blast.webp",
+      "full": "cards/full/base-2-emp-blast.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Ewok Village": {
+      "art": "cards/art/base-2-ewok-village.webp",
+      "full": "cards/full/base-2-ewok-village.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Ferocity of the Underworld": {
+      "art": "cards/art/base-2-ferocity-of-the-underworld.webp",
+      "full": "cards/full/base-2-ferocity-of-the-underworld.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Force Push": {
+      "art": "cards/art/base-2-force-push.webp",
+      "full": "cards/full/base-2-force-push.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Force Scream": {
+      "art": "cards/art/base-2-force-scream.webp",
+      "full": "cards/full/base-2-force-scream.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Gamorrean Prison Guard": {
+      "art": "cards/art/base-2-gamorrean-prison-guard.webp",
+      "full": "cards/full/base-2-gamorrean-prison-guard.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Gundark": {
+      "art": "cards/art/base-2-gundark.webp",
+      "full": "cards/full/base-2-gundark.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Hazard Trooper": {
+      "art": "cards/art/base-2-hazard-trooper.webp",
+      "full": "cards/full/base-2-hazard-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Hutt Crime Lord": {
+      "art": "cards/art/base-2-hutt-crime-lord.webp",
+      "full": "cards/full/base-2-hutt-crime-lord.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Hutt Palace": {
+      "art": "cards/art/base-2-hutt-palace.webp",
+      "full": "cards/full/base-2-hutt-palace.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Battle Healer": {
+      "art": "cards/art/base-2-jedi-battle-healer.webp",
+      "full": "cards/full/base-2-jedi-battle-healer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Battle Mage": {
+      "art": "cards/art/base-2-jedi-battle-mage.webp",
+      "full": "cards/full/base-2-jedi-battle-mage.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Battle Sage": {
+      "art": "cards/art/base-2-jedi-battle-sage.webp",
+      "full": "cards/full/base-2-jedi-battle-sage.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Knight": {
+      "art": "cards/art/base-2-jedi-knight.webp",
+      "full": "cards/full/base-2-jedi-knight.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Starfighter": {
+      "art": "cards/art/base-2-jedi-starfighter.webp",
+      "full": "cards/full/base-2-jedi-starfighter.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Temple": {
+      "art": "cards/art/base-2-jedi-temple.webp",
+      "full": "cards/full/base-2-jedi-temple.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jedi Training": {
+      "art": "cards/art/base-2-jedi-training.webp",
+      "full": "cards/full/base-2-jedi-training.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Jump Trooper": {
+      "art": "cards/art/base-2-jump-trooper.webp",
+      "full": "cards/full/base-2-jump-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::LAAT Gunship": {
+      "art": "cards/art/base-2-laat-gunship.webp",
+      "full": "cards/full/base-2-laat-gunship.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Lightning Bolt": {
+      "art": "cards/art/base-2-lightning-bolt.webp",
+      "full": "cards/full/base-2-lightning-bolt.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Mantellian Savrip": {
+      "art": "cards/art/base-2-mantellian-savrip.webp",
+      "full": "cards/full/base-2-mantellian-savrip.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Might of the Wild": {
+      "art": "cards/art/base-2-might-of-the-wild.webp",
+      "full": "cards/full/base-2-might-of-the-wild.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Miraculous Recovery": {
+      "art": "cards/art/base-2-miraculous-recovery.webp",
+      "full": "cards/full/base-2-miraculous-recovery.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Moisture Farm": {
+      "art": "cards/art/base-2-moisture-farm.webp",
+      "full": "cards/full/base-2-moisture-farm.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Mon Calamari Cruiser": {
+      "art": "cards/art/base-2-mon-calamari-cruiser.webp",
+      "full": "cards/full/base-2-mon-calamari-cruiser.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Nerf Herder": {
+      "art": "cards/art/base-2-nerf-herder.webp",
+      "full": "cards/full/base-2-nerf-herder.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Nexu Stalker": {
+      "art": "cards/art/base-2-nexu-stalker.webp",
+      "full": "cards/full/base-2-nexu-stalker.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Open Season": {
+      "art": "cards/art/base-2-open-season.webp",
+      "full": "cards/full/base-2-open-season.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Preordain": {
+      "art": "cards/art/base-2-preordain.webp",
+      "full": "cards/full/base-2-preordain.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Ravenous Wampa": {
+      "art": "cards/art/base-2-ravenous-wampa.webp",
+      "full": "cards/full/base-2-ravenous-wampa.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Regression": {
+      "art": "cards/art/base-2-regression.webp",
+      "full": "cards/full/base-2-regression.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Riding Ronto": {
+      "art": "cards/art/base-2-riding-ronto.webp",
+      "full": "cards/full/base-2-riding-ronto.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Rogue's Passage": {
+      "art": "cards/art/base-2-rogue-s-passage.webp",
+      "full": "cards/full/base-2-rogue-s-passage.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Rule of Two": {
+      "art": "cards/art/base-2-rule-of-two.webp",
+      "full": "cards/full/base-2-rule-of-two.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Rumor Monger": {
+      "art": "cards/art/base-2-rumor-monger.webp",
+      "full": "cards/full/base-2-rumor-monger.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Sabacc Game": {
+      "art": "cards/art/base-2-sabacc-game.webp",
+      "full": "cards/full/base-2-sabacc-game.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Senator Bail Organa": {
+      "art": "cards/art/base-2-senator-bail-organa.webp",
+      "full": "cards/full/base-2-senator-bail-organa.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Senator Lott Dod": {
+      "art": "cards/art/base-2-senator-lott-dod.webp",
+      "full": "cards/full/base-2-senator-lott-dod.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Senator Onaconda Farr": {
+      "art": "cards/art/base-2-senator-onaconda-farr.webp",
+      "full": "cards/full/base-2-senator-onaconda-farr.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Senator Padmé Amidala": {
+      "art": "cards/art/base-2-senator-padm-amidala.webp",
+      "full": "cards/full/base-2-senator-padm-amidala.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Senator Passel Argente": {
+      "art": "cards/art/base-2-senator-passel-argente.webp",
+      "full": "cards/full/base-2-senator-passel-argente.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Shock Trooper": {
+      "art": "cards/art/base-2-shock-trooper.webp",
+      "full": "cards/full/base-2-shock-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Show of Dominance": {
+      "art": "cards/art/base-2-show-of-dominance.webp",
+      "full": "cards/full/base-2-show-of-dominance.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Sith Assassin": {
+      "art": "cards/art/base-2-sith-assassin.webp",
+      "full": "cards/full/base-2-sith-assassin.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Sith Citadel": {
+      "art": "cards/art/base-2-sith-citadel.webp",
+      "full": "cards/full/base-2-sith-citadel.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Sith Manipulator": {
+      "art": "cards/art/base-2-sith-manipulator.webp",
+      "full": "cards/full/base-2-sith-manipulator.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Sith Marauder": {
+      "art": "cards/art/base-2-sith-marauder.webp",
+      "full": "cards/full/base-2-sith-marauder.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Sith Mindseer": {
+      "art": "cards/art/base-2-sith-mindseer.webp",
+      "full": "cards/full/base-2-sith-mindseer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Smash to Smithereens": {
+      "art": "cards/art/base-2-smash-to-smithereens.webp",
+      "full": "cards/full/base-2-smash-to-smithereens.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Snow Trooper": {
+      "art": "cards/art/base-2-snow-trooper.webp",
+      "full": "cards/full/base-2-snow-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::TIE Bomber": {
+      "art": "cards/art/base-2-tie-bomber.webp",
+      "full": "cards/full/base-2-tie-bomber.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Trooper Armor": {
+      "art": "cards/art/base-2-trooper-armor.webp",
+      "full": "cards/full/base-2-trooper-armor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Trooper Commando": {
+      "art": "cards/art/base-2-trooper-commando.webp",
+      "full": "cards/full/base-2-trooper-commando.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Unity of the Droids": {
+      "art": "cards/art/base-2-unity-of-the-droids.webp",
+      "full": "cards/full/base-2-unity-of-the-droids.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Unruly Sureshot": {
+      "art": "cards/art/base-2-unruly-sureshot.webp",
+      "full": "cards/full/base-2-unruly-sureshot.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Weequay Beastmaster": {
+      "art": "cards/art/base-2-weequay-beastmaster.webp",
+      "full": "cards/full/base-2-weequay-beastmaster.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Wisdom of the Jedi": {
+      "art": "cards/art/base-2-wisdom-of-the-jedi.webp",
+      "full": "cards/full/base-2-wisdom-of-the-jedi.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Wookiee Mystic": {
+      "art": "cards/art/base-2-wookiee-mystic.webp",
+      "full": "cards/full/base-2-wookiee-mystic.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-2-uncommons.pdf::Y-Wing": {
+      "art": "cards/art/base-2-y-wing.webp",
+      "full": "cards/full/base-2-y-wing.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::AT-ST": {
+      "art": "cards/art/base-3-at-st.webp",
+      "full": "cards/full/base-3-at-st.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Acklay of the Arena": {
+      "art": "cards/art/base-3-acklay-of-the-arena.webp",
+      "full": "cards/full/base-3-acklay-of-the-arena.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Admiral Ackbar": {
+      "art": "cards/art/base-3-admiral-ackbar.webp",
+      "full": "cards/full/base-3-admiral-ackbar.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Asajj Ventress": {
+      "art": "cards/art/base-3-asajj-ventress.webp",
+      "full": "cards/full/base-3-asajj-ventress.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Bantha Herd": {
+      "art": "cards/art/base-3-bantha-herd.webp",
+      "full": "cards/full/base-3-bantha-herd.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Bib Fortuna": {
+      "art": "cards/art/base-3-bib-fortuna.webp",
+      "full": "cards/full/base-3-bib-fortuna.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Blind Worship": {
+      "art": "cards/art/base-3-blind-worship.webp",
+      "full": "cards/full/base-3-blind-worship.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Bossk": {
+      "art": "cards/art/base-3-bossk.webp",
+      "full": "cards/full/base-3-bossk.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Bull Rancor": {
+      "art": "cards/art/base-3-bull-rancor.webp",
+      "full": "cards/full/base-3-bull-rancor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::C-3PO and R2D2": {
+      "art": "cards/art/base-3-c-3po-and-r2d2.webp",
+      "full": "cards/full/base-3-c-3po-and-r2d2.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Chewbacca": {
+      "art": "cards/art/base-3-chewbacca.webp",
+      "full": "cards/full/base-3-chewbacca.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Chief Chirpa": {
+      "art": "cards/art/base-3-chief-chirpa.webp",
+      "full": "cards/full/base-3-chief-chirpa.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Commander Cody": {
+      "art": "cards/art/base-3-commander-cody.webp",
+      "full": "cards/full/base-3-commander-cody.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Cunning Abduction": {
+      "art": "cards/art/base-3-cunning-abduction.webp",
+      "full": "cards/full/base-3-cunning-abduction.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Darth Maul": {
+      "art": "cards/art/base-3-darth-maul.webp",
+      "full": "cards/full/base-3-darth-maul.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Echo Base Commando": {
+      "art": "cards/art/base-3-echo-base-commando.webp",
+      "full": "cards/full/base-3-echo-base-commando.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Exogorth": {
+      "art": "cards/art/base-3-exogorth.webp",
+      "full": "cards/full/base-3-exogorth.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Flames of Remembrance": {
+      "art": "cards/art/base-3-flames-of-remembrance.webp",
+      "full": "cards/full/base-3-flames-of-remembrance.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Force Lightning": {
+      "art": "cards/art/base-3-force-lightning.webp",
+      "full": "cards/full/base-3-force-lightning.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Force Mastery": {
+      "art": "cards/art/base-3-force-mastery.webp",
+      "full": "cards/full/base-3-force-mastery.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Grand Moff Tarkin": {
+      "art": "cards/art/base-3-grand-moff-tarkin.webp",
+      "full": "cards/full/base-3-grand-moff-tarkin.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Greedo": {
+      "art": "cards/art/base-3-greedo.webp",
+      "full": "cards/full/base-3-greedo.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Han Solo": {
+      "art": "cards/art/base-3-han-solo.webp",
+      "full": "cards/full/base-3-han-solo.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Hot Pursuit": {
+      "art": "cards/art/base-3-hot-pursuit.webp",
+      "full": "cards/full/base-3-hot-pursuit.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Hunt to Extinction": {
+      "art": "cards/art/base-3-hunt-to-extinction.webp",
+      "full": "cards/full/base-3-hunt-to-extinction.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::IG-88B": {
+      "art": "cards/art/base-3-ig-88b.webp",
+      "full": "cards/full/base-3-ig-88b.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Iron Fist of the Empire": {
+      "art": "cards/art/base-3-iron-fist-of-the-empire.webp",
+      "full": "cards/full/base-3-iron-fist-of-the-empire.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Jabba the Hutt": {
+      "art": "cards/art/base-3-jabba-the-hutt.webp",
+      "full": "cards/full/base-3-jabba-the-hutt.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Jango Fett": {
+      "art": "cards/art/base-3-jango-fett.webp",
+      "full": "cards/full/base-3-jango-fett.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Jar Jar Binks": {
+      "art": "cards/art/base-3-jar-jar-binks.webp",
+      "full": "cards/full/base-3-jar-jar-binks.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Jedi Mind Trick": {
+      "art": "cards/art/base-3-jedi-mind-trick.webp",
+      "full": "cards/full/base-3-jedi-mind-trick.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Kamino Cloning Facility": {
+      "art": "cards/art/base-3-kamino-cloning-facility.webp",
+      "full": "cards/full/base-3-kamino-cloning-facility.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Ki-Adi-Mundi": {
+      "art": "cards/art/base-3-ki-adi-mundi.webp",
+      "full": "cards/full/base-3-ki-adi-mundi.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Lando Calrissian": {
+      "art": "cards/art/base-3-lando-calrissian.webp",
+      "full": "cards/full/base-3-lando-calrissian.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Legacy of the Beloved": {
+      "art": "cards/art/base-3-legacy-of-the-beloved.webp",
+      "full": "cards/full/base-3-legacy-of-the-beloved.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Mace Windu": {
+      "art": "cards/art/base-3-mace-windu.webp",
+      "full": "cards/full/base-3-mace-windu.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Maintenance Hangar": {
+      "art": "cards/art/base-3-maintenance-hangar.webp",
+      "full": "cards/full/base-3-maintenance-hangar.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::March of the Droids": {
+      "art": "cards/art/base-3-march-of-the-droids.webp",
+      "full": "cards/full/base-3-march-of-the-droids.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Millennium Falcon": {
+      "art": "cards/art/base-3-millennium-falcon.webp",
+      "full": "cards/full/base-3-millennium-falcon.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Nute Gunray": {
+      "art": "cards/art/base-3-nute-gunray.webp",
+      "full": "cards/full/base-3-nute-gunray.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Orbital Bombardment": {
+      "art": "cards/art/base-3-orbital-bombardment.webp",
+      "full": "cards/full/base-3-orbital-bombardment.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Order 66": {
+      "art": "cards/art/base-3-order-66.webp",
+      "full": "cards/full/base-3-order-66.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Plo Koon": {
+      "art": "cards/art/base-3-plo-koon.webp",
+      "full": "cards/full/base-3-plo-koon.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Precipice of Mortis": {
+      "art": "cards/art/base-3-precipice-of-mortis.webp",
+      "full": "cards/full/base-3-precipice-of-mortis.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Princess Leia": {
+      "art": "cards/art/base-3-princess-leia.webp",
+      "full": "cards/full/base-3-princess-leia.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Qui-Gon Jinn": {
+      "art": "cards/art/base-3-qui-gon-jinn.webp",
+      "full": "cards/full/base-3-qui-gon-jinn.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Rocket Trooper": {
+      "art": "cards/art/base-3-rocket-trooper.webp",
+      "full": "cards/full/base-3-rocket-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Sarlacc Pit": {
+      "art": "cards/art/base-3-sarlacc-pit.webp",
+      "full": "cards/full/base-3-sarlacc-pit.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Sith Lord": {
+      "art": "cards/art/base-3-sith-lord.webp",
+      "full": "cards/full/base-3-sith-lord.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Sith Magic": {
+      "art": "cards/art/base-3-sith-magic.webp",
+      "full": "cards/full/base-3-sith-magic.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Slave I": {
+      "art": "cards/art/base-3-slave-i.webp",
+      "full": "cards/full/base-3-slave-i.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Star Destroyer": {
+      "art": "cards/art/base-3-star-destroyer.webp",
+      "full": "cards/full/base-3-star-destroyer.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Tank Droid": {
+      "art": "cards/art/base-3-tank-droid.webp",
+      "full": "cards/full/base-3-tank-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Trade Federation Battleship": {
+      "art": "cards/art/base-3-trade-federation-battleship.webp",
+      "full": "cards/full/base-3-trade-federation-battleship.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-3-rares.pdf::Zam Wesell": {
+      "art": "cards/art/base-3-zam-wesell.webp",
+      "full": "cards/full/base-3-zam-wesell.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Aurra Sing, Bane of Jedi": {
+      "art": "cards/art/base-4-aurra-sing-bane-of-jedi.webp",
+      "full": "cards/full/base-4-aurra-sing-bane-of-jedi.webp",
+      "w": 295,
+      "h": 233,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Boba Fett": {
+      "art": "cards/art/base-4-boba-fett.webp",
+      "full": "cards/full/base-4-boba-fett.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Darth Sidious, Sith Lord": {
+      "art": "cards/art/base-4-darth-sidious-sith-lord.webp",
+      "full": "cards/full/base-4-darth-sidious-sith-lord.webp",
+      "w": 295,
+      "h": 233,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Darth Tyranus": {
+      "art": "cards/art/base-4-darth-tyranus.webp",
+      "full": "cards/full/base-4-darth-tyranus.webp",
+      "w": 295,
+      "h": 233,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::General Grievous": {
+      "art": "cards/art/base-4-general-grievous.webp",
+      "full": "cards/full/base-4-general-grievous.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Greater Krayt Dragon": {
+      "art": "cards/art/base-4-greater-krayt-dragon.webp",
+      "full": "cards/full/base-4-greater-krayt-dragon.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Luke Skywalker": {
+      "art": "cards/art/base-4-luke-skywalker.webp",
+      "full": "cards/full/base-4-luke-skywalker.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Obi-Wan Kenobi": {
+      "art": "cards/art/base-4-obi-wan-kenobi.webp",
+      "full": "cards/full/base-4-obi-wan-kenobi.webp",
+      "w": 295,
+      "h": 233,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::The Battle of Endor": {
+      "art": "cards/art/base-4-the-battle-of-endor.webp",
+      "full": "cards/full/base-4-the-battle-of-endor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::The Battle of Geonosis": {
+      "art": "cards/art/base-4-the-battle-of-geonosis.webp",
+      "full": "cards/full/base-4-the-battle-of-geonosis.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::The Battle of Hoth": {
+      "art": "cards/art/base-4-the-battle-of-hoth.webp",
+      "full": "cards/full/base-4-the-battle-of-hoth.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::The Battle of Naboo": {
+      "art": "cards/art/base-4-the-battle-of-naboo.webp",
+      "full": "cards/full/base-4-the-battle-of-naboo.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::The Battle of Yavin": {
+      "art": "cards/art/base-4-the-battle-of-yavin.webp",
+      "full": "cards/full/base-4-the-battle-of-yavin.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::The Death Star": {
+      "art": "cards/art/base-4-the-death-star.webp",
+      "full": "cards/full/base-4-the-death-star.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-4-mythics.pdf::Yoda, Jedi Master": {
+      "art": "cards/art/base-4-yoda-jedi-master.webp",
+      "full": "cards/full/base-4-yoda-jedi-master.webp",
+      "w": 295,
+      "h": 233,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-5-vader.pdf::Anakin Skywalker // Darth Vader": {
+      "art": "cards/art/base-5-anakin-skywalker-darth-vader.webp",
+      "full": "cards/full/base-5-anakin-skywalker-darth-vader.webp",
+      "w": 302,
+      "h": 219,
+      "fullW": 374,
+      "fullH": 522,
+      "artBack": "cards/art/base-5-anakin-skywalker-darth-vader-back.webp",
+      "fullBack": "cards/full/base-5-anakin-skywalker-darth-vader-back.webp"
+    },
+    "swtg-base-6-tokens-common.pdf::Droid": {
+      "art": "cards/art/base-6-droid.webp",
+      "full": "cards/full/base-6-droid.webp",
+      "w": 276,
+      "h": 253,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-6-tokens-common.pdf::Ewok": {
+      "art": "cards/art/base-6-ewok.webp",
+      "full": "cards/full/base-6-ewok.webp",
+      "w": 276,
+      "h": 253,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-6-tokens-common.pdf::TIE Fighter": {
+      "art": "cards/art/base-6-tie-fighter.webp",
+      "full": "cards/full/base-6-tie-fighter.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-6-tokens-common.pdf::Trooper": {
+      "art": "cards/art/base-6-trooper.webp",
+      "full": "cards/full/base-6-trooper.webp",
+      "w": 276,
+      "h": 253,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::AT-AT": {
+      "art": "cards/art/base-7-at-at.webp",
+      "full": "cards/full/base-7-at-at.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::B-Wing": {
+      "art": "cards/art/base-7-b-wing.webp",
+      "full": "cards/full/base-7-b-wing.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Emblem (Aurra Sing, Bane of Jedi)": {
+      "art": "cards/art/base-7-emblem-aurra-sing-bane-of-jedi.webp",
+      "full": "cards/full/base-7-emblem-aurra-sing-bane-of-jedi.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Emblem (Obi-Wan Kenobi)": {
+      "art": "cards/art/base-7-emblem-obi-wan-kenobi.webp",
+      "full": "cards/full/base-7-emblem-obi-wan-kenobi.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Emblem (Yoda, Jedi Master)": {
+      "art": "cards/art/base-7-emblem-yoda-jedi-master.webp",
+      "full": "cards/full/base-7-emblem-yoda-jedi-master.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Hunter": {
+      "art": "cards/art/base-7-hunter.webp",
+      "full": "cards/full/base-7-hunter.webp",
+      "w": 276,
+      "h": 253,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Rebel": {
+      "art": "cards/art/base-7-rebel.webp",
+      "full": "cards/full/base-7-rebel.webp",
+      "w": 276,
+      "h": 253,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Royal Guard": {
+      "art": "cards/art/base-7-royal-guard.webp",
+      "full": "cards/full/base-7-royal-guard.webp",
+      "w": 262,
+      "h": 202,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-base-7-tokens-rare.pdf::Tusken Raider": {
+      "art": "cards/art/base-7-tusken-raider.webp",
+      "full": "cards/full/base-7-tusken-raider.webp",
+      "w": 276,
+      "h": 253,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Astromech Droid": {
+      "art": "cards/art/tfa-astromech-droid.webp",
+      "full": "cards/full/tfa-astromech-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Buried Ruin": {
+      "art": "cards/art/tfa-buried-ruin.webp",
+      "full": "cards/full/tfa-buried-ruin.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Finn": {
+      "art": "cards/art/tfa-finn.webp",
+      "full": "cards/full/tfa-finn.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Flame Trooper": {
+      "art": "cards/art/tfa-flame-trooper.webp",
+      "full": "cards/full/tfa-flame-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Force Stasis": {
+      "art": "cards/art/tfa-force-stasis.webp",
+      "full": "cards/full/tfa-force-stasis.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::General Hux": {
+      "art": "cards/art/tfa-general-hux.webp",
+      "full": "cards/full/tfa-general-hux.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Kylo Ren": {
+      "art": "cards/art/tfa-kylo-ren.webp",
+      "full": "cards/full/tfa-kylo-ren.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Outer Rim Gang": {
+      "art": "cards/art/tfa-outer-rim-gang.webp",
+      "full": "cards/full/tfa-outer-rim-gang.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Poe Dameron": {
+      "art": "cards/art/tfa-poe-dameron.webp",
+      "full": "cards/full/tfa-poe-dameron.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Rathtar": {
+      "art": "cards/art/tfa-rathtar.webp",
+      "full": "cards/full/tfa-rathtar.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Rey": {
+      "art": "cards/art/tfa-rey.webp",
+      "full": "cards/full/tfa-rey.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Riot Trooper": {
+      "art": "cards/art/tfa-riot-trooper.webp",
+      "full": "cards/full/tfa-riot-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Salvage Trader": {
+      "art": "cards/art/tfa-salvage-trader.webp",
+      "full": "cards/full/tfa-salvage-trader.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Sins of the Father": {
+      "art": "cards/art/tfa-sins-of-the-father.webp",
+      "full": "cards/full/tfa-sins-of-the-father.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-00-TFA.pdf::Upsilon-class Shuttle": {
+      "art": "cards/art/tfa-upsilon-class-shuttle.webp",
+      "full": "cards/full/tfa-upsilon-class-shuttle.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Bludgeoning Pain": {
+      "art": "cards/art/ro-bludgeoning-pain.webp",
+      "full": "cards/full/ro-bludgeoning-pain.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Bor Gullet": {
+      "art": "cards/art/ro-bor-gullet.webp",
+      "full": "cards/full/ro-bor-gullet.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Chirrut Imwe": {
+      "art": "cards/art/ro-chirrut-imwe.webp",
+      "full": "cards/full/ro-chirrut-imwe.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Director Krennic": {
+      "art": "cards/art/ro-director-krennic.webp",
+      "full": "cards/full/ro-director-krennic.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Force Protection": {
+      "art": "cards/art/ro-force-protection.webp",
+      "full": "cards/full/ro-force-protection.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Gerrera's Revolutionary": {
+      "art": "cards/art/ro-gerrera-s-revolutionary.webp",
+      "full": "cards/full/ro-gerrera-s-revolutionary.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Hammerhead Corvette": {
+      "art": "cards/art/ro-hammerhead-corvette.webp",
+      "full": "cards/full/ro-hammerhead-corvette.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Imperial Hovertank": {
+      "art": "cards/art/ro-imperial-hovertank.webp",
+      "full": "cards/full/ro-imperial-hovertank.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Jyn Erso and Cassian Andor": {
+      "art": "cards/art/ro-jyn-erso-and-cassian-andor.webp",
+      "full": "cards/full/ro-jyn-erso-and-cassian-andor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Occupation": {
+      "art": "cards/art/ro-occupation.webp",
+      "full": "cards/full/ro-occupation.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Resistance": {
+      "art": "cards/art/ro-resistance.webp",
+      "full": "cards/full/ro-resistance.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::TIE Striker": {
+      "art": "cards/art/ro-tie-striker.webp",
+      "full": "cards/full/ro-tie-striker.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Thermal Detonator": {
+      "art": "cards/art/ro-thermal-detonator.webp",
+      "full": "cards/full/ro-thermal-detonator.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Trooper": {
+      "art": "cards/art/ro-trooper.webp",
+      "full": "cards/full/ro-trooper.webp",
+      "w": 276,
+      "h": 297,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::U-Wing": {
+      "art": "cards/art/ro-u-wing.webp",
+      "full": "cards/full/ro-u-wing.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-01-RO.pdf::Vader's Command": {
+      "art": "cards/art/ro-vader-s-command.webp",
+      "full": "cards/full/ro-vader-s-command.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Canto Bight Enforcer": {
+      "art": "cards/art/tlj-canto-bight-enforcer.webp",
+      "full": "cards/full/tlj-canto-bight-enforcer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Cantonica Casino": {
+      "art": "cards/art/tlj-cantonica-casino.webp",
+      "full": "cards/full/tlj-cantonica-casino.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Captain Phasma": {
+      "art": "cards/art/tlj-captain-phasma.webp",
+      "full": "cards/full/tlj-captain-phasma.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Code Slice": {
+      "art": "cards/art/tlj-code-slice.webp",
+      "full": "cards/full/tlj-code-slice.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Delay Tactic": {
+      "art": "cards/art/tlj-delay-tactic.webp",
+      "full": "cards/full/tlj-delay-tactic.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Fathier": {
+      "art": "cards/art/tlj-fathier.webp",
+      "full": "cards/full/tlj-fathier.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::First Order Dreadnought": {
+      "art": "cards/art/tlj-first-order-dreadnought.webp",
+      "full": "cards/full/tlj-first-order-dreadnought.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Force Projection": {
+      "art": "cards/art/tlj-force-projection.webp",
+      "full": "cards/full/tlj-force-projection.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Force Telepathy": {
+      "art": "cards/art/tlj-force-telepathy.webp",
+      "full": "cards/full/tlj-force-telepathy.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Glorious Charge": {
+      "art": "cards/art/tlj-glorious-charge.webp",
+      "full": "cards/full/tlj-glorious-charge.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Inspire": {
+      "art": "cards/art/tlj-inspire.webp",
+      "full": "cards/full/tlj-inspire.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Luke Skywalker, the Last Jedi": {
+      "art": "cards/art/tlj-luke-skywalker-the-last-jedi.webp",
+      "full": "cards/full/tlj-luke-skywalker-the-last-jedi.webp",
+      "w": 295,
+      "h": 229,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Mouse Droid": {
+      "art": "cards/art/tlj-mouse-droid.webp",
+      "full": "cards/full/tlj-mouse-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Porg": {
+      "art": "cards/art/tlj-porg.webp",
+      "full": "cards/full/tlj-porg.webp",
+      "w": 276,
+      "h": 224,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Porg Nest": {
+      "art": "cards/art/tlj-porg-nest.webp",
+      "full": "cards/full/tlj-porg-nest.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Praetorian Trooper": {
+      "art": "cards/art/tlj-praetorian-trooper.webp",
+      "full": "cards/full/tlj-praetorian-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Resistance Bomber": {
+      "art": "cards/art/tlj-resistance-bomber.webp",
+      "full": "cards/full/tlj-resistance-bomber.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Sai Tok": {
+      "art": "cards/art/tlj-sai-tok.webp",
+      "full": "cards/full/tlj-sai-tok.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Supreme Leader Snoke": {
+      "art": "cards/art/tlj-supreme-leader-snoke.webp",
+      "full": "cards/full/tlj-supreme-leader-snoke.webp",
+      "w": 295,
+      "h": 229,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::TIE Silencer": {
+      "art": "cards/art/tlj-tie-silencer.webp",
+      "full": "cards/full/tlj-tie-silencer.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Trooper": {
+      "art": "cards/art/tlj-trooper.webp",
+      "full": "cards/full/tlj-trooper.webp",
+      "w": 276,
+      "h": 297,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-02-TLJ.pdf::Vulptex": {
+      "art": "cards/art/tlj-vulptex.webp",
+      "full": "cards/full/tlj-vulptex.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Afterburn": {
+      "art": "cards/art/solo-afterburn.webp",
+      "full": "cards/full/solo-afterburn.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Chewbacca, the Beast": {
+      "art": "cards/art/solo-chewbacca-the-beast.webp",
+      "full": "cards/full/solo-chewbacca-the-beast.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Conscription": {
+      "art": "cards/art/solo-conscription.webp",
+      "full": "cards/full/solo-conscription.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Corellian Gunship": {
+      "art": "cards/art/solo-corellian-gunship.webp",
+      "full": "cards/full/solo-corellian-gunship.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Despair": {
+      "art": "cards/art/solo-despair.webp",
+      "full": "cards/full/solo-despair.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Droid": {
+      "art": "cards/art/solo-droid.webp",
+      "full": "cards/full/solo-droid.webp",
+      "w": 276,
+      "h": 297,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Droid Uprising": {
+      "art": "cards/art/solo-droid-uprising.webp",
+      "full": "cards/full/solo-droid-uprising.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Dryden Vos": {
+      "art": "cards/art/solo-dryden-vos.webp",
+      "full": "cards/full/solo-dryden-vos.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Enfys Nest": {
+      "art": "cards/art/solo-enfys-nest.webp",
+      "full": "cards/full/solo-enfys-nest.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Gamble": {
+      "art": "cards/art/solo-gamble.webp",
+      "full": "cards/full/solo-gamble.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Han Solo, Scrumrat": {
+      "art": "cards/art/solo-han-solo-scrumrat.webp",
+      "full": "cards/full/solo-han-solo-scrumrat.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Kalevan Star Yacht": {
+      "art": "cards/art/solo-kalevan-star-yacht.webp",
+      "full": "cards/full/solo-kalevan-star-yacht.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Maelstrom Blockade": {
+      "art": "cards/art/solo-maelstrom-blockade.webp",
+      "full": "cards/full/solo-maelstrom-blockade.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Mud Trooper": {
+      "art": "cards/art/solo-mud-trooper.webp",
+      "full": "cards/full/solo-mud-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Range Trooper": {
+      "art": "cards/art/solo-range-trooper.webp",
+      "full": "cards/full/solo-range-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Tobias Beckett": {
+      "art": "cards/art/solo-tobias-beckett.webp",
+      "full": "cards/full/solo-tobias-beckett.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-03-SOLO.pdf::Underground Forum": {
+      "art": "cards/art/solo-underground-forum.webp",
+      "full": "cards/full/solo-underground-forum.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-04-ROS.pdf::A Jedi's Fervor": {
+      "art": "cards/art/ros-a-jedi-s-fervor.webp",
+      "full": "cards/full/ros-a-jedi-s-fervor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Allegiant General Pryde": {
+      "art": "cards/art/ros-allegiant-general-pryde.webp",
+      "full": "cards/full/ros-allegiant-general-pryde.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Balance": {
+      "art": "cards/art/ros-balance.webp",
+      "full": "cards/full/ros-balance.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Band Together": {
+      "art": "cards/art/ros-band-together.webp",
+      "full": "cards/full/ros-band-together.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Ben Solo": {
+      "art": "cards/art/ros-ben-solo.webp",
+      "full": "cards/full/ros-ben-solo.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Betray": {
+      "art": "cards/art/ros-betray.webp",
+      "full": "cards/full/ros-betray.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Brave the Elements": {
+      "art": "cards/art/ros-brave-the-elements.webp",
+      "full": "cards/full/ros-brave-the-elements.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Culling Dais": {
+      "art": "cards/art/ros-culling-dais.webp",
+      "full": "cards/full/ros-culling-dais.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Droidsmith": {
+      "art": "cards/art/ros-droidsmith.webp",
+      "full": "cards/full/ros-droidsmith.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Dyad Force Transfer": {
+      "art": "cards/art/ros-dyad-force-transfer.webp",
+      "full": "cards/full/ros-dyad-force-transfer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Festival of the Ancestors": {
+      "art": "cards/art/ros-festival-of-the-ancestors.webp",
+      "full": "cards/full/ros-festival-of-the-ancestors.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::First Order Jet Trooper": {
+      "art": "cards/art/ros-first-order-jet-trooper.webp",
+      "full": "cards/full/ros-first-order-jet-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Force Lift": {
+      "art": "cards/art/ros-force-lift.webp",
+      "full": "cards/full/ros-force-lift.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::General Organa": {
+      "art": "cards/art/ros-general-organa.webp",
+      "full": "cards/full/ros-general-organa.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Hidden Base": {
+      "art": "cards/art/ros-hidden-base.webp",
+      "full": "cards/full/ros-hidden-base.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Hold Captive": {
+      "art": "cards/art/ros-hold-captive.webp",
+      "full": "cards/full/ros-hold-captive.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Holochess": {
+      "art": "cards/art/ros-holochess.webp",
+      "full": "cards/full/ros-holochess.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Knights of Ren": {
+      "art": "cards/art/ros-knights-of-ren.webp",
+      "full": "cards/full/ros-knights-of-ren.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Lightspeed Skipping": {
+      "art": "cards/art/ros-lightspeed-skipping.webp",
+      "full": "cards/full/ros-lightspeed-skipping.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Luke's Lightsaber": {
+      "art": "cards/art/ros-luke-s-lightsaber.webp",
+      "full": "cards/full/ros-luke-s-lightsaber.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Mimic Vat": {
+      "art": "cards/art/ros-mimic-vat.webp",
+      "full": "cards/full/ros-mimic-vat.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Orbak": {
+      "art": "cards/art/ros-orbak.webp",
+      "full": "cards/full/ros-orbak.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Propaganda": {
+      "art": "cards/art/ros-propaganda.webp",
+      "full": "cards/full/ros-propaganda.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Rey Skywalker": {
+      "art": "cards/art/ros-rey-skywalker.webp",
+      "full": "cards/full/ros-rey-skywalker.webp",
+      "w": 295,
+      "h": 229,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Rey's Lightsaber": {
+      "art": "cards/art/ros-rey-s-lightsaber.webp",
+      "full": "cards/full/ros-rey-s-lightsaber.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Sith Eternal Lightning": {
+      "art": "cards/art/ros-sith-eternal-lightning.webp",
+      "full": "cards/full/ros-sith-eternal-lightning.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Sith Wayfinder": {
+      "art": "cards/art/ros-sith-wayfinder.webp",
+      "full": "cards/full/ros-sith-wayfinder.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Training Droid": {
+      "art": "cards/art/ros-training-droid.webp",
+      "full": "cards/full/ros-training-droid.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Unpleasant Discovery": {
+      "art": "cards/art/ros-unpleasant-discovery.webp",
+      "full": "cards/full/ros-unpleasant-discovery.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Vexis": {
+      "art": "cards/art/ros-vexis.webp",
+      "full": "cards/full/ros-vexis.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::War Room": {
+      "art": "cards/art/ros-war-room.webp",
+      "full": "cards/full/ros-war-room.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Xyston Star Destroyer": {
+      "art": "cards/art/ros-xyston-star-destroyer.webp",
+      "full": "cards/full/ros-xyston-star-destroyer.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-04-ROS.pdf::Zorii Bliss": {
+      "art": "cards/art/ros-zorii-bliss.webp",
+      "full": "cards/full/ros-zorii-bliss.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 375,
+      "fullH": 523
+    },
+    "swtg-expansion-05-RBL.pdf::Ahsoka Tano, Rogue Jedi": {
+      "art": "cards/art/rbl-ahsoka-tano-rogue-jedi.webp",
+      "full": "cards/full/rbl-ahsoka-tano-rogue-jedi.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::CT-7567, Captain Rex": {
+      "art": "cards/art/rbl-ct-7567-captain-rex.webp",
+      "full": "cards/full/rbl-ct-7567-captain-rex.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Demolitions Trooper": {
+      "art": "cards/art/rbl-demolitions-trooper.webp",
+      "full": "cards/full/rbl-demolitions-trooper.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Evade the Empire": {
+      "art": "cards/art/rbl-evade-the-empire.webp",
+      "full": "cards/full/rbl-evade-the-empire.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Ezra Bridger": {
+      "art": "cards/art/rbl-ezra-bridger.webp",
+      "full": "cards/full/rbl-ezra-bridger.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Fateful Showdown": {
+      "art": "cards/art/rbl-fateful-showdown.webp",
+      "full": "cards/full/rbl-fateful-showdown.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Feral Loth-Cat": {
+      "art": "cards/art/rbl-feral-loth-cat.webp",
+      "full": "cards/full/rbl-feral-loth-cat.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Fulcrum Intelligence": {
+      "art": "cards/art/rbl-fulcrum-intelligence.webp",
+      "full": "cards/full/rbl-fulcrum-intelligence.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Garazeb Orrelios": {
+      "art": "cards/art/rbl-garazeb-orrelios.webp",
+      "full": "cards/full/rbl-garazeb-orrelios.webp",
+      "w": 295,
+      "h": 229,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Grand Admiral Thrawn": {
+      "art": "cards/art/rbl-grand-admiral-thrawn.webp",
+      "full": "cards/full/rbl-grand-admiral-thrawn.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Heart of the Rebellion": {
+      "art": "cards/art/rbl-heart-of-the-rebellion.webp",
+      "full": "cards/full/rbl-heart-of-the-rebellion.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Hera Syndulla": {
+      "art": "cards/art/rbl-hera-syndulla.webp",
+      "full": "cards/full/rbl-hera-syndulla.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Imperial Hotshot": {
+      "art": "cards/art/rbl-imperial-hotshot.webp",
+      "full": "cards/full/rbl-imperial-hotshot.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Imperial Inquisition": {
+      "art": "cards/art/rbl-imperial-inquisition.webp",
+      "full": "cards/full/rbl-imperial-inquisition.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Imperial Power Play": {
+      "art": "cards/art/rbl-imperial-power-play.webp",
+      "full": "cards/full/rbl-imperial-power-play.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Imperial Security Officer": {
+      "art": "cards/art/rbl-imperial-security-officer.webp",
+      "full": "cards/full/rbl-imperial-security-officer.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Inquisitor": {
+      "art": "cards/art/rbl-inquisitor.webp",
+      "full": "cards/full/rbl-inquisitor.webp",
+      "w": 276,
+      "h": 224,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Kallus, Imperial Traitor": {
+      "art": "cards/art/rbl-kallus-imperial-traitor.webp",
+      "full": "cards/full/rbl-kallus-imperial-traitor.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Kanan Jarrus, Hidden Jedi": {
+      "art": "cards/art/rbl-kanan-jarrus-hidden-jedi.webp",
+      "full": "cards/full/rbl-kanan-jarrus-hidden-jedi.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Loth-Wolf Pack": {
+      "art": "cards/art/rbl-loth-wolf-pack.webp",
+      "full": "cards/full/rbl-loth-wolf-pack.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Quiet Ending": {
+      "art": "cards/art/rbl-quiet-ending.webp",
+      "full": "cards/full/rbl-quiet-ending.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Rebel": {
+      "art": "cards/art/rbl-rebel.webp",
+      "full": "cards/full/rbl-rebel.webp",
+      "w": 276,
+      "h": 297,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Rebel Astromechs": {
+      "art": "cards/art/rbl-rebel-astromechs.webp",
+      "full": "cards/full/rbl-rebel-astromechs.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Recover": {
+      "art": "cards/art/rbl-recover.webp",
+      "full": "cards/full/rbl-recover.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Sabine Wren": {
+      "art": "cards/art/rbl-sabine-wren.webp",
+      "full": "cards/full/rbl-sabine-wren.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Savage Smash": {
+      "art": "cards/art/rbl-savage-smash.webp",
+      "full": "cards/full/rbl-savage-smash.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Saved by the Rebellion": {
+      "art": "cards/art/rbl-saved-by-the-rebellion.webp",
+      "full": "cards/full/rbl-saved-by-the-rebellion.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Spark of Rebellion": {
+      "art": "cards/art/rbl-spark-of-rebellion.webp",
+      "full": "cards/full/rbl-spark-of-rebellion.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::The Darksaber": {
+      "art": "cards/art/rbl-the-darksaber.webp",
+      "full": "cards/full/rbl-the-darksaber.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::The Ghost": {
+      "art": "cards/art/rbl-the-ghost.webp",
+      "full": "cards/full/rbl-the-ghost.webp",
+      "w": 256,
+      "h": 186,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::The Monarch": {
+      "art": "cards/art/rbl-the-monarch.webp",
+      "full": "cards/full/rbl-the-monarch.webp",
+      "w": 276,
+      "h": 224,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Trooper Medic": {
+      "art": "cards/art/rbl-trooper-medic.webp",
+      "full": "cards/full/rbl-trooper-medic.webp",
+      "w": 311,
+      "h": 226,
+      "fullW": 374,
+      "fullH": 522
+    },
+    "swtg-expansion-05-RBL.pdf::Wolf Beast": {
+      "art": "cards/art/rbl-wolf-beast.webp",
+      "full": "cards/full/rbl-wolf-beast.webp",
+      "w": 276,
+      "h": 297,
+      "fullW": 374,
+      "fullH": 522
+    }
+  },
+  "landVariants": {
+    "Plains": [
+      "cards/art/land-plains-1.webp",
+      "cards/art/land-plains-2.webp",
+      "cards/art/land-plains-3.webp",
+      "cards/art/land-plains-4.webp",
+      "cards/art/land-plains-5.webp"
+    ],
+    "Island": [
+      "cards/art/land-island-1.webp",
+      "cards/art/land-island-2.webp",
+      "cards/art/land-island-3.webp",
+      "cards/art/land-island-4.webp",
+      "cards/art/land-island-5.webp",
+      "cards/art/land-island-6.webp"
+    ],
+    "Swamp": [
+      "cards/art/land-swamp-1.webp",
+      "cards/art/land-swamp-2.webp",
+      "cards/art/land-swamp-3.webp",
+      "cards/art/land-swamp-4.webp",
+      "cards/art/land-swamp-5.webp"
+    ],
+    "Mountain": [
+      "cards/art/land-mountain-1.webp",
+      "cards/art/land-mountain-2.webp",
+      "cards/art/land-mountain-3.webp",
+      "cards/art/land-mountain-4.webp",
+      "cards/art/land-mountain-5.webp"
+    ],
+    "Forest": [
+      "cards/art/land-forest-1.webp",
+      "cards/art/land-forest-2.webp",
+      "cards/art/land-forest-3.webp",
+      "cards/art/land-forest-4.webp",
+      "cards/art/land-forest-5.webp"
+    ]
+  }
+}

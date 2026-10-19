@@ -6,7 +6,7 @@ export const STAR_WARS_SET: CardSet = {
   id: 'swtg-core',
   name: 'Star Wars TCG Core & Expansions',
   code: 'SWTG',
-  description: 'Original Star Wars custom TCG card set including Base set, TFA, and Rogue One expansions.',
+  description: 'Star Wars: The Gathering fan set: the base set plus The Force Awakens, Rogue One, The Last Jedi, Solo, Rise of Skywalker and Rebels.',
   cards: (rawCards as any[]).map((raw, idx) => {
     const colors = determineColors(raw.cost, raw.type);
     return {
@@ -19,7 +19,9 @@ export const STAR_WARS_SET: CardSet = {
       powerToughness: raw.powerToughness || '',
       rarity: raw.rarity || 'C',
       artist: raw.artist || '',
+      ...(raw.backFace ? { backFace: raw.backFace } : {}),
       source: raw.source || '',
+      artKey: `${raw.source}::${raw.name}`,
       colors,
     } as Card;
   }),

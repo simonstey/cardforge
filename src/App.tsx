@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Card, BoosterSlotConfig, BoosterPack } from './types/card';
 import { STAR_WARS_SET } from './data/starWarsSet';
 import { generateBoosterBox } from './utils/boosterCollation';
@@ -7,11 +7,23 @@ import { BoosterConfigurator } from './components/BoosterConfigurator';
 import { BoosterSimulator } from './components/BoosterSimulator';
 import { CardDatabase } from './components/CardDatabase';
 import { CardModal } from './components/CardModal';
-import { PrintSheetModal } from './components/PrintSheetModal';
-import { Package, Database, Sparkles, Printer, RotateCcw, Shield, Github, Layers } from 'lucide-react';
+import { CardEditorDialog } from './components/CardEditorDialog';
+import { Button, IconButton } from './components/ui/Button';
+import { useToast } from './components/ui/Toast';
+import { cx } from './components/ui/cx';
+import { Package, Database, Printer, RotateCcw } from 'lucide-react';
+
+// jsPDF only loads when the print dialog is first opened.
+const PrintSheetModal = lazy(() =>
+  import('./components/PrintSheetModal').then(m => ({ default: m.PrintSheetModal }))
+);
 
 const STORAGE_KEY_CARDS = 'cardforge_custom_cards_v1';
+const STORAGE_KEY_CARD_SET_VERSION = 'cardforge_card_set_version';
+/** Bump when the built-in card set changes; databases saved with an older set are rebased onto the new one. */
+const CARD_SET_VERSION = 2;
 const STORAGE_KEY_CONFIG = 'cardforge_booster_config_v1';
+const STORAGE_KEY_SOUND = 'cardforge_sound_v1';
 
 const DEFAULT_CONFIG: BoosterSlotConfig = {
   commonsCount: 10,
@@ -21,51 +33,97 @@ const DEFAULT_CONFIG: BoosterSlotConfig = {
   basicLandCount: 1,
   tokenCount: 0,
   balanceColorsInCommons: true,
+  // Saved configs are merged over these defaults, so foils stay off for existing users.
+  foilRate: 0,
 };
 
-export default function App() {
-  const [cards, setCards] = useState<Card[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY_CARDS);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      } catch (e) {
-        console.error('Failed to load stored cards', e);
-      }
-    }
-    return STAR_WARS_SET.cards;
-  });
+type View = 'simulator' | 'database';
+type EditorState = { mode: 'create' } | { mode: 'edit'; card: Card } | null;
 
-  const [config, setConfig] = useState<BoosterSlotConfig>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY_CONFIG);
-    if (saved) {
-      try {
-        return { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
-      } catch (e) {
-        console.error('Failed to load stored config', e);
-      }
-    }
-    return DEFAULT_CONFIG;
+function readStorage<T>(key: string, fallback: T, parse: (raw: string) => T): T {
+  try {
+    const saved = localStorage.getItem(key);
+    if (saved !== null) return parse(saved);
+  } catch (e) {
+    console.error(`Failed to load ${key}`, e);
+  }
+  return fallback;
+}
+
+/** Built-in set cards come from the SWTG PDFs; anything else was created or imported by the user. */
+const isSetCard = (card: Card) => (card.source ?? '').startsWith('swtg-');
+
+/**
+ * Load the saved card database. A database saved with an older built-in set keeps the
+ * user's own cards and takes the current set for everything else.
+ */
+function loadCards(): { cards: Card[]; keptCustom: number | null } {
+  const saved = readStorage<Card[] | null>(STORAGE_KEY_CARDS, null, raw => {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
   });
+  if (!saved) return { cards: STAR_WARS_SET.cards, keptCustom: null };
+  const version = readStorage(STORAGE_KEY_CARD_SET_VERSION, 1, raw => Number(raw) || 1);
+  if (version === CARD_SET_VERSION) return { cards: saved, keptCustom: null };
+  const custom = saved.filter(c => !isSetCard(c));
+  return { cards: [...custom, ...STAR_WARS_SET.cards], keptCustom: custom.length };
+}
+
+function writeStorage(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (e) {
+    console.error(`Failed to save ${key}`, e);
+  }
+}
+
+export default function App() {
+  const toast = useToast();
+
+  const [initialLoad] = useState(loadCards);
+  const [cards, setCards] = useState<Card[]>(initialLoad.cards);
+
+  const [config, setConfig] = useState<BoosterSlotConfig>(() =>
+    readStorage(STORAGE_KEY_CONFIG, DEFAULT_CONFIG, raw => ({ ...DEFAULT_CONFIG, ...JSON.parse(raw) }))
+  );
+
+  const [isSoundEnabled, setIsSoundEnabled] = useState<boolean>(() =>
+    readStorage(STORAGE_KEY_SOUND, true, raw => raw !== 'false')
+  );
 
   const [packCount, setPackCount] = useState<number>(36); // Default 36-pack booster box
   const [packs, setPacks] = useState<BoosterPack[]>([]);
-  const [activeTab, setActiveTab] = useState<'simulator' | 'database'>('simulator');
-  const [inspectingCard, setInspectingCard] = useState<Card | null>(null);
+  const [activeView, setActiveView] = useState<View>('simulator');
+  const [inspecting, setInspecting] = useState<{ card: Card; artSeed?: number } | null>(null);
+  const [editor, setEditor] = useState<EditorState>(null);
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState<boolean>(true);
 
-  // Save cards to localStorage whenever modified
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY_CARDS, JSON.stringify(cards));
+    writeStorage(STORAGE_KEY_CARDS, JSON.stringify(cards));
+    writeStorage(STORAGE_KEY_CARD_SET_VERSION, String(CARD_SET_VERSION));
   }, [cards]);
 
-  // Save config to localStorage
+  // Tell returning users their saved database moved to the updated card set.
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(config));
+    if (initialLoad.keptCustom === null) return;
+    const kept = initialLoad.keptCustom;
+    toast({
+      message: `The card set was updated to ${STAR_WARS_SET.cards.length} cards.${
+        kept > 0 ? ` Your ${kept} custom ${kept === 1 ? 'card was' : 'cards were'} kept.` : ''
+      }`,
+      duration: 8000,
+    });
+  }, []);
+
+  useEffect(() => {
+    writeStorage(STORAGE_KEY_CONFIG, JSON.stringify(config));
   }, [config]);
+
+  useEffect(() => {
+    setSoundEnabled(isSoundEnabled);
+    writeStorage(STORAGE_KEY_SOUND, String(isSoundEnabled));
+  }, [isSoundEnabled]);
 
   // Generate initial box on initial load
   useEffect(() => {
@@ -82,109 +140,128 @@ export default function App() {
   };
 
   const handleResetToDefaultCards = () => {
-    if (confirm('Reset custom card database back to original Star Wars TCG set? Any custom added cards will be reset.')) {
-      setCards(STAR_WARS_SET.cards);
-      localStorage.removeItem(STORAGE_KEY_CARDS);
-    }
+    const previous = cards;
+    setCards(STAR_WARS_SET.cards);
+    toast({
+      message: `Card database reset to the original ${STAR_WARS_SET.cards.length} cards.`,
+      actionLabel: 'Undo',
+      onAction: () => setCards(previous),
+    });
   };
 
-  const handleAddCard = (newCard: Card) => {
-    setCards(prev => [newCard, ...prev]);
-  };
-
-  const handleUpdateCard = (updatedCard: Card) => {
-    setCards(prev => prev.map(c => (c.id === updatedCard.id ? updatedCard : c)));
+  const handleSaveCard = (card: Card, isNew: boolean) => {
+    setCards(prev => (isNew ? [card, ...prev] : prev.map(c => (c.id === card.id ? card : c))));
+    setEditor(null);
+    toast({ message: isNew ? `Added “${card.name}”.` : `Saved changes to “${card.name}”.` });
   };
 
   const handleDeleteCard = (cardId: string) => {
+    const index = cards.findIndex(c => c.id === cardId);
+    if (index === -1) return;
+    const removed = cards[index];
     setCards(prev => prev.filter(c => c.id !== cardId));
+    toast({
+      message: `Deleted “${removed.name}”.`,
+      actionLabel: 'Undo',
+      onAction: () =>
+        setCards(prev => (prev.some(c => c.id === removed.id) ? prev : [...prev.slice(0, index), removed, ...prev.slice(index)])),
+    });
   };
 
   const handleImportCards = (importedCards: Card[]) => {
+    const previous = cards;
     setCards(importedCards);
+    toast({
+      message: `Imported ${importedCards.length} cards. They replace your previous database.`,
+      actionLabel: 'Undo',
+      onAction: () => setCards(previous),
+      duration: 8000,
+    });
   };
 
+  const navItems: { view: View; label: string; count: number; Icon: typeof Package }[] = [
+    { view: 'simulator', label: 'Booster Packs', count: packs.length, Icon: Package },
+    { view: 'database', label: 'Card Database', count: cards.length, Icon: Database },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950">
-      {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-slate-900/90 border-b border-slate-800 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-950/60 font-black text-lg">
-              <Package className="w-5 h-5" />
+    <div className="min-h-dvh bg-void text-fg flex flex-col font-sans">
+      {/* No backdrop-filter below sm: it would turn the header into the containing block of the fixed bottom nav. */}
+      <header className="sticky top-0 z-40 border-b border-line bg-void sm:bg-void/85 sm:backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-14 sm:min-h-16 py-2 flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="grid place-items-center size-9 rounded-xl bg-accent text-accent-ink shrink-0" aria-hidden>
+              <Package className="size-5" />
             </div>
-            <div>
-              <h1 className="text-base font-black tracking-tight text-white flex items-center gap-2">
-                CardForge
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-800/60">
-                  Booster Creator & Collation
-                </span>
-              </h1>
-              <p className="text-[11px] text-slate-400 hidden sm:block">
-                Star Wars TCG & Custom Card Booster Simulation & Print Sheet Generator
+            <div className="min-w-0">
+              <h1 className="text-wordmark text-fg-strong">CardForge</h1>
+              <p className="hidden lg:block text-xs text-fg-muted truncate">
+                Star Wars TCG booster simulator & print sheets
               </p>
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <div className="flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-xl border border-slate-800">
-            <button
-              type="button"
-              onClick={() => setActiveTab('simulator')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'simulator'
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <Package className="w-3.5 h-3.5" />
-              Booster Packs ({packs.length})
-            </button>
+          {/* One nav: inline in the header from sm up, docked to the bottom on phones */}
+          <nav
+            aria-label="Views"
+            className={cx(
+              'fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-1 border-t border-line bg-void/95 backdrop-blur-md px-2 pt-1.5 pb-[calc(env(safe-area-inset-bottom)+0.375rem)]',
+              'sm:static sm:z-auto sm:mx-auto sm:flex sm:gap-1 sm:rounded-xl sm:border sm:bg-well sm:p-1 sm:backdrop-blur-none'
+            )}
+          >
+            {navItems.map(({ view, label, count, Icon }) => {
+              const isActive = activeView === view;
+              return (
+                <button
+                  key={view}
+                  type="button"
+                  onClick={() => setActiveView(view)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cx(
+                    'flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 rounded-lg px-3 min-h-12 sm:min-h-9 text-xs sm:text-sm font-semibold cursor-pointer transition-colors duration-150',
+                    isActive
+                      ? 'bg-accent-soft text-accent-fg sm:ring-1 sm:ring-accent-line'
+                      : 'text-fg-muted hover:text-fg-strong hover:bg-raised'
+                  )}
+                >
+                  <Icon aria-hidden className="size-5 sm:size-4" />
+                  <span>
+                    {label} <span className="tabular-nums text-fg-muted font-medium">({count})</span>
+                  </span>
+                </button>
+              );
+            })}
+          </nav>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('database')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'database'
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              <Database className="w-3.5 h-3.5" />
-              Card Database ({cards.length})
-            </button>
-          </div>
-
-          {/* Quick Action Buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
+          <div className="ml-auto sm:ml-0 flex items-center gap-2">
+            <Button
               onClick={() => setIsPrintModalOpen(true)}
               disabled={packs.length === 0}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-md shadow-cyan-950/40 disabled:opacity-50 transition-all cursor-pointer"
+              className="max-sm:hidden"
             >
-              <Printer className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Print PDF Sheets</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleResetToDefaultCards}
-              title="Reset Card Database to default Star Wars set"
-              className="p-2 rounded-xl text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 transition-colors"
+              <Printer aria-hidden className="size-4" />
+              Print sheets
+            </Button>
+            <IconButton
+              label="Print sheets"
+              onClick={() => setIsPrintModalOpen(true)}
+              disabled={packs.length === 0}
+              className="sm:hidden"
             >
-              <RotateCcw className="w-4 h-4" />
-            </button>
+              <Printer aria-hidden className="size-4" />
+            </IconButton>
+            <IconButton label="Reset card database to the original set" onClick={handleResetToDefaultCards}>
+              <RotateCcw aria-hidden className="size-4" />
+            </IconButton>
           </div>
         </div>
       </header>
 
-      {/* Main Content Area */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-6">
-        {activeTab === 'simulator' ? (
+        {activeView === 'simulator' ? (
           <>
-            {/* Slot & Collation Configurator */}
             <BoosterConfigurator
+              cards={cards}
               config={config}
               onChange={setConfig}
               packCount={packCount}
@@ -193,69 +270,80 @@ export default function App() {
               isGenerating={isGenerating}
             />
 
-            {/* Booster Simulator & Collation Metrics */}
             <BoosterSimulator
               packs={packs}
               onOpenPrintModal={() => setIsPrintModalOpen(true)}
-              onInspectCard={setInspectingCard}
+              onInspectCard={(card, artSeed) => setInspecting({ card, artSeed })}
               isSoundEnabled={isSoundEnabled}
-              onToggleSound={() => {
-                const next = !isSoundEnabled;
-                setIsSoundEnabled(next);
-                setSoundEnabled(next);
-              }}
+              onToggleSound={() => setIsSoundEnabled(on => !on)}
             />
           </>
         ) : (
-          /* Card Database Management Tab */
           <CardDatabase
             cards={cards}
-            onAddCard={handleAddCard}
-            onUpdateCard={handleUpdateCard}
+            onCreateCard={() => setEditor({ mode: 'create' })}
+            onEditCard={card => setEditor({ mode: 'edit', card })}
             onDeleteCard={handleDeleteCard}
-            onInspectCard={setInspectingCard}
+            onInspectCard={card => setInspecting({ card })}
             onImportCards={handleImportCards}
           />
         )}
       </main>
 
-      {/* Card Inspection Modal */}
-      {inspectingCard && (
+      {inspecting && (
         <CardModal
-          card={inspectingCard}
-          onClose={() => setInspectingCard(null)}
-          onEdit={updated => {
-            handleUpdateCard(updated);
-            setInspectingCard(null);
-          }}
-          onDelete={id => {
-            handleDeleteCard(id);
-            setInspectingCard(null);
-          }}
+          card={inspecting.card}
+          artSeed={inspecting.artSeed}
+          onClose={() => setInspecting(null)}
+          // Pack cards are snapshots, so editing is only offered from the database.
+          onEdit={
+            activeView === 'database'
+              ? card => {
+                  setInspecting(null);
+                  setEditor({ mode: 'edit', card });
+                }
+              : undefined
+          }
+          onDelete={
+            activeView === 'database'
+              ? id => {
+                  setInspecting(null);
+                  handleDeleteCard(id);
+                }
+              : undefined
+          }
         />
       )}
 
-      {/* Print PDF Sheet Generator Modal */}
+      {editor && (
+        <CardEditorDialog
+          card={editor.mode === 'edit' ? editor.card : null}
+          onCancel={() => setEditor(null)}
+          onSave={handleSaveCard}
+        />
+      )}
+
       {isPrintModalOpen && (
-        <PrintSheetModal
-          packs={packs}
-          onClose={() => setIsPrintModalOpen(false)}
-        />
+        <Suspense fallback={null}>
+          <PrintSheetModal packs={packs} onClose={() => setIsPrintModalOpen(false)} />
+        </Suspense>
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-6 mt-12 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
+      <footer className="border-t border-line py-6 pb-28 sm:pb-6 text-xs text-fg-muted">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:justify-between gap-2">
           <p>
-            CardForge • Physical Card Stock Cutting PDF Sheets (Standard 63×88mm 2.5×3.5" Poker/MTG size)
+            Card designs and artwork from the{' '}
+            <a
+              href="https://www.starwarsthegathering.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-fg-soft underline decoration-line-strong underline-offset-3 hover:text-accent-fg hover:decoration-accent-fg"
+            >
+              Star Wars: The Gathering
+            </a>{' '}
+            fan project.
           </p>
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>Color-Balanced Collation Engine</span>
-            <span>•</span>
-            <span>1 in 4.5 Mythic Ratio</span>
-            <span>•</span>
-            <span className="text-cyan-400">Deployable via GitHub Pages</span>
-          </div>
+          <p>Print sheets use the standard 63 × 88 mm card size (2.5 × 3.5 in).</p>
         </div>
       </footer>
     </div>

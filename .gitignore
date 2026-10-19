@@ -8,5 +8,5 @@ coverage/
 __pycache__/
 
 # Source material for scripts/extract_card_art.py (not needed at runtime)
-cards/
-SWTG-BoosterPackMaker/
+/cards/
+/SWTG-BoosterPackMaker/

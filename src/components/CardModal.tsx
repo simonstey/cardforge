@@ -1,166 +1,150 @@
-import React, { useEffect } from 'react';
+import React, { useId, useState } from 'react';
 import { Card } from '../types/card';
-import { getRarityColor, getRarityLabel, getColorBadge } from '../utils/cardHelpers';
-import { playClickSound } from '../utils/audioFeedback';
-import { X, Sparkles, User, BookOpen, Layers } from 'lucide-react';
+import { MANA, RARITY, SET_NAMES, colorPips } from '../utils/cardHelpers';
+import { getCardSetCode } from '../utils/boosterCollation';
+import { getCardArt } from '../utils/cardArt';
+import { Dialog } from './ui/Dialog';
+import { Button, IconButton } from './ui/Button';
+import { ManaCost } from './ManaCost';
+import { RulesText } from './RulesText';
+import { CardItem } from './CardItem';
+import { cx } from './ui/cx';
+import { X, Pencil, Trash2, Repeat2 } from 'lucide-react';
 
 interface CardModalProps {
-  card: Card | null;
+  card: Card;
+  /** Which printing to show for cards with several (basic lands), matching the thumbnail. */
+  artSeed?: number;
   onClose: () => void;
   onEdit?: (card: Card) => void;
   onDelete?: (id: string) => void;
 }
 
-export const CardModal: React.FC<CardModalProps> = ({ card, onClose, onEdit, onDelete }) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
-
-  if (!card) return null;
-
-  const isMythic = card.rarity === 'M';
-  const isRare = card.rarity === 'R';
-  const colors = card.colors || ['Colorless'];
+export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, onEdit, onDelete }) => {
+  const id = useId();
+  const art = getCardArt(card, artSeed);
+  const [showBack, setShowBack] = useState(false);
+  const pips = colorPips(card);
+  const rarity = RARITY[card.rarity];
+  const setCode = getCardSetCode(card);
+  const setName = card.source
+    ? `${SET_NAMES[setCode] ?? setCode}${card.rarity === 'T' ? ' · Tokens' : card.rarity === 'L' ? ' · Basic lands' : ''}`
+    : undefined;
+  const hasBack = Boolean(card.backFace || art?.fullBackSrc);
+  // The face whose text is shown: the back face's details when it is turned over.
+  const face = showBack && card.backFace ? card.backFace : card;
 
   return (
-    <div
-      onClick={e => {
-        if (e.target === e.currentTarget) {
-          playClickSound();
-          onClose();
-        }
-      }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
-    >
-      <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl p-6 text-slate-100 overflow-hidden">
-        {/* Glow ambient background */}
-        {isMythic && (
-          <div className="absolute -top-24 -right-24 w-60 h-60 bg-orange-600/20 rounded-full blur-3xl pointer-events-none" />
-        )}
-        {isRare && (
-          <div className="absolute -top-24 -right-24 w-60 h-60 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
-        )}
-
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {/* Card Title and Cost */}
-        <div className="flex items-start justify-between gap-3 pr-8 pb-3 border-b border-slate-800">
-          <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              {card.name}
-              {isMythic && (
-                <span className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-950 text-orange-400 border border-orange-500/40">
-                  <Sparkles className="w-3 h-3 text-orange-400" />
-                  Mythic Rare
-                </span>
-              )}
+    <Dialog labelledBy={`${id}-title`} onClose={onClose} className="sm:w-[min(100%-2rem,52rem)]">
+      <div className="flex max-h-[inherit] flex-col">
+        <div className="flex items-start justify-between gap-3 border-b border-line px-6 py-4">
+          <div className="min-w-0">
+            <h2 id={`${id}-title`} className="text-xl font-bold text-fg-strong">
+              {face.name}
             </h2>
-            <p className="text-sm text-slate-400 mt-0.5">{card.type}</p>
+            <p className="text-sm text-fg-muted">{face.type}</p>
           </div>
-          {card.cost && (
-            <span className="px-3 py-1 text-sm font-mono font-bold rounded-lg bg-slate-800 text-amber-300 border border-slate-700 shadow-inner">
-              {card.cost}
-            </span>
-          )}
+          <div className="flex items-center gap-3">
+            {!showBack && <ManaCost cost={card.cost} size="md" />}
+            <IconButton label="Close" variant="ghost" onClick={onClose} autoFocus>
+              <X aria-hidden className="size-5" />
+            </IconButton>
+          </div>
         </div>
 
-        {/* Meta details */}
-        <div className="grid grid-cols-2 gap-2 my-4 text-xs">
-          <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 flex items-center justify-between">
-            <span className="text-slate-400 flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5" /> Rarity:
-            </span>
-            <span className={`px-2 py-0.5 rounded font-semibold border ${getRarityColor(card.rarity)}`}>
-              {getRarityLabel(card.rarity)}
-            </span>
-          </div>
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="grid gap-6 sm:grid-cols-[minmax(0,17rem)_1fr]">
+            <div className="mx-auto w-full max-w-[17rem]">
+              {art?.fullSrc ? (
+                <>
+                  <img
+                    src={showBack && art.fullBackSrc ? art.fullBackSrc : art.fullSrc}
+                    width={art.fullWidth}
+                    height={art.fullHeight}
+                    alt={`Original card scan of ${card.name}${showBack ? ', back face' : ''}`}
+                    className="w-full h-auto rounded-[0.9rem] shadow-xl shadow-black/60"
+                  />
+                  {hasBack && (
+                    <Button aria-pressed={showBack} onClick={() => setShowBack(b => !b)} className="mt-3 w-full">
+                      <Repeat2 aria-hidden className="size-4" />
+                      {showBack ? 'Show front face' : 'Show other face'}
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <div inert>
+                  <CardItem card={card} eagerArt />
+                </div>
+              )}
+            </div>
 
-          <div className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 flex items-center justify-between">
-            <span className="text-slate-400">Colors:</span>
-            <div className="flex gap-1">
-              {colors.map(col => {
-                const badge = getColorBadge(col);
-                return (
-                  <span
-                    key={col}
-                    className={`px-1.5 py-0.2 rounded text-[10px] font-semibold ${badge.bg} border ${badge.border}`}
-                  >
-                    {badge.label}
-                  </span>
-                );
-              })}
+            <div className="min-w-0 space-y-4">
+              <dl className="grid grid-cols-2 gap-2 text-sm">
+                <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                  <dt className="text-xs text-fg-muted">Rarity</dt>
+                  <dd className={cx('font-semibold', rarity.text)}>{rarity.label}</dd>
+                </div>
+                <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                  <dt className="text-xs text-fg-muted">Color</dt>
+                  <dd className="flex flex-wrap items-center gap-x-2 font-semibold text-fg">
+                    {pips.length === 0
+                      ? 'Colorless'
+                      : pips.map(c => (
+                          <span key={c} className="inline-flex items-center gap-1">
+                            <span aria-hidden className={cx('size-2.5 rounded-full', MANA[c].swatch)} />
+                            {MANA[c].label}
+                          </span>
+                        ))}
+                  </dd>
+                </div>
+                {face.powerToughness && (
+                  <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                    <dt className="text-xs text-fg-muted">{/planeswalker/i.test(face.type) ? 'Loyalty' : 'Power / toughness'}</dt>
+                    <dd className="font-bold text-amber-200">{face.powerToughness}</dd>
+                  </div>
+                )}
+                {setName && (
+                  <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                    <dt className="text-xs text-fg-muted">Set</dt>
+                    <dd className="font-semibold text-fg">{setName}</dd>
+                  </div>
+                )}
+              </dl>
+
+              {face.text && (
+                <div className="space-y-2 rounded-xl border border-line bg-well/70 p-4 text-sm leading-relaxed text-fg">
+                  <RulesText text={face.text} size="md" />
+                </div>
+              )}
+
+              {face.flavorText && (
+                <p className="px-1 text-sm italic leading-relaxed text-fg-muted whitespace-pre-line">{face.flavorText}</p>
+              )}
+
+              <p className="px-1 text-sm text-fg-muted">
+                Illustrated by <span className="text-fg-soft">{card.artist || 'an unknown artist'}</span>
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Card Oracle/Rules Text */}
-        {card.text && (
-          <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 text-sm text-slate-200 leading-relaxed mb-4 whitespace-pre-line">
-            {card.text}
-          </div>
-        )}
-
-        {/* Flavor text */}
-        {card.flavorText && (
-          <div className="p-3 rounded-lg bg-slate-800/30 border-l-2 border-amber-500/40 text-xs text-slate-400 italic mb-4">
-            "{card.flavorText}"
-          </div>
-        )}
-
-        {/* Power / Toughness and Artist */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-xs text-slate-400">
-          <div className="flex items-center gap-1.5">
-            <User className="w-3.5 h-3.5 text-slate-400" />
-            <span>Artist: {card.artist || 'Unknown'}</span>
-          </div>
-          {card.powerToughness && (
-            <div className="flex items-center gap-2">
-              <span className="text-slate-400">Power / Toughness:</span>
-              <span className="px-2.5 py-1 text-sm font-bold font-mono rounded bg-slate-800 text-amber-300 border border-slate-700">
-                {card.powerToughness}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Actions if provided */}
         {(onEdit || onDelete) && (
-          <div className="flex justify-end gap-2 mt-5 pt-3 border-t border-slate-800">
+          <div className="flex justify-end gap-2 border-t border-line px-6 py-4">
             {onDelete && (
-              <button
-                onClick={() => {
-                  onDelete(card.id);
-                  onClose();
-                }}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 hover:bg-rose-950/50 hover:border-rose-700 border border-transparent transition-colors"
-              >
-                Delete Card
-              </button>
+              <Button variant="danger" size="md" onClick={() => onDelete(card.id)}>
+                <Trash2 aria-hidden className="size-4" />
+                Delete card
+              </Button>
             )}
             {onEdit && (
-              <button
-                onClick={() => {
-                  onEdit(card);
-                  onClose();
-                }}
-                className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition-colors"
-              >
-                Edit Card
-              </button>
+              <Button variant="primary" size="md" onClick={() => onEdit(card)}>
+                <Pencil aria-hidden className="size-4" />
+                Edit card
+              </Button>
             )}
           </div>
         )}
       </div>
-    </div>
+    </Dialog>
   );
 };

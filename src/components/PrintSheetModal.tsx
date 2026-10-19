@@ -1,48 +1,62 @@
-import React, { useState } from 'react';
-import { BoosterPack } from '../types/card';
+import React, { useId, useMemo, useState } from 'react';
+import { BoosterPack, Card } from '../types/card';
 import { generatePrintPdf, PdfExportOptions } from '../utils/pdfGenerator';
-import { CardItem } from './CardItem';
+import { getCardArt } from '../utils/cardArt';
 import { playClickSound } from '../utils/audioFeedback';
-import {
-  Printer,
-  Download,
-  FileText,
-  Scissors,
-  Copy,
-  Eye,
-  X,
-  Layers,
-  ChevronLeft,
-  ChevronRight,
-  Info,
-} from 'lucide-react';
+import { Dialog } from './ui/Dialog';
+import { Button, IconButton, ToggleChip } from './ui/Button';
+import { cx } from './ui/cx';
+import { Printer, Download, FileText, ChevronLeft, ChevronRight, X, CircleAlert } from 'lucide-react';
 
 interface PrintSheetModalProps {
   packs: BoosterPack[];
   onClose: () => void;
 }
 
+interface Slot {
+  card: Card;
+  packNumber: number;
+  indexInPack: number;
+}
+
+const OPTION_ROW =
+  'flex items-start gap-3 rounded-xl border border-line bg-well/60 p-3 min-h-11 cursor-pointer hover:border-line-strong transition-colors duration-150';
+
 export const PrintSheetModal: React.FC<PrintSheetModalProps> = ({ packs, onClose }) => {
+  const id = useId();
   const [paperSize, setPaperSize] = useState<'letter' | 'a4'>('letter');
-  const [includeCutMarks, setIncludeCutMarks] = useState<boolean>(true);
-  const [includeBacks, setIncludeBacks] = useState<boolean>(false);
-  const [includePackHeaders, setIncludePackHeaders] = useState<boolean>(true);
-  const [customBackText, setCustomBackText] = useState<string>('STAR WARS TCG');
-  const [previewSheetIndex, setPreviewSheetIndex] = useState<number>(0);
-  const [showLivePreview, setShowLivePreview] = useState<boolean>(true);
+  const [faceStyle, setFaceStyle] = useState<'scan' | 'layout'>('scan');
+  const [includeCutMarks, setIncludeCutMarks] = useState(true);
+  const [includeBacks, setIncludeBacks] = useState(false);
+  const [includePackHeaders, setIncludePackHeaders] = useState(true);
+  const [newSheetPerPack, setNewSheetPerPack] = useState(false);
+  const [customBackText, setCustomBackText] = useState('STAR WARS TCG');
+  const [previewSheetIndex, setPreviewSheetIndex] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
+  const [progress, setProgress] = useState({ percent: 0, status: '' });
+  const [error, setError] = useState<string | null>(null);
 
-  const [isExporting, setIsExporting] = useState<boolean>(false);
-  const [progress, setProgress] = useState<{ percent: number; status: string }>({ percent: 0, status: '' });
+  // Lay out sheet slots exactly as the PDF will (empty slots when each pack starts a new sheet).
+  const slots = useMemo(() => {
+    const out: (Slot | null)[] = [];
+    packs.forEach(pack => {
+      if (newSheetPerPack) while (out.length % 9 !== 0) out.push(null);
+      pack.cards.forEach((card, idx) => out.push({ card, packNumber: pack.packNumber, indexInPack: idx }));
+    });
+    return out;
+  }, [packs, newSheetPerPack]);
 
-  // Flatten cards from all packs
-  const allCards = packs.flatMap(p => p.cards);
-  const totalSheets = Math.ceil(allCards.length / 9);
-  const currentSheetCards = allCards.slice(previewSheetIndex * 9, (previewSheetIndex + 1) * 9);
+  const totalCards = packs.reduce((n, p) => n + p.cards.length, 0);
+  const totalSheets = Math.max(1, Math.ceil(slots.length / 9));
+  const sheetIndex = Math.min(previewSheetIndex, totalSheets - 1);
+  const sheetSlots = Array.from({ length: 9 }, (_, i) => slots[sheetIndex * 9 + i] ?? null);
 
   const handleGeneratePdf = async () => {
+    playClickSound();
+    setError(null);
+    setIsExporting(true);
+    setProgress({ percent: 0, status: 'Preparing…' });
     try {
-      playClickSound();
-      setIsExporting(true);
       const options: PdfExportOptions = {
         paperSize,
         orientation: 'portrait',
@@ -51,23 +65,23 @@ export const PrintSheetModal: React.FC<PrintSheetModalProps> = ({ packs, onClose
         includePackHeaders,
         cardsPerSheet: 9,
         bleedMm: 0,
-        customBackText,
+        customBackText: customBackText.trim() || 'STAR WARS TCG',
+        faceStyle,
+        newSheetPerPack,
       };
-
-      const pdfBlob = await generatePrintPdf(packs, options, (pct, status) => {
-        setProgress({ percent: pct, status });
-      });
-
+      const pdfBlob = await generatePrintPdf(packs, options, (percent, status) => setProgress({ percent, status }));
       const url = URL.createObjectURL(pdfBlob);
       const a = document.createElement('a');
       a.href = url;
       a.download = `CardForge_Print_Sheets_${packs.length}_Packs_${paperSize.toUpperCase()}.pdf`;
       document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a);
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10_000);
+      setProgress({ percent: 100, status: 'PDF downloaded.' });
     } catch (err) {
-      console.error('PDF Generation failed:', err);
-      alert('Failed to generate PDF. Please check console for details.');
+      console.error('PDF generation failed:', err);
+      setError('The PDF couldn’t be generated. Try fewer packs or switch to the generated layout, then try again.');
     } finally {
       setIsExporting(false);
     }
@@ -75,12 +89,13 @@ export const PrintSheetModal: React.FC<PrintSheetModalProps> = ({ packs, onClose
 
   const handleExportManifest = () => {
     playClickSound();
-    let manifest = `CARDFORGE BOOSTER PACK MANIFEST\nTotal Packs: ${packs.length}\nTotal Cards: ${allCards.length}\nGenerated: ${new Date().toLocaleString()}\n\n`;
+    let manifest = `CARDFORGE BOOSTER PACK MANIFEST\nTotal Packs: ${packs.length}\nTotal Cards: ${totalCards}\nGenerated: ${new Date().toLocaleString()}\n\n`;
 
     packs.forEach(pack => {
-      manifest += `========================================\nPACK #${pack.packNumber} ${pack.hasMythic ? '[★ MYTHIC PACK]' : ''}\n========================================\n`;
+      const foils = new Set(pack.foilCardIds ?? []);
+      manifest += `========================================\nPACK #${pack.packNumber}${pack.hasMythic ? ' [MYTHIC PACK]' : ''}\n========================================\n`;
       pack.cards.forEach((c, idx) => {
-        manifest += `${idx + 1}. [${c.rarity}] ${c.name} (${c.type}) ${c.cost || ''}\n`;
+        manifest += `${idx + 1}. [${c.rarity}] ${c.name} (${c.type})${c.cost ? ` ${c.cost}` : ''}${foils.has(c.id) ? ' [FOIL]' : ''}\n`;
       });
       manifest += '\n';
     });
@@ -92,261 +107,294 @@ export const PrintSheetModal: React.FC<PrintSheetModalProps> = ({ packs, onClose
     a.download = `booster_packs_manifest_${packs.length}_packs.txt`;
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
+    a.remove();
+    URL.revokeObjectURL(url);
   };
 
+  const printedSheets = includeBacks ? totalSheets * 2 : totalSheets;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl text-slate-100 overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/90">
+    <Dialog labelledBy={`${id}-title`} onClose={onClose} className="sm:w-[min(100%-2rem,58rem)]">
+      <div className="flex max-h-[inherit] flex-col">
+        <div className="flex items-center justify-between gap-3 border-b border-line px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-cyan-950/90 border border-cyan-800/80 text-cyan-400 flex items-center justify-center shadow-lg">
-              <Printer className="w-5 h-5" />
+            <div className="grid place-items-center size-10 rounded-xl border border-accent-line/60 bg-accent-soft text-accent-fg" aria-hidden>
+              <Printer className="size-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white font-heading">
-                Physical Print Sheet Generator
+              <h2 id={`${id}-title`} className="text-section text-fg-strong">
+                Print sheets
               </h2>
-              <p className="text-xs text-slate-400">
-                Organized 3×3 grid (63×88mm MTG/poker standard) with cutting guides
-              </p>
+              <p className="text-sm text-fg-muted">3 × 3 sheets of 63 × 88 mm cards, with cut guides</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <IconButton label="Close" variant="ghost" onClick={onClose}>
+            <X aria-hidden className="size-5" />
+          </IconButton>
         </div>
 
-        {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
-          {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
-              <span className="text-[11px] text-slate-400">Total Cards</span>
-              <div className="text-xl font-black text-cyan-300 font-mono mt-0.5">{allCards.length}</div>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
-              <span className="text-[11px] text-slate-400">Sheets to Print</span>
-              <div className="text-xl font-black text-slate-200 font-mono mt-0.5">
-                {includeBacks ? totalSheets * 2 : totalSheets}{' '}
-                <span className="text-xs font-normal text-slate-400">
-                  ({totalSheets} fronts {includeBacks && `+ ${totalSheets} backs`})
-                </span>
-              </div>
-            </div>
-            <div className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800">
-              <span className="text-[11px] text-slate-400">Card Dimensions</span>
-              <div className="text-xl font-black text-amber-300 font-mono mt-0.5">
-                63 × 88 mm <span className="text-xs font-normal text-slate-400">(2.5 × 3.5")</span>
-              </div>
-            </div>
-          </div>
+        <div className="flex-1 overflow-y-auto px-6 py-5">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
+            {/* Sheet preview */}
+            <div className="space-y-3">
+              <dl className="grid grid-cols-3 gap-2">
+                <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                  <dt className="text-xs text-fg-muted">Cards</dt>
+                  <dd className="text-xl font-bold proportional-nums text-fg-strong">{totalCards}</dd>
+                </div>
+                <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                  <dt className="text-xs text-fg-muted">Sheets to print</dt>
+                  <dd className="text-xl font-bold proportional-nums text-fg-strong">
+                    {printedSheets}
+                    {includeBacks && <span className="ml-1 text-xs font-normal text-fg-muted">fronts + backs</span>}
+                  </dd>
+                </div>
+                <div className="rounded-xl border border-line bg-well/70 px-3 py-2">
+                  <dt className="text-xs text-fg-muted">Card size</dt>
+                  <dd className="text-sm font-semibold text-fg-strong leading-7">63 × 88 mm</dd>
+                </div>
+              </dl>
 
-          {/* Interactive Live 3x3 Sheet Visualizer */}
-          <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4 text-cyan-400" />
-                <span className="text-xs font-bold text-slate-200 uppercase tracking-wider font-mono">
-                  Live Sheet Preview: Sheet #{previewSheetIndex + 1} of {totalSheets}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setPreviewSheetIndex(prev => Math.max(0, prev - 1))}
-                  disabled={previewSheetIndex === 0}
-                  className="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white disabled:opacity-40 transition-colors"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <span className="text-xs font-mono text-slate-400 px-1">
-                  {previewSheetIndex + 1} / {totalSheets}
-                </span>
-                <button
-                  onClick={() => setPreviewSheetIndex(prev => Math.min(totalSheets - 1, prev + 1))}
-                  disabled={previewSheetIndex === totalSheets - 1}
-                  className="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white disabled:opacity-40 transition-colors"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* 3x3 Mock Preview with cut guides */}
-            <div className="relative p-4 rounded-xl bg-slate-900/90 border border-dashed border-slate-700/80 max-w-xl mx-auto shadow-inner">
-              {includeCutMarks && (
-                <>
-                  {/* Corner marks */}
-                  <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-amber-400/70" />
-                  <div className="absolute top-1 right-1 w-3 h-3 border-t-2 border-r-2 border-amber-400/70" />
-                  <div className="absolute bottom-1 left-1 w-3 h-3 border-b-2 border-l-2 border-amber-400/70" />
-                  <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-amber-400/70" />
-                </>
-              )}
-
-              <div className="grid grid-cols-3 gap-2">
-                {currentSheetCards.map((card, idx) => (
-                  <div
-                    key={`${card.id}-${idx}`}
-                    className="h-24 rounded-md border border-slate-700 bg-slate-950 p-1 flex flex-col justify-between text-[9px] overflow-hidden"
-                  >
-                    <div className="font-bold text-slate-200 truncate leading-tight">
-                      {card.name}
-                    </div>
-                    <div className="text-[8px] text-slate-400 truncate italic">
-                      {card.type}
-                    </div>
-                    <div className="flex items-center justify-between text-[8px] border-t border-slate-800 pt-0.5">
-                      <span className="font-mono text-cyan-400">[{card.rarity}]</span>
-                      <span className="font-mono text-amber-300">{card.cost || '—'}</span>
-                    </div>
+              <div className="rounded-2xl border border-line bg-well p-3">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <h3 className="text-group uppercase text-fg-soft">Sheet preview</h3>
+                  <div className="flex items-center gap-1">
+                    <IconButton
+                      label="Previous sheet"
+                      variant="ghost"
+                      onClick={() => setPreviewSheetIndex(Math.max(0, sheetIndex - 1))}
+                      disabled={sheetIndex === 0}
+                    >
+                      <ChevronLeft aria-hidden className="size-4" />
+                    </IconButton>
+                    <span className="min-w-16 text-center text-sm text-fg-soft" aria-live="polite">
+                      {sheetIndex + 1} of {totalSheets}
+                    </span>
+                    <IconButton
+                      label="Next sheet"
+                      variant="ghost"
+                      onClick={() => setPreviewSheetIndex(Math.min(totalSheets - 1, sheetIndex + 1))}
+                      disabled={sheetIndex === totalSheets - 1}
+                    >
+                      <ChevronRight aria-hidden className="size-4" />
+                    </IconButton>
                   </div>
-                ))}
+                </div>
+
+                {/* Paper, scaled: the 3 × 3 grid is centered with margins like the PDF */}
+                <div
+                  className={cx(
+                    'relative mx-auto w-full max-w-sm rounded-sm bg-stone-100 shadow-lg shadow-black/50',
+                    paperSize === 'a4' ? 'aspect-[210/297]' : 'aspect-[215.9/279.4]'
+                  )}
+                >
+                  <div className="absolute inset-0 grid place-items-center">
+                    <ul
+                      className="grid grid-cols-3"
+                      style={{ width: `${(189 / (paperSize === 'a4' ? 210 : 215.9)) * 100}%` }}
+                      aria-label={`Sheet ${sheetIndex + 1} contents`}
+                    >
+                      {sheetSlots.map((slot, i) => {
+                        const art = slot ? getCardArt(slot.card, slot.packNumber * 31 + slot.indexInPack) : null;
+                        const src = faceStyle === 'scan' && art?.fullSrc ? art.fullSrc : null;
+                        return (
+                          <li
+                            key={i}
+                            className={cx(
+                              'relative aspect-[63/88] overflow-hidden',
+                              includeCutMarks ? 'outline outline-1 -outline-offset-1 outline-stone-400/70' : '',
+                              !slot && 'bg-stone-200/60'
+                            )}
+                          >
+                            {slot &&
+                              (src ? (
+                                <img src={src} alt={slot.card.name} loading="lazy" className="size-full object-cover" />
+                              ) : (
+                                <div aria-hidden className="flex size-full flex-col bg-white p-[6%] text-stone-900">
+                                  <span className="truncate text-[0.5rem] font-bold leading-tight">{slot.card.name}</span>
+                                  <span className="mt-[4%] block aspect-[55/28] w-full overflow-hidden bg-stone-300">
+                                    {art && <img src={art.src} alt="" loading="lazy" className="size-full object-cover" />}
+                                  </span>
+                                  <span className="mt-auto truncate text-[0.45rem] text-stone-600">#{slot.packNumber}</span>
+                                </div>
+                              ))}
+                            {slot && !src && <span className="sr-only">{slot.card.name}</span>}
+                            {!slot && <span className="sr-only">Empty slot</span>}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <p className="mt-3 text-center text-xs text-fg-muted">
+                  300–350 gsm card stock trims cleanly with a rotary cutter.
+                </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-[11px] text-slate-400 justify-center">
-              <Scissors className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Standard 300–350 gsm linen or smooth card stock recommended for trimming</span>
+            {/* Options */}
+            <div className="space-y-4">
+              <fieldset>
+                <legend className="text-group uppercase text-fg-soft mb-2">Card faces</legend>
+                <div className="space-y-2">
+                  <label className={OPTION_ROW}>
+                    <input
+                      type="radio"
+                      name={`${id}-face`}
+                      checked={faceStyle === 'scan'}
+                      onChange={() => setFaceStyle('scan')}
+                      className="mt-0.5 size-4 shrink-0"
+                    />
+                    <span>
+                      <span className="block text-sm font-semibold text-fg">Original card scans</span>
+                      <span className="block text-xs text-fg-muted">The real printed card. Custom cards use the generated layout.</span>
+                    </span>
+                  </label>
+                  <label className={OPTION_ROW}>
+                    <input
+                      type="radio"
+                      name={`${id}-face`}
+                      checked={faceStyle === 'layout'}
+                      onChange={() => setFaceStyle('layout')}
+                      className="mt-0.5 size-4 shrink-0"
+                    />
+                    <span>
+                      <span className="block text-sm font-semibold text-fg">Generated layout</span>
+                      <span className="block text-xs text-fg-muted">A plain, ink-light card face with the artwork and full text.</span>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div>
+                <span id={`${id}-paper`} className="block text-group uppercase text-fg-soft mb-2">
+                  Paper
+                </span>
+                <div role="group" aria-labelledby={`${id}-paper`} className="grid grid-cols-2 gap-1.5">
+                  <ToggleChip selected={paperSize === 'letter'} onClick={() => setPaperSize('letter')}>
+                    US Letter
+                  </ToggleChip>
+                  <ToggleChip selected={paperSize === 'a4'} onClick={() => setPaperSize('a4')}>
+                    A4
+                  </ToggleChip>
+                </div>
+              </div>
+
+              <fieldset className="space-y-2">
+                <legend className="text-group uppercase text-fg-soft mb-2">Sheet options</legend>
+                <label className={OPTION_ROW}>
+                  <input
+                    type="checkbox"
+                    checked={includeCutMarks}
+                    onChange={e => setIncludeCutMarks(e.target.checked)}
+                    className="mt-0.5 size-4 shrink-0"
+                  />
+                  <span>
+                    <span className="block text-sm font-semibold text-fg">Cut guides</span>
+                    <span className="block text-xs text-fg-muted">Margin ticks and crosshairs for a rotary trimmer</span>
+                  </span>
+                </label>
+                <label className={OPTION_ROW}>
+                  <input
+                    type="checkbox"
+                    checked={includePackHeaders}
+                    onChange={e => setIncludePackHeaders(e.target.checked)}
+                    className="mt-0.5 size-4 shrink-0"
+                  />
+                  <span>
+                    <span className="block text-sm font-semibold text-fg">Pack labels</span>
+                    <span className="block text-xs text-fg-muted">Prints the pack numbers in the top margin</span>
+                  </span>
+                </label>
+                <label className={OPTION_ROW}>
+                  <input
+                    type="checkbox"
+                    checked={newSheetPerPack}
+                    onChange={e => setNewSheetPerPack(e.target.checked)}
+                    className="mt-0.5 size-4 shrink-0"
+                  />
+                  <span>
+                    <span className="block text-sm font-semibold text-fg">Start each pack on a new sheet</span>
+                    <span className="block text-xs text-fg-muted">Keeps packs apart after cutting; uses more paper</span>
+                  </span>
+                </label>
+                <label className={OPTION_ROW}>
+                  <input
+                    type="checkbox"
+                    checked={includeBacks}
+                    onChange={e => setIncludeBacks(e.target.checked)}
+                    className="mt-0.5 size-4 shrink-0"
+                  />
+                  <span>
+                    <span className="block text-sm font-semibold text-fg">Duplex back sheets</span>
+                    <span className="block text-xs text-fg-muted">A mirrored back after every sheet, for two-sided printing</span>
+                  </span>
+                </label>
+                {includeBacks && (
+                  <div className="pl-3">
+                    <label htmlFor={`${id}-back`} className="block text-sm font-medium text-fg-soft mb-1.5">
+                      Card back text
+                    </label>
+                    <input
+                      id={`${id}-back`}
+                      type="text"
+                      maxLength={24}
+                      value={customBackText}
+                      onChange={e => setCustomBackText(e.target.value)}
+                      className="w-full rounded-lg border border-line-strong bg-well px-3 min-h-10 text-sm text-fg hover:border-slate-600 focus-visible:border-accent"
+                    />
+                  </div>
+                )}
+              </fieldset>
             </div>
           </div>
 
-          {/* Options & Settings */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Paper standard */}
-            <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-              <div>
-                <label className="text-xs font-bold text-slate-200">Paper Standard</label>
-                <p className="text-[11px] text-slate-400">Select page size for your printer</p>
-              </div>
-              <div className="flex gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => setPaperSize('letter')}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
-                    paperSize === 'letter'
-                      ? 'bg-cyan-950 text-cyan-300 border-cyan-500'
-                      : 'bg-slate-900 text-slate-400 border-slate-800'
-                  }`}
-                >
-                  US Letter (8.5×11")
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPaperSize('a4')}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
-                    paperSize === 'a4'
-                      ? 'bg-cyan-950 text-cyan-300 border-cyan-500'
-                      : 'bg-slate-900 text-slate-400 border-slate-800'
-                  }`}
-                >
-                  A4 (210×297mm)
-                </button>
-              </div>
-            </div>
-
-            {/* Cut Marks */}
-            <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <Scissors className="w-4 h-4 text-cyan-400" />
-                <div>
-                  <label className="text-xs font-bold text-slate-200">Cut Guides & Crosshairs</label>
-                  <p className="text-[11px] text-slate-400">Margin tick lines for rotary trimmers</p>
-                </div>
-              </div>
-              <input
-                type="checkbox"
-                checked={includeCutMarks}
-                onChange={e => setIncludeCutMarks(e.target.checked)}
-                className="w-4 h-4 rounded accent-cyan-500 cursor-pointer"
-              />
-            </div>
-
-            {/* Duplex Backs */}
-            <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <Copy className="w-4 h-4 text-cyan-400" />
-                <div>
-                  <label className="text-xs font-bold text-slate-200">Duplex Back Sheets</label>
-                  <p className="text-[11px] text-slate-400">Mirrored for 2-sided printing</p>
-                </div>
-              </div>
-              <input
-                type="checkbox"
-                checked={includeBacks}
-                onChange={e => setIncludeBacks(e.target.checked)}
-                className="w-4 h-4 rounded accent-cyan-500 cursor-pointer"
-              />
-            </div>
-
-            {/* Pack Margins */}
-            <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
-              <div>
-                <label className="text-xs font-bold text-slate-200">Pack Header Labels</label>
-                <p className="text-[11px] text-slate-400">Shows pack number on margins</p>
-              </div>
-              <input
-                type="checkbox"
-                checked={includePackHeaders}
-                onChange={e => setIncludePackHeaders(e.target.checked)}
-                className="w-4 h-4 rounded accent-cyan-500 cursor-pointer"
-              />
-            </div>
-          </div>
-
-          {/* Progress bar when rendering PDF */}
-          {isExporting && (
-            <div className="p-4 rounded-2xl bg-slate-950 border border-cyan-800/60 space-y-2">
-              <div className="flex justify-between text-xs text-cyan-300 font-medium">
-                <span>{progress.status || 'Rendering PDF sheets...'}</span>
+          {(isExporting || progress.percent === 100) && (
+            <div className="mt-5 rounded-xl border border-accent-line/50 bg-well p-4">
+              <div className="flex justify-between text-sm text-accent-fg mb-2" aria-live="polite">
+                <span>{progress.status}</span>
                 <span>{progress.percent}%</span>
               </div>
-              <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+              <div
+                role="progressbar"
+                aria-label="PDF progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={progress.percent}
+                className="h-2 w-full overflow-hidden rounded-full bg-raised"
+              >
                 <div
-                  className="bg-cyan-500 h-full transition-all duration-300"
-                  style={{ width: `${progress.percent}%` }}
+                  className="h-full origin-left bg-accent transition-transform duration-300 ease-out-expo"
+                  style={{ transform: `scaleX(${progress.percent / 100})` }}
                 />
               </div>
             </div>
           )}
+
+          {error && (
+            <p role="alert" className="mt-5 flex items-start gap-2 rounded-xl border border-rose-800 bg-danger-soft p-3 text-sm text-rose-100">
+              <CircleAlert aria-hidden className="size-4 shrink-0 mt-0.5 text-danger" />
+              {error}
+            </p>
+          )}
         </div>
 
-        {/* Footer */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-slate-800 bg-slate-900/90">
-          <button
-            type="button"
-            onClick={handleExportManifest}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 transition-colors"
-          >
-            <FileText className="w-4 h-4" />
-            Export Text Manifest (.txt)
-          </button>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-            >
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line px-6 py-4">
+          <Button onClick={handleExportManifest}>
+            <FileText aria-hidden className="size-4" />
+            Pack list (.txt)
+          </Button>
+          <div className="flex items-center gap-2 max-sm:w-full">
+            <Button variant="ghost" size="md" onClick={onClose} className="max-sm:flex-1">
               Close
-            </button>
-            <button
-              type="button"
-              onClick={handleGeneratePdf}
-              disabled={isExporting}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/60 hover:shadow-cyan-900/70 active:scale-95 transition-all disabled:opacity-50 cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              {isExporting ? 'Generating PDF...' : 'Download Printable PDF'}
-            </button>
+            </Button>
+            <Button variant="primary" size="md" onClick={handleGeneratePdf} disabled={isExporting} className="max-sm:flex-1">
+              <Download aria-hidden className="size-4" />
+              {isExporting ? 'Generating PDF…' : 'Download PDF'}
+            </Button>
           </div>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 };

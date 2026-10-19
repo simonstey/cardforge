@@ -1,37 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useId, useCallback } from 'react';
 import { BoosterPack, Card } from '../types/card';
 import { CardItem } from './CardItem';
 import { computeCollationStats } from '../utils/boosterCollation';
-import { getColorBadge } from '../utils/cardHelpers';
-import {
-  playCardFlipSound,
-  playPackRipSound,
-  playMythicChimeSound,
-  playClickSound,
-} from '../utils/audioFeedback';
-import {
-  Package,
-  Sparkles,
-  ChevronRight,
-  ChevronLeft,
-  BarChart3,
-  Flame,
-  Volume2,
-  VolumeX,
-  Printer,
-  Maximize2,
-  RotateCw,
-  Award,
-} from 'lucide-react';
+import { MANA, MANA_ORDER, RARITY } from '../utils/cardHelpers';
+import { getCardArt } from '../utils/cardArt';
+import { STAR_WARS_SET } from '../data/starWarsSet';
+import { playCardFlipSound, playPackRipSound, playMythicChimeSound, playClickSound } from '../utils/audioFeedback';
+import { Button, IconButton } from './ui/Button';
+import { cx } from './ui/cx';
+import { Package, Sparkles, ChevronRight, ChevronLeft, BarChart3, Volume2, VolumeX, Printer, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface BoosterSimulatorProps {
   packs: BoosterPack[];
   onOpenPrintModal: () => void;
-  onInspectCard: (card: Card) => void;
+  onInspectCard: (card: Card, artSeed?: number) => void;
   isSoundEnabled: boolean;
   onToggleSound: () => void;
 }
+
+interface Ceremony {
+  torn: boolean;
+  revealed: number;
+}
+
+/** Opening order: tokens and lands first, then commons, uncommons, and the rare or mythic last. */
+const OPENING_ORDER: Record<string, number> = { T: 1, L: 2, C: 3, U: 4, R: 5, M: 6 };
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** Keys typed into a form control belong to that control. */
+function isFormControl(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+}
+
+/** Space/Enter on any interactive element should activate that element, not the global shortcut. */
+function isInteractive(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) return false;
+  return isFormControl(target) || !!target.closest('button, a[href], summary, [role="button"]');
+}
+
+// Key art on the booster wrapper.
+const PACK_ART = (() => {
+  const vader = STAR_WARS_SET.cards.find(c => c.name === 'Anakin Skywalker // Darth Vader');
+  return vader ? getCardArt(vader) : null;
+})();
+
+const formatShare = (part: number, whole: number) => (whole > 0 ? `${((part / whole) * 100).toFixed(1)}%` : '0%');
 
 export const BoosterSimulator: React.FC<BoosterSimulatorProps> = ({
   packs,
@@ -40,445 +56,508 @@ export const BoosterSimulator: React.FC<BoosterSimulatorProps> = ({
   isSoundEnabled,
   onToggleSound,
 }) => {
+  const id = useId();
   const [selectedPackIndex, setSelectedPackIndex] = useState<number>(0);
-  const [isOpeningCeremony, setIsOpeningCeremony] = useState<boolean>(false);
-  const [isPackTorn, setIsPackTorn] = useState<boolean>(false);
-  const [revealedCardCount, setRevealedCardCount] = useState<number>(0);
+  const [ceremony, setCeremony] = useState<Ceremony | null>(null);
+  const [isTearing, setIsTearing] = useState(false);
+  const [announcement, setAnnouncement] = useState('');
 
-  // Keyboard navigation support
+  const openButtonRef = useRef<HTMLButtonElement>(null);
+  const packWrapperRef = useRef<HTMLButtonElement>(null);
+  const revealNextRef = useRef<HTMLButtonElement>(null);
+  const doneRef = useRef<HTMLButtonElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
+
+  const stats = useMemo(() => computeCollationStats(packs), [packs]);
+  const safeIndex = Math.min(selectedPackIndex, Math.max(0, packs.length - 1));
+  const currentPack = packs[safeIndex];
+
+  const openingOrder = useMemo(
+    () =>
+      currentPack
+        ? [...currentPack.cards].sort((a, b) => (OPENING_ORDER[a.rarity] || 3) - (OPENING_ORDER[b.rarity] || 3))
+        : [],
+    [currentPack]
+  );
+
+  const foilIds = useMemo(() => new Set(currentPack?.foilCardIds ?? []), [currentPack]);
+
+  // A new box resets the browser to its first pack.
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' && !isOpeningCeremony) {
-        setSelectedPackIndex(prev => Math.min(packs.length - 1, prev + 1));
-      } else if (e.key === 'ArrowLeft' && !isOpeningCeremony) {
-        setSelectedPackIndex(prev => Math.max(0, prev - 1));
-      } else if (e.key === ' ' || e.key === 'Enter') {
-        if (isOpeningCeremony) {
-          if (!isPackTorn) {
-            handleTearPack();
-          } else {
-            handleRevealNext();
-          }
-        }
-      } else if (e.key === 'Escape') {
-        if (isOpeningCeremony) {
-          setIsOpeningCeremony(false);
-          setIsPackTorn(false);
-        }
-      }
-    };
+    setSelectedPackIndex(0);
+    setCeremony(null);
+  }, [packs]);
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpeningCeremony, isPackTorn, packs.length, revealedCardCount, selectedPackIndex]);
+  // Keep the selected pack chip in view.
+  useEffect(() => {
+    const chip = stripRef.current?.querySelector<HTMLElement>(`[data-pack="${safeIndex}"]`);
+    chip?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  }, [safeIndex]);
 
-  if (packs.length === 0) {
-    return (
-      <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-16 text-center text-slate-400 max-w-2xl mx-auto my-8">
-        <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto mb-4 border border-slate-700">
-          <Package className="w-8 h-8 text-slate-500" />
-        </div>
-        <h3 className="text-lg font-bold text-slate-100 font-heading">No Booster Packs Generated Yet</h3>
-        <p className="text-xs text-slate-400 mt-2 max-w-md mx-auto leading-relaxed">
-          Set your preferred slot distribution above and click "Generate Packs" to initiate collation and preview packs.
-        </p>
-      </div>
-    );
-  }
+  // Move focus to the control the next step needs.
+  const total = openingOrder.length;
+  useEffect(() => {
+    if (!ceremony) return;
+    if (!ceremony.torn) packWrapperRef.current?.focus();
+    else if (ceremony.revealed >= total) doneRef.current?.focus();
+    else if (ceremony.revealed === 0) revealNextRef.current?.focus();
+  }, [ceremony?.torn, ceremony !== null, ceremony?.revealed === total]);
 
-  const currentPack = packs[selectedPackIndex] || packs[0];
-  const stats = computeCollationStats(packs);
-
-  // Sort cards inside the pack for authentic MTG opening order:
-  // Tokens & Lands first, then Commons, then Uncommons, and the Rare/Mythic at the very end!
-  const sortedCardsForOpening = [...currentPack.cards].sort((a, b) => {
-    const order: Record<string, number> = { T: 1, L: 2, C: 3, U: 4, R: 5, M: 6 };
-    return (order[a.rarity] || 3) - (order[b.rarity] || 3);
-  });
-
-  const handleStartCeremony = (idx: number) => {
+  const selectPack = (index: number) => {
     playClickSound();
-    setSelectedPackIndex(idx);
-    setIsOpeningCeremony(true);
-    setIsPackTorn(false);
-    setRevealedCardCount(0);
+    setSelectedPackIndex(Math.max(0, Math.min(packs.length - 1, index)));
   };
 
-  const handleTearPack = () => {
-    playPackRipSound();
-    setIsPackTorn(true);
-    setRevealedCardCount(0);
+  const startCeremony = () => {
+    playClickSound();
+    setCeremony({ torn: false, revealed: 0 });
+    setAnnouncement(`Pack ${currentPack.packNumber} is ready to open.`);
+  };
 
-    // Subtle burst
+  const closeCeremony = useCallback(() => {
+    setCeremony(null);
+    setIsTearing(false);
+    requestAnimationFrame(() => openButtonRef.current?.focus());
+  }, []);
+
+  const tearPack = useCallback(() => {
+    if (isTearing) return;
+    playPackRipSound();
+    const finish = () => {
+      setIsTearing(false);
+      setCeremony({ torn: true, revealed: 0 });
+      setAnnouncement(`Pack torn open. ${total} cards face down.`);
+    };
+    if (prefersReducedMotion()) {
+      finish();
+    } else {
+      setIsTearing(true);
+      window.setTimeout(finish, 320);
+    }
+  }, [isTearing, total]);
+
+  const celebrateMythic = () => {
+    playMythicChimeSound();
     confetti({
-      particleCount: 30,
-      spread: 60,
-      origin: { y: 0.5 },
-      colors: ['#38bdf8', '#fbbf24', '#ffffff'],
+      particleCount: 90,
+      spread: 75,
+      origin: { y: 0.6 },
+      colors: ['#fb923c', '#fbbf24', '#f472b6', '#ffffff'],
+      disableForReducedMotion: true,
     });
   };
 
-  const handleRevealNext = () => {
-    if (revealedCardCount < sortedCardsForOpening.length) {
-      const nextCount = revealedCardCount + 1;
-      setRevealedCardCount(nextCount);
+  // Read through a ref so rapid key repeats never reveal the same card twice.
+  const ceremonyRef = useRef(ceremony);
+  ceremonyRef.current = ceremony;
 
-      const cardRevealed = sortedCardsForOpening[nextCount - 1];
-      if (cardRevealed.rarity === 'M') {
-        playMythicChimeSound();
-        confetti({
-          particleCount: 100,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#f97316', '#fbbf24', '#ef4444', '#ec4899', '#ffffff'],
-        });
-      } else {
-        playCardFlipSound();
-      }
-    }
-  };
+  const revealNext = useCallback(() => {
+    const c = ceremonyRef.current;
+    if (!c || !c.torn || c.revealed >= total) return;
+    const card = openingOrder[c.revealed];
+    if (card.rarity === 'M') celebrateMythic();
+    else playCardFlipSound();
+    setAnnouncement(
+      `Card ${c.revealed + 1} of ${total}: ${card.name}, ${RARITY[card.rarity].label}${foilIds.has(card.id) ? ', foil' : ''}.`
+    );
+    const next = { ...c, revealed: c.revealed + 1 };
+    ceremonyRef.current = next;
+    setCeremony(next);
+  }, [openingOrder, total, foilIds]);
 
-  const handleRevealAll = () => {
+  const revealAll = () => {
+    if (!ceremony) return;
+    const remaining = openingOrder.slice(ceremony.revealed);
     playCardFlipSound();
-    setRevealedCardCount(sortedCardsForOpening.length);
-    if (currentPack.hasMythic) {
-      playMythicChimeSound();
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#f97316', '#fbbf24', '#ffffff'],
-      });
-    }
+    if (remaining.some(c => c.rarity === 'M')) celebrateMythic();
+    setCeremony({ ...ceremony, revealed: total });
+    setAnnouncement(`All ${total} cards revealed.`);
   };
+
+  // Keyboard shortcuts: arrows browse packs, Space/Enter advance the opening, Escape closes it.
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (document.querySelector('dialog[open]')) return;
+
+      if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !ceremony && !isFormControl(e.target)) {
+        e.preventDefault();
+        setSelectedPackIndex(i => Math.max(0, Math.min(packs.length - 1, i + (e.key === 'ArrowRight' ? 1 : -1))));
+      } else if ((e.key === ' ' || e.key === 'Enter') && ceremony && !isInteractive(e.target)) {
+        e.preventDefault();
+        if (!ceremony.torn) tearPack();
+        else revealNext();
+      } else if (e.key === 'Escape' && ceremony) {
+        closeCeremony();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [ceremony, packs.length, tearPack, revealNext, closeCeremony]);
+
+  if (packs.length === 0 || !currentPack) {
+    return (
+      <section className="rounded-2xl border border-line bg-panel/60 px-6 py-14 text-center max-w-2xl mx-auto">
+        <Package aria-hidden className="size-8 mx-auto mb-3 text-fg-muted" />
+        <h2 className="text-section text-fg-strong">No booster packs yet</h2>
+        <p className="mt-1 text-sm text-fg-muted">
+          Set the slot rules above, then choose Generate to collate a box.
+        </p>
+      </section>
+    );
+  }
+
+  const maxBucket = Math.max(1, ...MANA_ORDER.map(c => stats.colorDistribution[c] || 0));
+  const isComplete = ceremony?.torn && ceremony.revealed >= total;
 
   return (
     <div className="space-y-6">
-      {/* Collation Health & Color Distribution Bar */}
-      <div className="relative bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-2xl backdrop-blur-xl overflow-hidden">
-        {/* Subtle decorative radial glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-5 mb-5 border-b border-slate-800/80">
+      {/* Box collation summary */}
+      <section aria-labelledby={`${id}-stats`} className="rounded-2xl border border-line bg-panel p-5">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 mb-5 border-b border-line">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-indigo-950/80 border border-indigo-700/60 text-indigo-400 flex items-center justify-center shadow-lg">
-              <BarChart3 className="w-5 h-5" />
+            <div className="grid place-items-center size-10 rounded-xl border border-indigo-700/60 bg-indigo-950/80 text-indigo-300" aria-hidden>
+              <BarChart3 className="size-5" />
             </div>
             <div>
-              <div className="flex items-center gap-2.5">
-                <h2 className="text-lg font-bold text-white font-heading">
-                  Collation & Color Distribution
-                </h2>
-                <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
-                  stats.colorBalanceScore >= 85
-                    ? 'bg-emerald-950 text-emerald-300 border-emerald-600/60'
-                    : 'bg-amber-950 text-amber-300 border-amber-600/60'
-                }`}>
-                  {stats.colorBalanceScore}% Balanced
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Total {packs.length} packs ({packs.reduce((acc, p) => acc + p.cards.length, 0)} cards)
+              <h2 id={`${id}-stats`} className="text-section text-fg-strong">
+                Box collation
+              </h2>
+              <p className="text-sm text-fg-muted">
+                {stats.totalPacks} packs · {stats.totalCards} cards
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Sound Toggle */}
-            <button
+          <div className="flex items-center gap-2">
+            <IconButton
+              label={isSoundEnabled ? 'Mute sound effects' : 'Turn on sound effects'}
+              aria-pressed={isSoundEnabled}
               onClick={onToggleSound}
-              title={isSoundEnabled ? 'Mute sound effects' : 'Enable sound effects'}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors cursor-pointer"
             >
-              {isSoundEnabled ? <Volume2 className="w-4 h-4 text-cyan-400" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
-            </button>
+              {isSoundEnabled ? (
+                <Volume2 aria-hidden className="size-4 text-accent-fg" />
+              ) : (
+                <VolumeX aria-hidden className="size-4" />
+              )}
+            </IconButton>
+            <Button onClick={onOpenPrintModal}>
+              <Printer aria-hidden className="size-4" />
+              Print sheets
+            </Button>
+          </div>
+        </div>
 
-            {/* Mythic Count Badge */}
-            <div className="px-3.5 py-1.5 rounded-xl bg-orange-950/60 border border-orange-800/60 text-right">
-              <span className="text-[10px] text-orange-300 uppercase tracking-wider block font-bold">
-                Mythic Pulls
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+          <div className="rounded-xl border border-line bg-well/70 px-4 py-3">
+            <dt className="text-xs text-fg-muted">Color balance</dt>
+            <dd className="mt-0.5 flex items-baseline gap-2">
+              <span className="text-2xl font-bold proportional-nums text-fg-strong">{stats.colorBalanceScore}%</span>
+              <span className={cx('text-xs font-semibold', stats.colorBalanceScore >= 85 ? 'text-success' : 'text-warning')}>
+                {stats.colorBalanceScore >= 85 ? 'Even' : 'Uneven'}
               </span>
-              <span className="text-sm font-black font-mono text-orange-400 flex items-center justify-end gap-1">
-                <Sparkles className="w-3.5 h-3.5" />
-                {stats.mythicPacksCount} / {stats.totalPacks} ({stats.mythicRatePercent}%)
+            </dd>
+            <dd className="mt-1 text-xs text-fg-muted">
+              How evenly W, U, B, R and G appear among playable cards. 100% = equal; lands and tokens don’t count.
+            </dd>
+          </div>
+          <div className="rounded-xl border border-line bg-well/70 px-4 py-3">
+            <dt className="text-xs text-fg-muted">Mythic packs</dt>
+            <dd className="mt-0.5 flex items-baseline gap-2">
+              <span className="text-2xl font-bold proportional-nums text-fg-strong">{stats.mythicPacksCount}</span>
+              <span className="text-xs text-fg-muted">of {stats.totalPacks}</span>
+            </dd>
+            <dd className="mt-1 text-xs text-fg-muted">
+              {stats.mythicRatePercent}% of packs
+              {stats.totalMythics !== stats.mythicPacksCount && ` · ${stats.totalMythics} mythics in total`}
+            </dd>
+          </div>
+          <div className="rounded-xl border border-line bg-well/70 px-4 py-3">
+            <dt className="text-xs text-fg-muted">Foil packs</dt>
+            <dd className="mt-0.5 flex items-baseline gap-2">
+              <span className="text-2xl font-bold proportional-nums text-fg-strong">{stats.foilPacksCount}</span>
+              <span className="text-xs text-fg-muted">of {stats.totalPacks}</span>
+            </dd>
+            <dd className="mt-1 text-xs text-fg-muted">
+              {stats.foilPacksCount > 0 ? 'A foil replaces one common' : 'Foils are off in the slot rules'}
+            </dd>
+          </div>
+          <div className="rounded-xl border border-line bg-well/70 px-4 py-3">
+            <dt className="text-xs text-fg-muted">Average pack</dt>
+            <dd className="mt-0.5 text-2xl font-bold proportional-nums text-fg-strong">
+              {(stats.totalCards / Math.max(1, stats.totalPacks)).toFixed(stats.totalCards % Math.max(1, stats.totalPacks) ? 1 : 0)}
+              <span className="ml-1.5 text-xs font-normal text-fg-muted">cards</span>
+            </dd>
+          </div>
+        </dl>
+
+        {/* Color distribution: a table with an inline bar per row (the bars share one scale) */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <caption className="text-left pb-2">
+              <span className="font-semibold text-fg">Color distribution across the box</span>
+              <span className="block text-xs text-fg-muted">
+                Each card is counted once. Multicolor cards have their own row; “In cards” also counts them under each of
+                their colors.
               </span>
-            </div>
-
-            <button
-              onClick={onOpenPrintModal}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-950/50 hover:shadow-cyan-900/60 active:scale-95 transition-all cursor-pointer"
-            >
-              <Printer className="w-4 h-4" />
-              Export PDF Sheets
-            </button>
-          </div>
-        </div>
-
-        {/* 7-Segment Color Breakdown Bar */}
-        <div>
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-2.5">
-            <span className="font-medium text-slate-300">Color Representation across Box:</span>
-            <span className="text-[11px] text-slate-500">
-              Balanced collation minimizes mana starvation in draft packs
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
-            {[
-              { code: 'W', name: 'White', barColor: 'bg-amber-100 text-amber-950', border: 'border-amber-300' },
-              { code: 'U', name: 'Blue', barColor: 'bg-blue-600 text-white', border: 'border-blue-400' },
-              { code: 'B', name: 'Black', barColor: 'bg-neutral-800 text-neutral-100', border: 'border-neutral-600' },
-              { code: 'R', name: 'Red', barColor: 'bg-rose-700 text-white', border: 'border-rose-400' },
-              { code: 'G', name: 'Green', barColor: 'bg-emerald-700 text-white', border: 'border-emerald-400' },
-              { code: 'Multicolor', name: 'Multi', barColor: 'bg-gradient-to-r from-amber-500 to-rose-500 text-white', border: 'border-amber-400' },
-              { code: 'Colorless', name: 'Colorless', barColor: 'bg-zinc-700 text-zinc-100', border: 'border-zinc-500' },
-            ].map(col => {
-              const count = stats.colorDistribution[col.code] || 0;
-              const avg = stats.averageColorPerPack[col.code] || 0;
-              const totalCards = packs.reduce((acc, p) => acc + p.cards.length, 0);
-              const pct = totalCards > 0 ? ((count / totalCards) * 100).toFixed(1) : 0;
-
-              return (
-                <div key={col.code} className="p-3 rounded-2xl bg-slate-950/70 border border-slate-800/80 shadow-sm">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-                      <span className={`w-3 h-3 rounded-full ${col.barColor} border ${col.border}`} />
-                      {col.name}
-                    </span>
-                    <span className="text-xs font-mono font-bold text-slate-200">{count}</span>
-                  </div>
-                  <div className="w-full bg-slate-800/80 h-1.5 rounded-full overflow-hidden my-1">
-                    <div
-                      className={`h-full ${col.barColor}`}
-                      style={{ width: `${Math.min(100, (count / (totalCards / 6)) * 100)}%` }}
-                    />
-                  </div>
-                  <div className="flex justify-between text-[10px] text-slate-400 font-mono pt-0.5">
-                    <span>{pct}%</span>
-                    <span>~{avg}/pk</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Pack Browser Header & Selector Carousel */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
-        <div className="flex items-center gap-2 overflow-x-auto py-1 max-w-full">
-          <span className="text-xs font-bold text-slate-400 shrink-0 mr-1">Packs:</span>
-          {packs.map((pack, idx) => {
-            const isSelected = idx === selectedPackIndex;
-            return (
-              <button
-                key={pack.id}
-                onClick={() => {
-                  playClickSound();
-                  setSelectedPackIndex(idx);
-                }}
-                className={`relative px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all shrink-0 cursor-pointer ${
-                  isSelected
-                    ? 'bg-cyan-950 text-cyan-300 border-cyan-500 shadow-lg shadow-cyan-950/60 ring-1 ring-cyan-400/40'
-                    : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200'
-                }`}
-              >
-                #{pack.packNumber}
-                {pack.hasMythic && (
-                  <Sparkles className="w-3 h-3 text-orange-400 inline ml-1.5 animate-pulse" />
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => {
-              playClickSound();
-              setSelectedPackIndex(prev => Math.max(0, prev - 1));
-            }}
-            disabled={selectedPackIndex === 0}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 disabled:opacity-40 transition-colors cursor-pointer"
-            title="Previous pack (←)"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <span className="text-xs font-mono font-bold text-slate-300 px-2">
-            {selectedPackIndex + 1} of {packs.length}
-          </span>
-          <button
-            onClick={() => {
-              playClickSound();
-              setSelectedPackIndex(prev => Math.min(packs.length - 1, prev + 1));
-            }}
-            disabled={selectedPackIndex === packs.length - 1}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 disabled:opacity-40 transition-colors cursor-pointer"
-            title="Next pack (→)"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => handleStartCeremony(selectedPackIndex)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white shadow-lg shadow-orange-950/50 hover:shadow-orange-900/60 active:scale-95 transition-all cursor-pointer ml-2"
-          >
-            <Flame className="w-3.5 h-3.5 text-amber-200" />
-            Crack This Pack
-          </button>
-        </div>
-      </div>
-
-      {/* Interactive Pack Opening Ceremony Modal / View */}
-      {isOpeningCeremony ? (
-        <div className="relative bg-slate-950/95 border-2 border-slate-800 rounded-3xl p-8 shadow-2xl text-center space-y-6 animate-in zoom-in-95 duration-200">
-          <div className="flex items-center justify-between max-w-3xl mx-auto pb-4 border-b border-slate-800">
-            <div>
-              <h3 className="text-base font-bold text-white font-heading flex items-center gap-2">
-                Pack #{currentPack.packNumber} Cracking Chamber
-                {currentPack.hasMythic && (
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-950 text-orange-400 border border-orange-600">
-                    ★ Mythic Inside
-                  </span>
-                )}
-              </h3>
-              <p className="text-xs text-slate-400">
-                Revealed: {revealedCardCount} of {sortedCardsForOpening.length} cards (Press Space or Enter)
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {isPackTorn ? (
-                <>
-                  <button
-                    onClick={handleRevealNext}
-                    disabled={revealedCardCount >= sortedCardsForOpening.length}
-                    className="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white disabled:opacity-40 transition-all cursor-pointer"
-                  >
-                    Reveal Next ({revealedCardCount + 1})
-                  </button>
-                  <button
-                    onClick={handleRevealAll}
-                    className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors"
-                  >
-                    Reveal All
-                  </button>
-                </>
-              ) : null}
-
-              <button
-                onClick={() => {
-                  setIsOpeningCeremony(false);
-                  setIsPackTorn(false);
-                }}
-                className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors"
-              >
-                Close (Esc)
-              </button>
-            </div>
-          </div>
-
-          {!isPackTorn ? (
-            /* Physical Foil Booster Pack Wrapper Representation */
-            <div className="py-12 flex flex-col items-center justify-center">
-              <div
-                onClick={handleTearPack}
-                className="group relative w-64 h-96 rounded-2xl bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-950 border-4 border-amber-500/70 shadow-2xl p-4 flex flex-col items-center justify-between cursor-pointer select-none transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/20 active:scale-95 overflow-hidden"
-              >
-                {/* Crimped Foil edges */}
-                <div className="absolute top-0 inset-x-0 h-4 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-600 opacity-80" />
-                <div className="absolute bottom-0 inset-x-0 h-4 bg-gradient-to-r from-amber-600 via-amber-300 to-amber-600 opacity-80" />
-
-                {/* Holographic wrapper sheen */}
-                <div className="absolute inset-0 foil-shimmer opacity-30 group-hover:opacity-70 transition-opacity" />
-
-                <div className="text-center pt-3 z-10">
-                  <span className="text-[11px] font-mono tracking-widest text-amber-300/80 uppercase font-black">
-                    LIMITED EDITION
-                  </span>
-                  <h4 className="text-xl font-black text-white font-heading mt-1">
-                    STAR WARS
-                  </h4>
-                  <span className="text-[10px] text-cyan-300 tracking-wider">TRADING CARD GAME</span>
-                </div>
-
-                <div className="w-24 h-24 rounded-full border-2 border-amber-400/50 bg-black/60 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform z-10">
-                  <Flame className="w-12 h-12 text-amber-400 animate-pulse" />
-                </div>
-
-                <div className="text-center pb-3 z-10">
-                  <div className="px-4 py-1.5 rounded-full bg-amber-500 text-slate-950 font-black text-xs shadow-lg group-hover:bg-amber-400 transition-colors">
-                    CLICK TO TEAR PACK
-                  </div>
-                  <span className="text-[10px] text-slate-400 mt-2 block font-mono">
-                    {sortedCardsForOpening.length} Collectible Cards
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-400 mt-4">
-                Click the booster foil pack to tear it open and reveal cards!
-              </p>
-            </div>
-          ) : (
-            /* Revealed Cards in authentic order */
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {sortedCardsForOpening.map((card, idx) => {
-                const isRevealed = idx < revealedCardCount;
-
+            </caption>
+            <thead>
+              <tr className="text-xs text-fg-muted border-b border-line">
+                <th scope="col" className="py-2 pr-3 text-left font-medium">Color</th>
+                <th scope="col" className="py-2 pr-3 text-left font-medium w-[34%] sm:w-[40%]">
+                  <span className="sr-only">Share of cards</span>
+                </th>
+                <th scope="col" className="py-2 px-2 sm:px-3 text-right font-medium">Cards</th>
+                <th scope="col" className="py-2 pl-2 sm:px-3 text-right font-medium">Share</th>
+                <th scope="col" className="py-2 px-3 text-right font-medium max-sm:hidden">Per pack</th>
+                <th scope="col" className="py-2 pl-3 text-right font-medium max-sm:hidden">In cards</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MANA_ORDER.map(c => {
+                const count = stats.colorDistribution[c] || 0;
+                const presence = c in stats.colorPresence ? stats.colorPresence[c as keyof typeof stats.colorPresence] : null;
                 return (
-                  <div key={`${card.id}-${idx}`} className="transition-all duration-300">
-                    <CardItem
-                      card={card}
-                      isFlipped={isRevealed}
-                      showPackSlot={`#${idx + 1} (${card.rarity})`}
-                      onClick={() => {
-                        if (!isRevealed) {
-                          handleRevealNext();
-                        } else {
-                          onInspectCard(card);
-                        }
-                      }}
-                    />
-                  </div>
+                  <tr key={c} className="group border-b border-line/60 last:border-0 hover:bg-raised/40 transition-colors duration-100">
+                    <th scope="row" className="py-2 pr-3 text-left font-medium text-fg whitespace-nowrap">
+                      <span className="inline-flex items-center gap-2">
+                        <span aria-hidden className={cx('size-3 rounded-full ring-1 ring-black/40', MANA[c].swatch)} />
+                        {MANA[c].label}
+                      </span>
+                      {/* Phones: the two right-hand columns move under the name */}
+                      <span className="block pl-5 text-xs font-normal text-fg-muted sm:hidden">
+                        {(stats.averageColorPerPack[c] || 0).toFixed(1)} per pack{presence !== null && ` · in ${presence}`}
+                      </span>
+                    </th>
+                    <td className="py-2 pr-3" aria-hidden>
+                      <div className="h-2 rounded-r-[4px] bg-accent/80 group-hover:bg-accent transition-colors duration-100" style={{ width: `${(count / maxBucket) * 100}%` }} />
+                    </td>
+                    <td className="py-2 px-2 sm:px-3 text-right text-fg">{count}</td>
+                    <td className="py-2 pl-2 sm:px-3 text-right text-fg-soft">{formatShare(count, stats.totalCards)}</td>
+                    <td className="py-2 px-3 text-right text-fg-soft max-sm:hidden">{(stats.averageColorPerPack[c] || 0).toFixed(1)}</td>
+                    <td className="py-2 pl-3 text-right text-fg-muted max-sm:hidden">{presence ?? '—'}</td>
+                  </tr>
                 );
               })}
-            </div>
-          )}
+            </tbody>
+          </table>
         </div>
-      ) : (
-        /* Regular Pack Overview Grid Display */
-        <div className="space-y-4">
-          <div className="flex items-center justify-between px-2 text-xs text-slate-400">
-            <span className="font-medium text-slate-300">
-              Cards in Pack #{currentPack.packNumber}:
-            </span>
-            <span className="text-[11px] text-slate-500">
-              Click any card to inspect full oracle text and artist lore
-            </span>
+      </section>
+
+      {/* Pack browser */}
+      <section aria-labelledby={`${id}-packs`} className="space-y-4">
+        <div className="rounded-2xl border border-line bg-panel/80 p-3 sm:p-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 id={`${id}-packs`} className="text-section text-fg-strong">
+              Pack {currentPack.packNumber}
+              {currentPack.hasMythic && (
+                <span className="ml-2 inline-flex items-center gap-1 rounded-full border border-rarity-m-line/70 bg-rarity-m-soft px-2 py-0.5 align-middle text-xs font-semibold text-rarity-m">
+                  <Sparkles aria-hidden className="size-3" />
+                  Mythic inside
+                </span>
+              )}
+            </h2>
+            <div className="flex items-center gap-2">
+              <IconButton
+                label="Previous pack"
+                aria-keyshortcuts="ArrowLeft"
+                onClick={() => selectPack(safeIndex - 1)}
+                disabled={safeIndex === 0 || !!ceremony}
+              >
+                <ChevronLeft aria-hidden className="size-4" />
+              </IconButton>
+              <span className="min-w-14 text-center text-sm font-semibold text-fg-soft" aria-live="polite">
+                {safeIndex + 1} of {packs.length}
+              </span>
+              <IconButton
+                label="Next pack"
+                aria-keyshortcuts="ArrowRight"
+                onClick={() => selectPack(safeIndex + 1)}
+                disabled={safeIndex === packs.length - 1 || !!ceremony}
+              >
+                <ChevronRight aria-hidden className="size-4" />
+              </IconButton>
+              {!ceremony && (
+                <Button ref={openButtonRef} variant="foil" size="md" onClick={startCeremony} className="ml-1">
+                  <Package aria-hidden className="size-4" />
+                  Open this pack
+                </Button>
+              )}
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {currentPack.cards.map((card, idx) => {
-              let slotLabel = 'C';
-              if (card.rarity === 'M') slotLabel = 'MYTHIC';
-              else if (card.rarity === 'R') slotLabel = 'RARE';
-              else if (card.rarity === 'U') slotLabel = 'UNCOMMON';
-              else if (card.rarity === 'L') slotLabel = 'LAND';
-              else if (card.rarity === 'T') slotLabel = 'TOKEN';
-
+          <div
+            ref={stripRef}
+            role="group"
+            aria-label="Choose a pack"
+            className="flex gap-1.5 overflow-x-auto scroll-px-2 pb-1 -mx-1 px-1 [scrollbar-width:thin]"
+          >
+            {packs.map((pack, idx) => {
+              const isSelected = idx === safeIndex;
               return (
-                <CardItem
-                  key={`${card.id}-${idx}`}
-                  card={card}
-                  showPackSlot={slotLabel}
-                  onClick={() => onInspectCard(card)}
-                />
+                <button
+                  key={pack.id}
+                  type="button"
+                  data-pack={idx}
+                  aria-pressed={isSelected}
+                  disabled={!!ceremony && !isSelected}
+                  onClick={() => selectPack(idx)}
+                  className={cx(
+                    'relative inline-flex shrink-0 items-center gap-1 rounded-lg border px-3 min-h-9 pointer-coarse:min-h-11 text-control font-semibold cursor-pointer transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed',
+                    isSelected
+                      ? 'bg-accent-soft text-accent-fg border-accent-line'
+                      : 'bg-well text-fg-muted border-line hover:border-line-strong hover:text-fg'
+                  )}
+                >
+                  #{pack.packNumber}
+                  {pack.hasMythic && (
+                    <>
+                      <Sparkles aria-hidden className="size-3 text-rarity-m" />
+                      <span className="sr-only">, has a mythic</span>
+                    </>
+                  )}
+                </button>
               );
             })}
           </div>
         </div>
-      )}
+
+        <p className="sr-only" aria-live="polite">
+          {announcement}
+        </p>
+
+        {ceremony ? (
+          <div className="rounded-3xl border border-line-strong bg-well p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-line">
+              <div>
+                <h3 className="text-section text-fg-strong">Opening pack {currentPack.packNumber}</h3>
+                <p className="text-sm text-fg-muted">
+                  {ceremony.torn
+                    ? `${ceremony.revealed} of ${total} revealed · Space or Enter reveals the next card`
+                    : 'Tear the wrapper to start · Space or Enter works too'}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                {ceremony.torn && !isComplete && (
+                  <>
+                    <Button ref={revealNextRef} variant="primary" size="md" onClick={revealNext}>
+                      Reveal next
+                    </Button>
+                    <Button size="md" onClick={revealAll}>
+                      Reveal all
+                    </Button>
+                  </>
+                )}
+                {isComplete ? (
+                  <Button ref={doneRef} variant="primary" size="md" onClick={closeCeremony}>
+                    Done
+                  </Button>
+                ) : (
+                  <Button variant="ghost" size="md" onClick={closeCeremony} aria-keyshortcuts="Escape">
+                    <X aria-hidden className="size-4" />
+                    Close
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            {!ceremony.torn ? (
+              <div className="flex flex-col items-center py-6 sm:py-10">
+                <button
+                  ref={packWrapperRef}
+                  type="button"
+                  onClick={tearPack}
+                  aria-label={`Tear open pack ${currentPack.packNumber}, ${total} cards`}
+                  className={cx(
+                    'group relative w-52 sm:w-60 aspect-[5/8] overflow-hidden rounded-2xl border-2 border-foil/70 bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-950',
+                    'shadow-2xl shadow-black/70 cursor-pointer select-none',
+                    'transition-[translate,scale,opacity] duration-300 ease-out-expo hover:-translate-y-1 active:scale-[0.98] motion-reduce:hover:translate-y-0',
+                    isTearing && 'scale-95 opacity-0'
+                  )}
+                >
+                  {PACK_ART && (
+                    <img
+                      src={PACK_ART.src}
+                      alt=""
+                      className="absolute inset-x-0 top-[22%] h-[46%] w-full object-cover opacity-80 [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_70%,transparent)]"
+                    />
+                  )}
+                  <span
+                    aria-hidden
+                    className={cx(
+                      'absolute inset-x-0 top-0 h-5 bg-[repeating-linear-gradient(90deg,var(--color-amber-600)_0_6px,var(--color-amber-300)_6px_9px)] opacity-90',
+                      'transition-[translate,rotate] duration-300 ease-out-expo origin-left',
+                      isTearing && '-translate-y-6 -rotate-6'
+                    )}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-0 bottom-0 h-5 bg-[repeating-linear-gradient(90deg,var(--color-amber-600)_0_6px,var(--color-amber-300)_6px_9px)] opacity-90"
+                  />
+                  <span aria-hidden className="foil-sheen absolute inset-0 group-hover:bg-position-[0%_0%]" />
+
+                  <span className="absolute inset-x-0 top-9 flex flex-col items-center text-center">
+                    <span className="text-label uppercase text-foil">Booster pack</span>
+                    <span className="mt-1 text-2xl font-extrabold font-stretch-semi-condensed text-fg-strong">
+                      Star Wars TCG
+                    </span>
+                  </span>
+
+                  <span className="absolute inset-x-0 bottom-9 flex flex-col items-center gap-2">
+                    <span className="rounded-full bg-foil px-4 py-1.5 text-sm font-bold text-foil-ink shadow-lg group-hover:bg-foil-hover transition-colors duration-150">
+                      Tear open
+                    </span>
+                    <span className="text-xs text-fg-soft">{total} cards</span>
+                  </span>
+                </button>
+              </div>
+            ) : (
+              <ul className="card-grid">
+                {openingOrder.map((card, idx) => {
+                  const isRevealed = idx < ceremony.revealed;
+                  return (
+                    <li
+                      key={`${card.id}-${idx}`}
+                      className="transition-[opacity,translate] duration-300 ease-out-expo starting:opacity-0 starting:translate-y-3 motion-reduce:starting:translate-y-0"
+                      style={{ transitionDelay: `${Math.min(idx, 14) * 30}ms` }}
+                    >
+                      <CardItem
+                        card={card}
+                        flippable
+                        faceDown={!isRevealed}
+                        isFoil={foilIds.has(card.id)}
+                        artSeed={currentPack.packNumber * 31 + currentPack.cards.indexOf(card)}
+                        label={isRevealed ? undefined : `Reveal card ${idx + 1} of ${total}`}
+                        onClick={() =>
+                          isRevealed
+                            ? onInspectCard(card, currentPack.packNumber * 31 + currentPack.cards.indexOf(card))
+                            : revealNext()
+                        }
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        ) : (
+          <div>
+            <p className="mb-3 text-sm text-fg-muted">Select a card to see its full rules text and artwork.</p>
+            <ul className="card-grid">
+              {currentPack.cards.map((card, idx) => (
+                <li key={`${card.id}-${idx}`}>
+                  <CardItem
+                    card={card}
+                    isFoil={foilIds.has(card.id)}
+                    artSeed={currentPack.packNumber * 31 + idx}
+                    onClick={() => onInspectCard(card, currentPack.packNumber * 31 + idx)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
     </div>
   );
 };

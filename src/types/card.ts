@@ -2,6 +2,15 @@ export type Rarity = 'C' | 'U' | 'R' | 'M' | 'L' | 'T';
 
 export type CardColor = 'W' | 'U' | 'B' | 'R' | 'G' | 'Colorless' | 'Multicolor';
 
+/** The second face of a double-faced card. */
+export interface CardFace {
+  name: string;
+  type: string;
+  text?: string;
+  flavorText?: string;
+  powerToughness?: string;
+}
+
 export interface Card {
   id: string;
   name: string;
@@ -14,6 +23,11 @@ export interface Card {
   artist?: string;
   source?: string;
   colors?: CardColor[];
+  /** Present on double-faced cards. Rules text uses {T}, {2}, {R} … for symbols. */
+  backFace?: CardFace;
+  /** Artwork lookup key (`source::name`) fixed at set creation, so renaming a card keeps its art. */
+  artKey?: string;
+  /** User-supplied artwork for custom cards. */
   customImageUrl?: string;
 }
 
@@ -25,14 +39,26 @@ export interface BoosterSlotConfig {
   basicLandCount: number;
   tokenCount: number;
   balanceColorsInCommons: boolean; // ensures all 5 colors represented when commons >= 5
+  /** Chance (0–1) that a pack contains a foil, which replaces one common. Default 0 (off). */
+  foilRate?: number;
+  /** Set codes (see getCardSetCode) to draw from. Missing, empty, or matching no cards = all sets. */
+  includedSets?: string[];
 }
 
 export interface BoosterPack {
   id: string;
   packNumber: number;
   cards: Card[];
+  /** True when a rare/mythic slot produced a mythic. */
   hasMythic: boolean;
+  /** Partition: each card counted once under W/U/B/R/G (mono), Multicolor or Colorless. */
   colorCounts: Record<string, number>;
+  /** Cards containing each color; multicolor cards count under each of their colors. */
+  colorPresence?: Record<'W' | 'U' | 'B' | 'R' | 'G', number>;
+  /** Mythics produced by the rare/mythic slots. */
+  mythicCount?: number;
+  /** Ids of the foil card(s) in `cards`. */
+  foilCardIds?: string[];
 }
 
 export interface CardSet {

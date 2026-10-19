@@ -19,37 +19,117 @@ export function determineColors(cost?: string, type?: string): CardColor[] {
 }
 
 export function getRarityLabel(rarity: Rarity): string {
-  switch (rarity) {
-    case 'C': return 'Common';
-    case 'U': return 'Uncommon';
-    case 'R': return 'Rare';
-    case 'M': return 'Mythic Rare';
-    case 'L': return 'Basic Land';
-    case 'T': return 'Token';
-    default: return 'Common';
-  }
+  return RARITY[rarity]?.label ?? 'Common';
 }
 
-export function getRarityColor(rarity: Rarity): string {
-  switch (rarity) {
-    case 'C': return 'text-slate-300 border-slate-400 bg-slate-800';
-    case 'U': return 'text-sky-300 border-sky-400 bg-sky-950/80';
-    case 'R': return 'text-amber-300 border-amber-400 bg-amber-950/80';
-    case 'M': return 'text-orange-400 border-orange-500 bg-orange-950/80';
-    case 'L': return 'text-emerald-300 border-emerald-500 bg-emerald-950/80';
-    case 'T': return 'text-purple-300 border-purple-400 bg-purple-950/80';
-    default: return 'text-slate-300 border-slate-400 bg-slate-800';
-  }
+interface RarityStyle {
+  label: string;
+  /** Text color class for the rarity's identity color. */
+  text: string;
+  /** Small bordered badge (text + tinted fill). */
+  badge: string;
 }
 
-export function getColorBadge(color: string): { bg: string; text: string; label: string; border: string } {
-  switch (color) {
-    case 'W': return { bg: 'bg-amber-100/90 text-amber-900 border-amber-300', text: 'text-amber-900', label: 'White', border: 'border-amber-200' };
-    case 'U': return { bg: 'bg-blue-600/90 text-white border-blue-400', text: 'text-blue-400', label: 'Blue', border: 'border-blue-500' };
-    case 'B': return { bg: 'bg-neutral-800 text-neutral-200 border-neutral-600', text: 'text-neutral-400', label: 'Black', border: 'border-neutral-700' };
-    case 'R': return { bg: 'bg-rose-700/90 text-white border-rose-400', text: 'text-rose-400', label: 'Red', border: 'border-rose-500' };
-    case 'G': return { bg: 'bg-emerald-700/90 text-white border-emerald-400', text: 'text-emerald-400', label: 'Green', border: 'border-emerald-500' };
-    case 'Multicolor': return { bg: 'bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-500 text-white border-amber-300', text: 'text-amber-400', label: 'Multi', border: 'border-amber-400' };
-    default: return { bg: 'bg-zinc-700 text-zinc-200 border-zinc-500', text: 'text-zinc-400', label: 'Colorless', border: 'border-zinc-600' };
-  }
+/** Single source of truth for rarity presentation. */
+export const RARITY: Record<Rarity, RarityStyle> = {
+  C: { label: 'Common', text: 'text-rarity-c', badge: 'text-rarity-c border-rarity-c/40 bg-rarity-c/10' },
+  U: { label: 'Uncommon', text: 'text-rarity-u', badge: 'text-rarity-u border-rarity-u/50 bg-rarity-u/10' },
+  R: { label: 'Rare', text: 'text-rarity-r', badge: 'text-rarity-r border-rarity-r/50 bg-rarity-r/10' },
+  M: { label: 'Mythic Rare', text: 'text-rarity-m', badge: 'text-rarity-m border-rarity-m/60 bg-rarity-m/15' },
+  L: { label: 'Basic Land', text: 'text-rarity-l', badge: 'text-rarity-l border-rarity-l/50 bg-rarity-l/10' },
+  T: { label: 'Token', text: 'text-rarity-t', badge: 'text-rarity-t border-rarity-t/50 bg-rarity-t/10' },
+};
+
+export const RARITY_ORDER: Rarity[] = ['C', 'U', 'R', 'M', 'L', 'T'];
+
+interface ManaStyle {
+  label: string;
+  /** Solid swatch used for dots and distribution bars. */
+  swatch: string;
+  /** Card face frame: gradient + border. */
+  frame: string;
+  /** Card face title and type bars. */
+  bar: string;
+}
+
+/** Single source of truth for color identity (mana) presentation. */
+export const MANA: Record<CardColor, ManaStyle> = {
+  W: {
+    label: 'White',
+    swatch: 'bg-mana-w',
+    frame: 'from-stone-700 via-stone-900 to-stone-950 border-mana-w/50',
+    bar: 'bg-stone-900/90 border-mana-w/40 text-amber-50',
+  },
+  U: {
+    label: 'Blue',
+    swatch: 'bg-mana-u',
+    frame: 'from-sky-950 via-slate-900 to-blue-950 border-mana-u/60',
+    bar: 'bg-sky-950/90 border-mana-u/50 text-sky-50',
+  },
+  B: {
+    label: 'Black',
+    swatch: 'bg-mana-b',
+    frame: 'from-neutral-900 via-stone-950 to-black border-neutral-600',
+    bar: 'bg-neutral-900/90 border-neutral-600 text-neutral-100',
+  },
+  R: {
+    label: 'Red',
+    swatch: 'bg-mana-r',
+    frame: 'from-rose-950 via-stone-900 to-rose-950 border-mana-r/60',
+    bar: 'bg-rose-950/90 border-mana-r/50 text-rose-50',
+  },
+  G: {
+    label: 'Green',
+    swatch: 'bg-mana-g',
+    frame: 'from-emerald-950 via-stone-900 to-emerald-950 border-mana-g/60',
+    bar: 'bg-emerald-950/90 border-mana-g/50 text-emerald-50',
+  },
+  Multicolor: {
+    label: 'Multicolor',
+    swatch: 'bg-mana-multi',
+    frame: 'from-amber-950 via-stone-900 to-amber-950 border-mana-multi/70',
+    bar: 'bg-amber-950/85 border-mana-multi/50 text-amber-50',
+  },
+  Colorless: {
+    label: 'Colorless',
+    swatch: 'bg-mana-c',
+    frame: 'from-slate-800 via-slate-900 to-slate-950 border-slate-600',
+    bar: 'bg-slate-900/90 border-slate-600 text-slate-100',
+  },
+};
+
+/** Display names for set codes (see getCardSetCode in boosterCollation). */
+export const SET_NAMES: Record<string, string> = {
+  Main: 'Base set',
+  TFA: 'The Force Awakens',
+  RO: 'Rogue One',
+  TLJ: 'The Last Jedi',
+  SOLO: 'Solo',
+  ROS: 'Rise of Skywalker',
+  RBL: 'Rebels',
+};
+
+export const MANA_ORDER: CardColor[] = ['W', 'U', 'B', 'R', 'G', 'Multicolor', 'Colorless'];
+
+const BASIC_LAND_IDENTITY: Record<string, CardColor> = {
+  plains: 'W',
+  island: 'U',
+  swamp: 'B',
+  mountain: 'R',
+  forest: 'G',
+};
+
+/** The identity that decides a card's frame: multicolor, its one color, a basic land's color, or colorless. */
+export function frameIdentity(card: Card): CardColor {
+  const colors = card.colors || ['Colorless'];
+  if (colors.includes('Multicolor')) return 'Multicolor';
+  const mono = colors.find(c => c !== 'Colorless');
+  if (mono) return mono;
+  if (card.rarity === 'L') return BASIC_LAND_IDENTITY[card.name.toLowerCase()] ?? 'Colorless';
+  return 'Colorless';
+}
+
+/** The individual colors of a card (no Multicolor/Colorless markers). */
+export function colorPips(card: Card): CardColor[] {
+  return (card.colors || []).filter(c => c !== 'Multicolor' && c !== 'Colorless');
 }

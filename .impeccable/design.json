@@ -1,0 +1,905 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T13:23:05.672Z",
+  "title": "Design System: CardForge",
+  "extensions": {
+    "colorMeta": {
+      "void": {
+        "role": "neutral",
+        "displayName": "Void",
+        "canonical": "#07090e",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "well": {
+        "role": "neutral",
+        "displayName": "Well",
+        "canonical": "oklch(12.9% 0.042 264.695)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "oklch(20.8% 0.042 265.755)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Raised",
+        "canonical": "oklch(27.9% 0.041 260.031)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "raised-hover": {
+        "role": "neutral",
+        "displayName": "Raised Hover",
+        "canonical": "oklch(37.2% 0.044 257.287)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(27.9% 0.041 260.031)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Strong",
+        "canonical": "oklch(37.2% 0.044 257.287)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "fg-strong": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "fg": {
+        "role": "neutral",
+        "displayName": "Mist",
+        "canonical": "oklch(96.8% 0.007 247.896)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "fg-soft": {
+        "role": "neutral",
+        "displayName": "Haze",
+        "canonical": "oklch(86.9% 0.022 252.894)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "fg-muted": {
+        "role": "neutral",
+        "displayName": "Dusk",
+        "canonical": "oklch(70.4% 0.04 256.788)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Hologram Cyan",
+        "canonical": "oklch(78.9% 0.154 211.53)",
+        "tonalRamp": [
+          "oklch(30.2% 0.056 229.695)",
+          "oklch(45% 0.085 224.283)",
+          "oklch(52% 0.105 223.128)",
+          "oklch(60.9% 0.126 221.723)",
+          "oklch(71.5% 0.143 215.221)",
+          "oklch(78.9% 0.154 211.53)",
+          "oklch(86.5% 0.127 207.078)",
+          "oklch(95.6% 0.045 203.388)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Hologram Cyan Bright",
+        "canonical": "oklch(86.5% 0.127 207.078)",
+        "tonalRamp": [
+          "oklch(30.2% 0.056 229.695)",
+          "oklch(45% 0.085 224.283)",
+          "oklch(52% 0.105 223.128)",
+          "oklch(60.9% 0.126 221.723)",
+          "oklch(71.5% 0.143 215.221)",
+          "oklch(78.9% 0.154 211.53)",
+          "oklch(86.5% 0.127 207.078)",
+          "oklch(95.6% 0.045 203.388)"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Accent Ink",
+        "canonical": "oklch(12.9% 0.042 264.695)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "accent-fg": {
+        "role": "primary",
+        "displayName": "Cyan Glow",
+        "canonical": "oklch(86.5% 0.127 207.078)",
+        "tonalRamp": [
+          "oklch(30.2% 0.056 229.695)",
+          "oklch(45% 0.085 224.283)",
+          "oklch(52% 0.105 223.128)",
+          "oklch(60.9% 0.126 221.723)",
+          "oklch(71.5% 0.143 215.221)",
+          "oklch(78.9% 0.154 211.53)",
+          "oklch(86.5% 0.127 207.078)",
+          "oklch(95.6% 0.045 203.388)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Cyan Depth",
+        "canonical": "oklch(30.2% 0.056 229.695)",
+        "tonalRamp": [
+          "oklch(30.2% 0.056 229.695)",
+          "oklch(45% 0.085 224.283)",
+          "oklch(52% 0.105 223.128)",
+          "oklch(60.9% 0.126 221.723)",
+          "oklch(71.5% 0.143 215.221)",
+          "oklch(78.9% 0.154 211.53)",
+          "oklch(86.5% 0.127 207.078)",
+          "oklch(95.6% 0.045 203.388)"
+        ]
+      },
+      "accent-line": {
+        "role": "primary",
+        "displayName": "Cyan Edge",
+        "canonical": "oklch(60.9% 0.126 221.723)",
+        "tonalRamp": [
+          "oklch(30.2% 0.056 229.695)",
+          "oklch(45% 0.085 224.283)",
+          "oklch(52% 0.105 223.128)",
+          "oklch(60.9% 0.126 221.723)",
+          "oklch(71.5% 0.143 215.221)",
+          "oklch(78.9% 0.154 211.53)",
+          "oklch(86.5% 0.127 207.078)",
+          "oklch(95.6% 0.045 203.388)"
+        ]
+      },
+      "foil": {
+        "role": "secondary",
+        "displayName": "Foil Gold",
+        "canonical": "oklch(82.8% 0.189 84.429)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "foil-hover": {
+        "role": "secondary",
+        "displayName": "Foil Bright",
+        "canonical": "oklch(87.9% 0.169 91.605)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "foil-ink": {
+        "role": "secondary",
+        "displayName": "Foil Ink",
+        "canonical": "oklch(27.9% 0.077 45.635)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "rarity-c": {
+        "role": "tertiary",
+        "displayName": "Rarity: Pale Slate (Common)",
+        "canonical": "oklch(86.9% 0.022 252.894)",
+        "tonalRamp": [
+          "oklch(12.9% 0.042 264.695)",
+          "oklch(27.9% 0.041 260.031)",
+          "oklch(37.2% 0.044 257.287)",
+          "oklch(44.6% 0.043 257.281)",
+          "oklch(55.4% 0.046 257.417)",
+          "oklch(70.4% 0.04 256.788)",
+          "oklch(86.9% 0.022 252.894)",
+          "oklch(96.8% 0.007 247.896)"
+        ]
+      },
+      "rarity-u": {
+        "role": "tertiary",
+        "displayName": "Rarity: Sky (Uncommon)",
+        "canonical": "oklch(82.8% 0.111 230.318)",
+        "tonalRamp": [
+          "oklch(29.3% 0.066 243.157)",
+          "oklch(44.3% 0.11 240.79)",
+          "oklch(50% 0.134 242.749)",
+          "oklch(58.8% 0.158 241.966)",
+          "oklch(68.5% 0.169 237.323)",
+          "oklch(74.6% 0.16 232.661)",
+          "oklch(82.8% 0.111 230.318)",
+          "oklch(95.1% 0.026 236.824)"
+        ]
+      },
+      "rarity-r": {
+        "role": "tertiary",
+        "displayName": "Rarity: Gold Leaf (Rare)",
+        "canonical": "oklch(87.9% 0.169 91.605)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "rarity-m": {
+        "role": "tertiary",
+        "displayName": "Rarity: Mythic Ember (Mythic)",
+        "canonical": "oklch(75% 0.183 55.934)",
+        "tonalRamp": [
+          "oklch(26.6% 0.079 36.259)",
+          "oklch(47% 0.157 37.304)",
+          "oklch(55.3% 0.195 38.402)",
+          "oklch(64.6% 0.222 41.116)",
+          "oklch(70.5% 0.213 47.604)",
+          "oklch(75% 0.183 55.934)",
+          "oklch(83.7% 0.128 66.29)",
+          "oklch(95.4% 0.038 75.164)"
+        ]
+      },
+      "rarity-l": {
+        "role": "tertiary",
+        "displayName": "Rarity: Jade (Basic Land)",
+        "canonical": "oklch(84.5% 0.143 164.978)",
+        "tonalRamp": [
+          "oklch(26.2% 0.051 172.552)",
+          "oklch(43.2% 0.095 166.913)",
+          "oklch(50.8% 0.118 165.612)",
+          "oklch(59.6% 0.145 163.225)",
+          "oklch(69.6% 0.17 162.48)",
+          "oklch(76.5% 0.177 163.223)",
+          "oklch(84.5% 0.143 164.978)",
+          "oklch(95% 0.052 163.051)"
+        ]
+      },
+      "rarity-t": {
+        "role": "tertiary",
+        "displayName": "Rarity: Lilac (Token)",
+        "canonical": "oklch(82.7% 0.119 306.383)",
+        "tonalRamp": [
+          "oklch(29.1% 0.149 302.717)",
+          "oklch(43.8% 0.218 303.724)",
+          "oklch(49.6% 0.265 301.924)",
+          "oklch(55.8% 0.288 302.321)",
+          "oklch(62.7% 0.265 303.9)",
+          "oklch(71.4% 0.203 305.504)",
+          "oklch(82.7% 0.119 306.383)",
+          "oklch(94.6% 0.033 307.174)"
+        ]
+      },
+      "mana-w": {
+        "role": "tertiary",
+        "displayName": "Mana: Parchment (White)",
+        "canonical": "oklch(96.2% 0.059 95.617)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "mana-u": {
+        "role": "tertiary",
+        "displayName": "Mana: Deep Blue (Blue)",
+        "canonical": "oklch(62.3% 0.214 259.815)",
+        "tonalRamp": [
+          "oklch(28.2% 0.091 267.935)",
+          "oklch(42.4% 0.199 265.638)",
+          "oklch(48.8% 0.243 264.376)",
+          "oklch(54.6% 0.245 262.881)",
+          "oklch(62.3% 0.214 259.815)",
+          "oklch(70.7% 0.165 254.624)",
+          "oklch(80.9% 0.105 251.813)",
+          "oklch(93.2% 0.032 255.585)"
+        ]
+      },
+      "mana-b": {
+        "role": "tertiary",
+        "displayName": "Mana: Graphite (Black)",
+        "canonical": "oklch(43.9% 0 none)",
+        "tonalRamp": [
+          "oklch(14.5% 0 none)",
+          "oklch(26.9% 0 none)",
+          "oklch(37.1% 0 none)",
+          "oklch(43.9% 0 none)",
+          "oklch(55.6% 0 none)",
+          "oklch(70.8% 0 none)",
+          "oklch(87% 0 none)",
+          "oklch(97% 0 none)"
+        ]
+      },
+      "mana-r": {
+        "role": "tertiary",
+        "displayName": "Mana: Crimson (Red)",
+        "canonical": "oklch(58.6% 0.253 17.585)",
+        "tonalRamp": [
+          "oklch(27.1% 0.105 12.094)",
+          "oklch(45.5% 0.188 13.697)",
+          "oklch(51.4% 0.222 16.935)",
+          "oklch(58.6% 0.253 17.585)",
+          "oklch(64.5% 0.246 16.439)",
+          "oklch(71.2% 0.194 13.428)",
+          "oklch(81% 0.117 11.638)",
+          "oklch(94.1% 0.03 12.58)"
+        ]
+      },
+      "mana-g": {
+        "role": "tertiary",
+        "displayName": "Mana: Forest (Green)",
+        "canonical": "oklch(59.6% 0.145 163.225)",
+        "tonalRamp": [
+          "oklch(26.2% 0.051 172.552)",
+          "oklch(43.2% 0.095 166.913)",
+          "oklch(50.8% 0.118 165.612)",
+          "oklch(59.6% 0.145 163.225)",
+          "oklch(69.6% 0.17 162.48)",
+          "oklch(76.5% 0.177 163.223)",
+          "oklch(84.5% 0.143 164.978)",
+          "oklch(95% 0.052 163.051)"
+        ]
+      },
+      "mana-multi": {
+        "role": "tertiary",
+        "displayName": "Mana: Gold (Multicolor)",
+        "canonical": "oklch(82.8% 0.189 84.429)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "mana-c": {
+        "role": "tertiary",
+        "displayName": "Mana: Ash (Colorless)",
+        "canonical": "oklch(70.5% 0.015 286.067)",
+        "tonalRamp": [
+          "oklch(14.1% 0.005 285.823)",
+          "oklch(27.4% 0.006 286.033)",
+          "oklch(37% 0.013 285.805)",
+          "oklch(44.2% 0.017 285.786)",
+          "oklch(55.2% 0.016 285.938)",
+          "oklch(70.5% 0.015 286.067)",
+          "oklch(87.1% 0.006 286.286)",
+          "oklch(96.7% 0.001 286.375)"
+        ]
+      },
+      "success": {
+        "role": "status",
+        "displayName": "Emerald (Success)",
+        "canonical": "oklch(76.5% 0.177 163.223)",
+        "tonalRamp": [
+          "oklch(26.2% 0.051 172.552)",
+          "oklch(43.2% 0.095 166.913)",
+          "oklch(50.8% 0.118 165.612)",
+          "oklch(59.6% 0.145 163.225)",
+          "oklch(69.6% 0.17 162.48)",
+          "oklch(76.5% 0.177 163.223)",
+          "oklch(84.5% 0.143 164.978)",
+          "oklch(95% 0.052 163.051)"
+        ]
+      },
+      "warning": {
+        "role": "status",
+        "displayName": "Amber (Warning)",
+        "canonical": "oklch(87.9% 0.169 91.605)",
+        "tonalRamp": [
+          "oklch(27.9% 0.077 45.635)",
+          "oklch(47.3% 0.137 46.201)",
+          "oklch(55.5% 0.163 48.998)",
+          "oklch(66.6% 0.179 58.318)",
+          "oklch(76.9% 0.188 70.08)",
+          "oklch(82.8% 0.189 84.429)",
+          "oklch(87.9% 0.169 91.605)",
+          "oklch(96.2% 0.059 95.617)"
+        ]
+      },
+      "danger": {
+        "role": "status",
+        "displayName": "Rose (Danger)",
+        "canonical": "oklch(71.2% 0.194 13.428)",
+        "tonalRamp": [
+          "oklch(27.1% 0.105 12.094)",
+          "oklch(45.5% 0.188 13.697)",
+          "oklch(51.4% 0.222 16.935)",
+          "oklch(58.6% 0.253 17.585)",
+          "oklch(64.5% 0.246 16.439)",
+          "oklch(71.2% 0.194 13.428)",
+          "oklch(81% 0.117 11.638)",
+          "oklch(94.1% 0.03 12.58)"
+        ]
+      },
+      "danger-soft": {
+        "role": "status",
+        "displayName": "Rose Depth (Danger Soft)",
+        "canonical": "oklch(27.1% 0.105 12.094)",
+        "tonalRamp": [
+          "oklch(27.1% 0.105 12.094)",
+          "oklch(45.5% 0.188 13.697)",
+          "oklch(51.4% 0.222 16.935)",
+          "oklch(58.6% 0.253 17.585)",
+          "oklch(64.5% 0.246 16.439)",
+          "oklch(71.2% 0.194 13.428)",
+          "oklch(81% 0.117 11.638)",
+          "oklch(94.1% 0.03 12.58)"
+        ]
+      },
+      "rarity-m-soft": {
+        "role": "tertiary",
+        "displayName": "Ember Depth (mythic fill)",
+        "canonical": "oklch(26.6% 0.079 36.259)",
+        "tonalRamp": [
+          "oklch(26.6% 0.079 36.259)",
+          "oklch(47% 0.157 37.304)",
+          "oklch(55.3% 0.195 38.402)",
+          "oklch(64.6% 0.222 41.116)",
+          "oklch(70.5% 0.213 47.604)",
+          "oklch(75% 0.183 55.934)",
+          "oklch(83.7% 0.128 66.29)",
+          "oklch(95.4% 0.038 75.164)"
+        ]
+      },
+      "rarity-m-line": {
+        "role": "tertiary",
+        "displayName": "Ember Edge (mythic border)",
+        "canonical": "oklch(55.3% 0.195 38.402)",
+        "tonalRamp": [
+          "oklch(26.6% 0.079 36.259)",
+          "oklch(47% 0.157 37.304)",
+          "oklch(55.3% 0.195 38.402)",
+          "oklch(64.6% 0.222 41.116)",
+          "oklch(70.5% 0.213 47.604)",
+          "oklch(75% 0.183 55.934)",
+          "oklch(83.7% 0.128 66.29)",
+          "oklch(95.4% 0.038 75.164)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The CardForge name in the header; used once."
+      },
+      "stat": {
+        "displayName": "Stat",
+        "purpose": "Large stat-tile values; proportional numerals."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Panel and dialog headings."
+      },
+      "group": {
+        "displayName": "Group",
+        "purpose": "Uppercase sub-group headings inside a panel."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs, table cells, fields, md buttons, nav labels; tabular numerals."
+      },
+      "helper": {
+        "displayName": "Helper",
+        "purpose": "Captions, stat descriptions, table headers, counts."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "sm buttons, chips, pack-strip buttons."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase printed marks on card and pack objects only."
+      },
+      "card-name": {
+        "displayName": "Card Name",
+        "purpose": "Card title on thumbnails; semi-condensed."
+      },
+      "card-cost": {
+        "displayName": "Card Cost",
+        "purpose": "Power/toughness and cost numerals on thumbnails."
+      },
+      "card-small": {
+        "displayName": "Card Small",
+        "purpose": "Type line, rules text, artist on thumbnails; semi-condensed. The 11px floor."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5)",
+        "purpose": "Every card thumbnail at rest; mythic face-up cards tint it orange-950 at 50%."
+      },
+      {
+        "name": "card-lift",
+        "value": "0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6)",
+        "purpose": "Card hover, paired with a 4px rise."
+      },
+      {
+        "name": "toast",
+        "value": "0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5)",
+        "purpose": "The single toast."
+      },
+      {
+        "name": "overlay",
+        "value": "0 25px 50px -12px rgb(0 0 0 / 0.6)",
+        "purpose": "Dialogs; the pack wrapper uses the same shape at 0.7."
+      },
+      {
+        "name": "pip",
+        "value": "0 1px 1px rgb(0 0 0 / 0.5)",
+        "purpose": "Mana pips on the card title bar."
+      },
+      {
+        "name": "dialog-backdrop",
+        "value": "background: rgb(2 6 23 / 0.82); backdrop-filter: blur(6px)",
+        "purpose": "Behind every modal dialog."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--color-accent); outline-offset: 2px",
+        "purpose": "Global :focus-visible ring."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one easing curve for movement: overlays, card lift, reveals, flip, foil sweep."
+      },
+      {
+        "name": "duration-color",
+        "value": "150ms",
+        "purpose": "Color, background and border transitions on controls."
+      },
+      {
+        "name": "duration-overlay",
+        "value": "200ms",
+        "purpose": "Dialog and toast entry (fade + 12px/8px rise), card hover lift, reduced-motion flip crossfade."
+      },
+      {
+        "name": "duration-reveal",
+        "value": "300ms",
+        "purpose": "Face-down cards entering after the tear; wrapper hover and tear crimp."
+      },
+      {
+        "name": "card-flip",
+        "value": "650ms ease-out-expo, perspective 1100px",
+        "purpose": "3D rotateY flip on reveal; reduced motion swaps it for a 200ms opacity crossfade."
+      },
+      {
+        "name": "foil-sweep",
+        "value": "foil-sweep 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards",
+        "purpose": "One light band across foil/mythic art on appearance (motion-safe only); hover replays via a 1.1s transition."
+      },
+      {
+        "name": "tear",
+        "value": "320ms",
+        "purpose": "Wrapper tear before cards appear; instant under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "card-compact (container)",
+        "value": "11.5rem"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container-max",
+        "value": "80rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary-md",
+      "description": "The one filled Hologram Cyan action per view (Generate packs, New card, Print).",
+      "html": "<button class=\"ds-btn-primary\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2\"/><path d=\"M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6\"/><rect x=\"6\" y=\"14\" width=\"12\" height=\"8\" rx=\"1\"/></svg>Print sheets</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 12px; font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; white-space: nowrap; cursor: pointer; border: 1px solid transparent; transition: background-color 150ms, color 150ms, border-color 150ms, transform 150ms; background: var(--color-accent, oklch(78.9% 0.154 211.53)); color: var(--color-accent-ink, oklch(12.9% 0.042 264.695)); } .ds-btn-primary:hover { background: var(--color-accent-hover, oklch(86.5% 0.127 207.078)); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } @media (pointer: coarse) { .ds-btn-primary { min-height: 44px; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Default button: Raised fill with a strong hairline; everything that is not the primary action.",
+      "html": "<button class=\"ds-btn-secondary\">Reveal all</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 12px; font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; white-space: nowrap; cursor: pointer; border: 1px solid transparent; transition: background-color 150ms, color 150ms, border-color 150ms, transform 150ms; min-height: 32px; padding: 0 12px; font-size: 0.8125rem; gap: 6px; background: var(--color-raised, oklch(27.9% 0.041 260.031)); color: var(--color-fg, oklch(96.8% 0.007 247.896)); border-color: var(--color-line-strong, oklch(37.2% 0.044 257.287)); } .ds-btn-secondary:hover { background: var(--color-raised-hover, oklch(37.2% 0.044 257.287)); color: var(--color-fg-strong, #ffffff); } .ds-btn-secondary:active { transform: translateY(1px); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } @media (pointer: coarse) { .ds-btn-secondary { min-height: 44px; } }"
+    },
+    {
+      "name": "Foil Button",
+      "kind": "button",
+      "refersTo": "button-foil",
+      "description": "Foil Gold fill reserved for opening a pack; never used outside the ceremony.",
+      "html": "<button class=\"ds-btn-foil\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z\"/><path d=\"M12 22V12\"/><polyline points=\"3.29 7 12 12 20.71 7\"/><path d=\"m7.5 4.27 9 5.15\"/></svg>Open pack</button>",
+      "css": ".ds-btn-foil { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: 12px; font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; white-space: nowrap; cursor: pointer; border: 1px solid transparent; transition: background-color 150ms, color 150ms, border-color 150ms, transform 150ms; background: var(--color-foil, oklch(82.8% 0.189 84.429)); color: var(--color-foil-ink, oklch(27.9% 0.077 45.635)); } .ds-btn-foil:hover { background: var(--color-foil-hover, oklch(87.9% 0.169 91.605)); } .ds-btn-foil:active { transform: translateY(1px); } .ds-btn-foil:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } @media (pointer: coarse) { .ds-btn-foil { min-height: 44px; } }"
+    },
+    {
+      "name": "Toggle Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pressable option (aria-pressed): Well when off, Cyan Depth with Cyan Edge border when on.",
+      "html": "<div class=\"ds-chip-row\"><button class=\"ds-chip\" aria-pressed=\"true\">15 cards</button><button class=\"ds-chip\" aria-pressed=\"false\">14 cards</button><button class=\"ds-chip\" aria-pressed=\"false\">Custom</button></div>",
+      "css": ".ds-chip-row { display: flex; gap: 8px; flex-wrap: wrap; } .ds-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--color-line, oklch(27.9% 0.041 260.031)); background: var(--color-well, oklch(12.9% 0.042 264.695)); color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; font-size: 0.8125rem; font-weight: 600; cursor: pointer; transition: color 150ms, background-color 150ms, border-color 150ms; } .ds-chip:hover { border-color: var(--color-line-strong, oklch(37.2% 0.044 257.287)); color: var(--color-fg, oklch(96.8% 0.007 247.896)); } .ds-chip[aria-pressed=\"true\"] { background: var(--color-accent-soft, oklch(30.2% 0.056 229.695)); color: var(--color-accent-fg, oklch(86.5% 0.127 207.078)); border-color: var(--color-accent-line, oklch(60.9% 0.126 221.723)); } .ds-chip:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } @media (pointer: coarse) { .ds-chip { min-height: 44px; } }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Recessed Well field with a strong hairline; the border turns cyan on focus and rose when invalid.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Card name</span><input class=\"ds-field-input\" placeholder=\"Luke Skywalker\" /></label>",
+      "css": ".ds-field { display: block; font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; } .ds-field-label { display: block; margin-bottom: 6px; font-size: 0.875rem; font-weight: 500; color: var(--color-fg-soft, oklch(86.9% 0.022 252.894)); } .ds-field-input { width: 100%; min-height: 40px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--color-line-strong, oklch(37.2% 0.044 257.287)); background: var(--color-well, oklch(12.9% 0.042 264.695)); color: var(--color-fg, oklch(96.8% 0.007 247.896)); font: inherit; font-size: 0.875rem; caret-color: var(--color-accent, oklch(78.9% 0.154 211.53)); } .ds-field-input::placeholder { color: color-mix(in oklch, var(--color-fg-muted, oklch(70.4% 0.04 256.788)) 70%, transparent); } .ds-field-input:hover { border-color: oklch(44.6% 0.043 257.281); } .ds-field-input:focus-visible { border-color: var(--color-accent, oklch(78.9% 0.154 211.53)); outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } .ds-field-input[aria-invalid=\"true\"] { border-color: var(--color-danger, oklch(71.2% 0.194 13.428)); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "The single view switcher: a segmented Well tray in the header from 640px (docks to a bottom tab bar on phones).",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Views\"><button class=\"ds-nav-item\" aria-current=\"page\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z\"/><path d=\"M12 22V12\"/><polyline points=\"3.29 7 12 12 20.71 7\"/><path d=\"m7.5 4.27 9 5.15\"/></svg><span>Booster Packs <span class=\"ds-nav-count\">(24)</span></span></button><button class=\"ds-nav-item\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><ellipse cx=\"12\" cy=\"5\" rx=\"9\" ry=\"3\"/><path d=\"M3 5V19A9 3 0 0 0 21 19V5\"/><path d=\"M3 12A9 3 0 0 0 21 12\"/></svg><span>Card Database <span class=\"ds-nav-count\">(312)</span></span></button></nav>",
+      "css": ".ds-nav { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; border: 1px solid var(--color-line, oklch(27.9% 0.041 260.031)); background: var(--color-well, oklch(12.9% 0.042 264.695)); font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; } .ds-nav-item { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); font: inherit; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: color 150ms, background-color 150ms; font-variant-numeric: tabular-nums; } .ds-nav-item:hover { color: var(--color-fg-strong, #ffffff); background: var(--color-raised, oklch(27.9% 0.041 260.031)); } .ds-nav-item[aria-current=\"page\"] { background: var(--color-accent-soft, oklch(30.2% 0.056 229.695)); color: var(--color-accent-fg, oklch(86.5% 0.127 207.078)); box-shadow: inset 0 0 0 1px var(--color-accent-line, oklch(60.9% 0.126 221.723)); } .ds-nav-count { color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); font-weight: 500; } .ds-nav-item:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; }"
+    },
+    {
+      "name": "Stepper",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Number field with minus/plus buttons in a Well capsule; tabular Paper White value.",
+      "html": "<div class=\"ds-stepper\"><button class=\"ds-step\" aria-label=\"Fewer packs\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/></svg></button><input class=\"ds-step-value\" value=\"24\" inputmode=\"numeric\" aria-label=\"Packs\" /><button class=\"ds-step\" aria-label=\"More packs\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg></button></div>",
+      "css": ".ds-stepper { display: inline-flex; align-items: center; padding: 2px; border-radius: 12px; border: 1px solid var(--color-line-strong, oklch(37.2% 0.044 257.287)); background: var(--color-well, oklch(12.9% 0.042 264.695)); } .ds-step { display: grid; place-items: center; width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent; color: var(--color-fg-soft, oklch(86.9% 0.022 252.894)); cursor: pointer; transition: color 150ms, background-color 150ms; } .ds-step:hover { background: var(--color-raised-hover, oklch(37.2% 0.044 257.287)); color: var(--color-fg-strong, #ffffff); } .ds-step:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } .ds-step-value { width: 40px; align-self: stretch; border: 0; border-radius: 6px; background: transparent; text-align: center; color: var(--color-fg-strong, #ffffff); font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 700; font-variant-numeric: tabular-nums; } .ds-step-value:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } @media (pointer: coarse) { .ds-step { width: 44px; height: 44px; } }"
+    },
+    {
+      "name": "Stat Tile",
+      "kind": "card",
+      "refersTo": "stat-tile",
+      "description": "Flat recessed tile inside a panel: helper label, proportional Stat value, verdict, helper line. No shadow.",
+      "html": "<dl class=\"ds-panel\"><div class=\"ds-stat\"><dt class=\"ds-stat-label\">Color balance</dt><dd class=\"ds-stat-row\"><span class=\"ds-stat-value\">92%</span><span class=\"ds-stat-verdict\">Even</span></dd><dd class=\"ds-stat-help\">How evenly W, U, B, R and G appear among playable cards.</dd></div></dl>",
+      "css": ".ds-panel { margin: 0; padding: 20px; border-radius: 16px; border: 1px solid var(--color-line, oklch(27.9% 0.041 260.031)); background: var(--color-panel, oklch(20.8% 0.042 265.755)); font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; max-width: 280px; } .ds-stat { padding: 12px 16px; border-radius: 12px; border: 1px solid var(--color-line, oklch(27.9% 0.041 260.031)); background: color-mix(in oklch, var(--color-well, oklch(12.9% 0.042 264.695)) 70%, transparent); } .ds-stat-label { font-size: 0.75rem; color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); } .ds-stat-row { margin: 2px 0 0; display: flex; align-items: baseline; gap: 8px; } .ds-stat-value { font-size: 1.5rem; line-height: 1.3333; font-weight: 700; font-variant-numeric: proportional-nums; color: var(--color-fg-strong, #ffffff); } .ds-stat-verdict { font-size: 0.75rem; font-weight: 600; color: var(--color-success, oklch(76.5% 0.177 163.223)); } .ds-stat-help { margin: 4px 0 0; font-size: 0.75rem; line-height: 1.3333; color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); }"
+    },
+    {
+      "name": "Toast",
+      "kind": "custom",
+      "refersTo": "toast",
+      "description": "Single-slot status toast on Raised with an Undo action; one of the few lifted surfaces.",
+      "html": "<div class=\"ds-toast\" role=\"status\"><span class=\"ds-toast-icon\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg></span><span class=\"ds-toast-msg\">Deleted “X-wing Squadron”.</span><button class=\"ds-toast-action\">Undo</button><button class=\"ds-toast-close\" aria-label=\"Dismiss\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/></svg></button></div>",
+      "css": ".ds-toast { display: inline-flex; align-items: center; gap: 12px; max-width: 28rem; padding: 8px 8px 8px 16px; border-radius: 16px; border: 1px solid var(--color-line-strong, oklch(37.2% 0.044 257.287)); background: var(--color-raised, oklch(27.9% 0.041 260.031)); color: var(--color-fg, oklch(96.8% 0.007 247.896)); font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5); animation: ds-toast-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both; } @keyframes ds-toast-in { from { opacity: 0; translate: 0 8px; } } @media (prefers-reduced-motion: reduce) { @keyframes ds-toast-in { from { opacity: 0; } } } .ds-toast-icon { display: inline-flex; color: var(--color-success, oklch(76.5% 0.177 163.223)); } .ds-toast-msg { padding: 4px 0; } .ds-toast-action, .ds-toast-close { min-height: 32px; border: 0; border-radius: 8px; background: transparent; font: inherit; cursor: pointer; } .ds-toast-action { padding: 0 12px; font-weight: 600; color: var(--color-accent-fg, oklch(86.5% 0.127 207.078)); } .ds-toast-close { display: grid; place-items: center; width: 32px; color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); } .ds-toast-action:hover, .ds-toast-close:hover { background: var(--color-raised-hover, oklch(37.2% 0.044 257.287)); color: var(--color-fg-strong, #ffffff); } .ds-toast-action:focus-visible, .ds-toast-close:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; }"
+    },
+    {
+      "name": "Card Face",
+      "kind": "card",
+      "refersTo": "card-face",
+      "description": "Signature 63:88 card: identity frame from MANA, 311:226 art window, rarity gem from RARITY, mythic foil sheen; lifts on hover.",
+      "html": "<button class=\"ds-card\" aria-label=\"Darth Vader, Mythic Rare\"><span class=\"ds-card-face\"><span class=\"ds-card-bar\"><span class=\"ds-card-name\">Darth Vader</span><span class=\"ds-pips\"><span class=\"ds-pip ds-pip-gen\">3</span><span class=\"ds-pip ds-pip-b\">B</span></span></span><span class=\"ds-card-art\"><span class=\"ds-card-sheen\"></span></span><span class=\"ds-card-type\"><span>Character — Sith Lord</span><span class=\"ds-gem\">M</span></span><span class=\"ds-card-text\">When Darth Vader enters play, each opponent discards a card.</span><span class=\"ds-card-foot\"><span>Illus. R. Concept</span><span class=\"ds-pt\">5/5</span></span></span></button>",
+      "css": ".ds-card { display: block; width: 200px; aspect-ratio: 63 / 88; padding: 0; border: 0; border-radius: 0.8rem; background: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgb(67 20 7 / 0.5), 0 4px 6px -4px rgb(67 20 7 / 0.5); transition: translate 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1); font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif; text-align: left; } .ds-card:hover { translate: 0 -4px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.6); } .ds-card:focus-visible { outline: 2px solid var(--color-accent, oklch(78.9% 0.154 211.53)); outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-card:hover { translate: none; } } .ds-card-face { position: relative; display: flex; flex-direction: column; gap: 4px; width: 100%; height: 100%; padding: 6px; overflow: hidden; border-radius: 0.8rem; border: 2px solid oklch(43.9% 0 none); background: linear-gradient(to bottom, oklch(20.5% 0 none), oklch(14.7% 0.004 49.25), #000); box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-rarity-m, oklch(75% 0.183 55.934)) 70%, transparent); font-stretch: 87.5%; } .ds-card-bar { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 4px 8px; border-radius: 6px; border: 1px solid oklch(43.9% 0 none); background: color-mix(in oklch, oklch(20.5% 0 none) 90%, transparent); } .ds-card-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8125rem; line-height: 1.2; font-weight: 700; color: #fff; } .ds-pips { display: inline-flex; gap: 2px; } .ds-pip { display: grid; place-items: center; width: 16px; height: 16px; border-radius: 9999px; font-size: 0.6875rem; font-weight: 700; line-height: 1; box-shadow: 0 1px 1px rgb(0 0 0 / 0.5); font-stretch: 100%; } .ds-pip-gen { background: oklch(86.9% 0.022 252.894); color: oklch(20.8% 0.042 265.755); } .ds-pip-b { background: var(--color-mana-b, oklch(43.9% 0 none)); color: #fff; } .ds-card-art { position: relative; display: block; width: 100%; aspect-ratio: 311 / 226; overflow: hidden; border-radius: 6px; border: 1px solid rgb(0 0 0 / 0.6); background: radial-gradient(ellipse at 30% 30%, oklch(58.6% 0.253 17.585), oklch(25.7% 0.09 281.288) 55%, #000); } .ds-card-sheen { position: absolute; inset: 0; background-image: linear-gradient(115deg, transparent 28%, rgb(255 215 0 / 0.32) 42%, rgb(0 240 255 / 0.38) 50%, rgb(255 80 200 / 0.32) 58%, transparent 72%); background-size: 260% 100%; background-position: 100% 0%; mix-blend-mode: color-dodge; transition: background-position 1.1s cubic-bezier(0.16, 1, 0.3, 1); } .ds-card:hover .ds-card-sheen { background-position: 0% 0%; } @media (prefers-reduced-motion: reduce) { .ds-card-sheen { transition: none; } } .ds-card-type { display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 2px 8px; border-radius: 6px; border: 1px solid rgb(0 0 0 / 0.4); background: rgb(0 0 0 / 0.45); font-size: 0.6875rem; line-height: 1.4; font-weight: 500; color: var(--color-fg-soft, oklch(86.9% 0.022 252.894)); } .ds-gem { padding: 0 4px; border-radius: 4px; border: 1px solid color-mix(in oklch, var(--color-rarity-m, oklch(75% 0.183 55.934)) 60%, transparent); background: color-mix(in oklch, var(--color-rarity-m, oklch(75% 0.183 55.934)) 15%, transparent); color: var(--color-rarity-m, oklch(75% 0.183 55.934)); font-weight: 700; font-stretch: 100%; } .ds-card-text { flex: 1; min-height: 0; overflow: hidden; padding: 6px 8px; border-radius: 6px; border: 1px solid rgb(0 0 0 / 0.4); background: rgb(0 0 0 / 0.55); font-size: 0.6875rem; line-height: 1.4; letter-spacing: 0.01em; font-weight: 450; color: var(--color-fg, oklch(96.8% 0.007 247.896)); } .ds-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 2px; font-size: 0.6875rem; color: var(--color-fg-muted, oklch(70.4% 0.04 256.788)); } .ds-pt { padding: 0 6px; border-radius: 6px; border: 1px solid color-mix(in oklch, var(--color-foil, oklch(82.8% 0.189 84.429)) 40%, transparent); background: rgb(0 0 0 / 0.8); font-size: 0.75rem; font-weight: 700; color: oklch(92.4% 0.12 95.746); font-stretch: 100%; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Collector's Light Table",
+    "overview": "CardForge is a dark, quiet workbench. The card art is the most saturated thing on screen. Everything else (header, panels, tables, controls) sits on a cool slate-navy ramp and recedes, the way a light table disappears under the cards laid on it. Chrome is flat and separated by tonal steps and hairline borders. Cards are the objects on the table, and they are the only things that cast shadows.\n\nTwo accents, two jobs. Hologram Cyan marks tools and data: the primary action, selected states, focus, caret, selection, and the distribution bars. Foil Gold is held back for the one authored moment, the pack-opening ceremony, where you tear the wrapper, flip the cards one by one, and a mythic gets a light sweep and confetti. The rest of the product is Operate mode: dense, legible, keyboard-friendly, with 44px touch targets on coarse pointers.\n\nControls are precise and quiet: small radii, hairline borders, one bright filled action. Nothing in the chrome competes with the art.",
+    "keyCharacteristics": [
+      "Dark only (`color-scheme: dark`), deepest surface is a near-black blue-void.",
+      "Tonal layers for chrome, real shadows only for cards, the pack wrapper, dialogs and toasts.",
+      "One typeface, Archivo variable. Card faces use its semi-condensed width (87.5%).",
+      "Tabular numerals everywhere by default. Large stat values switch to proportional.",
+      "Identity color (mana, rarity) lives in swatches, pips, frames and badges, all drawn from two lookup maps.",
+      "Motion uses one curve, expo-out, and every movement has a reduced-motion alternative."
+    ],
+    "rules": [
+      {
+        "name": "The Light Table Rule",
+        "body": "The card art is the most saturated thing on screen. Chrome draws only from the slate ramp, Hologram Cyan and status colors; any new chrome color has to lose to the art.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Bright Action Rule",
+        "body": "A view carries one filled Hologram Cyan button, its primary action. Everything else is secondary (Raised), ghost, or a soft cyan selection state. Selection is shown with Cyan Depth fills and Cyan Edge borders, never a second solid cyan fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Foil Is Ceremony Rule",
+        "body": "In the app chrome, Foil Gold appears only in pack opening: the Open pack button, the wrapper, the card back. Never use it for a generic highlight, badge or warning; warnings use `warning`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Swatch Speaks Rule",
+        "body": "Text never wears mana colors. A color's identity comes from the swatch, pip or frame beside the text, which stays in the neutral text ramp. Rarity colors may tint short labels and counts, and only through the RARITY map.",
+        "section": "colors"
+      },
+      {
+        "name": "The Single Source Rule",
+        "body": "Rarity and mana presentation comes only from the `RARITY` and `MANA` maps in `src/utils/cardHelpers.ts` (label, text, badge; swatch, frame, bar). Don't compose identity styling inline from raw palette steps; add a field to the map.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Default Rule",
+        "body": "`body` sets `font-variant-numeric: tabular-nums`, so counters, pack numbers and table columns don't shift when values change. Only the large Stat values opt out to proportional numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The 11px Floor Rule",
+        "body": "No text below 11px (0.6875rem). 11px is reserved for card faces and pack/card objects (`card-small`, `label`). App chrome starts at 12px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two Widths Rule",
+        "body": "Semi-condensed width (`font-stretch: semi-condensed`, 87.5%) belongs to card and pack faces. Chrome uses normal width.",
+        "section": "typography"
+      },
+      {
+        "name": "The Cards Lift Rule",
+        "body": "If it isn't a card, the pack wrapper, a dialog or a toast, it has no shadow. Separate chrome with a surface step or a hairline instead.",
+        "section": "elevation"
+      },
+      {
+        "name": "The 63:88 Rule",
+        "body": "A card face always renders at 63:88, at every size and in every context (grid, ceremony, inspect). Responsive behavior changes what's inside the card, never its proportion.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Reduced-Motion Twin Rule",
+        "body": "Every movement ships with a reduced-motion alternative. Flips become crossfades, rises become fades, the tear becomes instant, and the sweep and confetti are dropped. Motion is never the only signal: foil still reads from the rarity ring and the Foil tag.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do take every color from the semantic roles in `src/index.css` `@theme` (`bg-panel`, `text-fg-muted`, `bg-accent`), never raw palette steps in chrome.",
+      "Do give each view one filled Hologram Cyan button for its primary action. Use Raised secondary or ghost buttons for everything else.",
+      "Do separate chrome with surface steps (Void → Well → Panel → Raised) and 1px hairlines.",
+      "Do put identity in a swatch, pip, frame or badge from the `MANA` and `RARITY` maps, next to neutral text.",
+      "Do keep card faces at 63:88 and art windows at 311:226, and set card text in Archivo's semi-condensed width.",
+      "Do use `ease-out-expo` (cubic-bezier(0.16, 1, 0.3, 1)) and keep the durations: 150ms for color, 200ms for overlays and card hover, 300ms for reveals, 650ms for the flip.",
+      "Do ship a reduced-motion twin for every movement: a crossfade, an instant state change, or nothing (`motion-safe:` / `motion-reduce:`).",
+      "Do give every control a 44px minimum target on coarse pointers."
+    ],
+    "donts": [
+      "Don't put a shadow on chrome (panels, tiles, nav, buttons). Only cards, the pack wrapper, dialogs and toasts lift.",
+      "Don't use Foil Gold outside pack opening.",
+      "Don't color text with mana colors, or style rarity and mana inline outside the maps.",
+      "Don't add a second filled cyan button to a view, or use solid cyan for selection.",
+      "Don't set text below 11px, or use 11px outside card and pack faces.",
+      "Don't let anything in the chrome out-saturate the card art."
+    ]
+  }
+}
