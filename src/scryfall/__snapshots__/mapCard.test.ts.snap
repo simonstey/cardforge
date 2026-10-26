@@ -1,0 +1,741 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`adventure: the adventure is the back, the image comes from the root 1`] = `
+{
+  "artist": "Victor Adame Minguez",
+  "backFace": {
+    "cost": "{1}{R}",
+    "name": "Stomp",
+    "text": "Damage can't be prevented this turn. Stomp deals 2 damage to any target.",
+    "type": "Instant — Adventure",
+  },
+  "collectorNumber": "115",
+  "colors": [
+    "R",
+  ],
+  "cost": "{2}{R}",
+  "flavorText": "Not every tale ends in glory.",
+  "id": "scry:09fd2d9c-1793-4beb-a3fb-7a869f660cd4",
+  "name": "Bonecrusher Giant",
+  "powerToughness": "4/3",
+  "rarity": "R",
+  "scryfall": {
+    "id": "09fd2d9c-1793-4beb-a3fb-7a869f660cd4",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+      "full": "https://cards.scryfall.io/display/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "adventure",
+    "oracleId": "d6d72f5f-8f5d-4180-b514-f22ff5482902",
+    "uri": "https://scryfall.com/card/eld/115/bonecrusher-giant-stomp?utm_source=api",
+  },
+  "setCode": "ELD",
+  "setName": "Throne of Eldraine",
+  "source": "scryfall:eld",
+  "text": "Whenever this creature becomes the target of a spell, this creature deals 2 damage to that spell's controller.",
+  "type": "Creature — Giant",
+}
+`;
+
+exports[`art-series: not representable 1`] = `null`;
+
+exports[`basic: basic lands are rarity L and colourless 1`] = `
+{
+  "artist": "Piotr Dura",
+  "collectorNumber": "291",
+  "colors": [
+    "Colorless",
+  ],
+  "id": "scry:aea5c36b-c107-4daf-bedb-507b4cd64724",
+  "name": "Forest",
+  "rarity": "L",
+  "scryfall": {
+    "id": "aea5c36b-c107-4daf-bedb-507b4cd64724",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/a/e/aea5c36b-c107-4daf-bedb-507b4cd64724.webp?1783923809",
+      "full": "https://cards.scryfall.io/display/front/a/e/aea5c36b-c107-4daf-bedb-507b4cd64724.webp?1783923809",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "b34bb2dc-c1af-4d77-b0b3-a0fb342a5fc6",
+    "uri": "https://scryfall.com/card/neo/291/forest?utm_source=api",
+  },
+  "setCode": "NEO",
+  "setName": "Kamigawa: Neon Dynasty",
+  "source": "scryfall:neo",
+  "text": "({T}: Add {G}.)",
+  "type": "Basic Land — Forest",
+}
+`;
+
+exports[`battle: defense goes into powerToughness 1`] = `
+{
+  "artist": "Diego Gisbert",
+  "backFace": {
+    "flavorText": "Nahiri tried to bend Zendikar to Phyrexia's will. In response, the world rose against her.",
+    "name": "Awakened Skyclave",
+    "powerToughness": "4/4",
+    "text": "Vigilance, haste
+As long as this creature is on the battlefield, it's a land in addition to its other types.
+{T}: Add one mana of any color.",
+    "type": "Creature — Elemental",
+  },
+  "collectorNumber": "194",
+  "colors": [
+    "G",
+  ],
+  "cost": "{3}{G}",
+  "id": "scry:8fed056f-a8f5-41ec-a7d2-a80a238872d1",
+  "name": "Invasion of Zendikar",
+  "powerToughness": "3",
+  "rarity": "U",
+  "scryfall": {
+    "id": "8fed056f-a8f5-41ec-a7d2-a80a238872d1",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+      "artBack": "https://cards.scryfall.io/art/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+      "full": "https://cards.scryfall.io/display/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+      "fullBack": "https://cards.scryfall.io/display/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "transform",
+    "oracleId": "4b1874af-4ea5-4e22-a4d4-e718d75fe95e",
+    "uri": "https://scryfall.com/card/mom/194/invasion-of-zendikar-awakened-skyclave?utm_source=api",
+  },
+  "setCode": "MOM",
+  "setName": "March of the Machine",
+  "source": "scryfall:mom",
+  "text": "(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.",
+  "type": "Battle — Siege",
+}
+`;
+
+exports[`class: maps as a single-face card 1`] = `
+{
+  "artist": "Marta Nael",
+  "collectorNumber": "81",
+  "colors": [
+    "U",
+  ],
+  "cost": "{U}",
+  "id": "scry:d1f629fb-b097-4240-8560-ef47f5678f48",
+  "name": "Wizard Class",
+  "rarity": "U",
+  "scryfall": {
+    "id": "d1f629fb-b097-4240-8560-ef47f5678f48",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+      "full": "https://cards.scryfall.io/display/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "class",
+    "oracleId": "36f68aa3-9955-46f1-bc87-497f16ef5222",
+    "uri": "https://scryfall.com/card/afr/81/wizard-class?utm_source=api",
+  },
+  "setCode": "AFR",
+  "setName": "Adventures in the Forgotten Realms",
+  "source": "scryfall:afr",
+  "text": "(Gain the next level as a sorcery to add its ability.)
+You have no maximum hand size.
+{2}{U}: Level 2
+When this Class becomes level 2, draw two cards.
+{4}{U}: Level 3
+Whenever you draw a card, put a +1/+1 counter on target creature you control.",
+  "type": "Enchantment — Class",
+}
+`;
+
+exports[`colorless: maps as a single-face card 1`] = `
+{
+  "artist": "Svetlin Velinov",
+  "collectorNumber": "9",
+  "colors": [
+    "Colorless",
+  ],
+  "cost": "{3}{C}",
+  "id": "scry:bffc360e-db41-48f3-9365-680d55046e04",
+  "name": "Thought-Knot Seer",
+  "powerToughness": "4/4",
+  "rarity": "R",
+  "scryfall": {
+    "id": "bffc360e-db41-48f3-9365-680d55046e04",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+      "full": "https://cards.scryfall.io/display/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "cef7396d-2168-4282-bf38-670ca9eebd91",
+    "uri": "https://scryfall.com/card/ogw/9/thought-knot-seer?utm_source=api",
+  },
+  "setCode": "OGW",
+  "setName": "Oath of the Gatewatch",
+  "source": "scryfall:ogw",
+  "text": "({C} represents colorless mana.)
+When this creature enters, target opponent reveals their hand. You choose a nonland card from it and exile that card.
+When this creature leaves the battlefield, target opponent draws a card.",
+  "type": "Creature — Eldrazi",
+}
+`;
+
+exports[`dfc-token: rarity T in the parent set 1`] = `
+{
+  "artist": "Johann Bodin",
+  "backFace": {
+    "name": "Phyrexian",
+    "powerToughness": "0/0",
+    "type": "Token Artifact Creature — Phyrexian",
+  },
+  "collectorNumber": "13",
+  "colors": [
+    "Colorless",
+  ],
+  "id": "scry:7b7f2e3a-ec43-4408-affd-a09338566ce3",
+  "name": "Incubator",
+  "rarity": "T",
+  "scryfall": {
+    "id": "7b7f2e3a-ec43-4408-affd-a09338566ce3",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+      "artBack": "https://cards.scryfall.io/art/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+      "full": "https://cards.scryfall.io/display/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+      "fullBack": "https://cards.scryfall.io/display/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "double_faced_token",
+    "oracleId": "dd3bf75e-9ef0-4ded-9b65-1a60a78a6253",
+    "uri": "https://scryfall.com/card/tfrc/13/incubator-phyrexian?utm_source=api",
+  },
+  "setCode": "NEO",
+  "setName": "Kamigawa: Neon Dynasty",
+  "source": "scryfall:tfrc",
+  "text": "{2}: Transform this artifact.",
+  "type": "Token Artifact — Incubator",
+}
+`;
+
+exports[`emblem: rarity T in the parent set 1`] = `
+{
+  "artist": "Kieran Yanner",
+  "collectorNumber": "18",
+  "colors": [
+    "Colorless",
+  ],
+  "id": "scry:5fdc53ba-e023-4ee4-bb14-fd8c52955ee9",
+  "name": "Chandra, Torch of Defiance Emblem",
+  "rarity": "T",
+  "scryfall": {
+    "id": "5fdc53ba-e023-4ee4-bb14-fd8c52955ee9",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+      "full": "https://cards.scryfall.io/display/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "emblem",
+    "oracleId": "1c944fa3-ff6c-4638-a8cd-77d3ca68e599",
+    "uri": "https://scryfall.com/card/tfra/18/chandra-torch-of-defiance-emblem?utm_source=api",
+  },
+  "setCode": "NEO",
+  "setName": "Kamigawa: Neon Dynasty",
+  "source": "scryfall:tfra",
+  "text": "Whenever you cast a spell, this emblem deals 5 damage to any target.",
+  "type": "Emblem — Chandra",
+}
+`;
+
+exports[`flip: the flipped half is the back, the image comes from the root 1`] = `
+{
+  "artist": "Matt Cavotta",
+  "backFace": {
+    "name": "Tok-Tok, Volcano Born",
+    "powerToughness": "2/2",
+    "text": "Protection from red
+If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.",
+    "type": "Legendary Creature — Goblin Shaman",
+  },
+  "collectorNumber": "153",
+  "colors": [
+    "R",
+  ],
+  "cost": "{3}{R}",
+  "id": "scry:6ee6cd34-c117-4d7e-97d1-8f8464bfaac8",
+  "name": "Akki Lavarunner",
+  "powerToughness": "1/1",
+  "rarity": "R",
+  "scryfall": {
+    "id": "6ee6cd34-c117-4d7e-97d1-8f8464bfaac8",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+      "full": "https://cards.scryfall.io/display/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "flip",
+    "oracleId": "47795817-73e5-4af6-bd1e-d69b193e8e9e",
+    "uri": "https://scryfall.com/card/chk/153/akki-lavarunner-tok-tok-volcano-born?utm_source=api",
+  },
+  "setCode": "CHK",
+  "setName": "Champions of Kamigawa",
+  "source": "scryfall:chk",
+  "text": "Haste
+Whenever this creature deals damage to an opponent, flip it.",
+  "type": "Creature — Goblin Warrior",
+}
+`;
+
+exports[`hybrid-phyrexian: maps as a single-face card 1`] = `
+{
+  "artist": "Chris Rahn",
+  "collectorNumber": "238",
+  "colors": [
+    "Multicolor",
+    "U",
+    "G",
+  ],
+  "cost": "{2}{G}{G/U/P}{U}",
+  "id": "scry:222a736e-d819-452d-aeda-eb848c4b2302",
+  "name": "Tamiyo, Compleated Sage",
+  "powerToughness": "5",
+  "rarity": "M",
+  "scryfall": {
+    "id": "222a736e-d819-452d-aeda-eb848c4b2302",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+      "full": "https://cards.scryfall.io/display/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "021b4745-4a15-462c-a6b0-2dee1dc9d196",
+    "uri": "https://scryfall.com/card/neo/238/tamiyo-compleated-sage?utm_source=api",
+  },
+  "setCode": "NEO",
+  "setName": "Kamigawa: Neon Dynasty",
+  "source": "scryfall:neo",
+  "text": "Compleated ({G/U/P} can be paid with {G}, {U}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)
++1: Tap up to one target artifact or creature. It doesn't untap during its controller's next untap step.
+−X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.
+−7: Create Tamiyo's Notebook, a legendary colorless Book artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."",
+  "type": "Legendary Planeswalker — Tamiyo",
+}
+`;
+
+exports[`mdfc: the back cost is the second face mana_cost 1`] = `
+{
+  "artist": "Campbell White",
+  "backFace": {
+    "flavorText": ""I can hear the echo of their hammers, long stilled."
+—Tars Olan, stoneforge mystic",
+    "name": "Valakut Stoneforge",
+    "text": "This land enters tapped.
+{T}: Add {R}.",
+    "type": "Land",
+  },
+  "collectorNumber": "174",
+  "colors": [
+    "R",
+  ],
+  "cost": "{2}{R}",
+  "flavorText": ""My ancestors reshaped the world to their vision. I have a few ideas of my own."
+—Tars Olan, stoneforge mystic",
+  "id": "scry:228e551e-023a-4c9a-8f32-58dae6ffdf7f",
+  "name": "Valakut Awakening",
+  "rarity": "R",
+  "scryfall": {
+    "id": "228e551e-023a-4c9a-8f32-58dae6ffdf7f",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+      "artBack": "https://cards.scryfall.io/art/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+      "full": "https://cards.scryfall.io/display/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+      "fullBack": "https://cards.scryfall.io/display/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "modal_dfc",
+    "oracleId": "ff0ab867-b710-4b1a-baed-95fc3cf68f79",
+    "uri": "https://scryfall.com/card/znr/174/valakut-awakening-valakut-stoneforge?utm_source=api",
+  },
+  "setCode": "ZNR",
+  "setName": "Zendikar Rising",
+  "source": "scryfall:znr",
+  "text": "Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.",
+  "type": "Instant",
+}
+`;
+
+exports[`meld: maps as a single-face card 1`] = `
+{
+  "artist": "Clint Cearley",
+  "collectorNumber": "15",
+  "colors": [
+    "W",
+  ],
+  "cost": "{5}{W}{W}",
+  "flavorText": "She now sees only Emrakul's visions.",
+  "id": "scry:27907985-b5f6-4098-ab43-15a0c2bf94d5",
+  "name": "Bruna, the Fading Light",
+  "powerToughness": "5/7",
+  "rarity": "R",
+  "scryfall": {
+    "id": "27907985-b5f6-4098-ab43-15a0c2bf94d5",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+      "full": "https://cards.scryfall.io/display/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "meld",
+    "oracleId": "bce7e45d-b2c5-43aa-91a6-3a3c24f30850",
+    "uri": "https://scryfall.com/card/emn/15/bruna-the-fading-light?utm_source=api",
+  },
+  "setCode": "EMN",
+  "setName": "Eldritch Moon",
+  "source": "scryfall:emn",
+  "text": "When you cast this spell, you may return target Angel or Human creature card from your graveyard to the battlefield.
+Flying, vigilance
+(Melds with Gisela, the Broken Blade.)",
+  "type": "Legendary Creature — Angel Horror",
+}
+`;
+
+exports[`mono-hybrid: maps as a single-face card 1`] = `
+{
+  "artist": "Jeremy Enecio",
+  "collectorNumber": "23",
+  "colors": [
+    "W",
+  ],
+  "cost": "{2/W}{2/W}{2/W}",
+  "flavorText": ""The dead have it easy. They suffer no more. If breaking their rest helps the living, so be it."
+—Olka, mistmeadow witch",
+  "id": "scry:5e26bd0c-5ec7-4653-8e63-747157c20af1",
+  "name": "Spectral Procession",
+  "rarity": "U",
+  "scryfall": {
+    "id": "5e26bd0c-5ec7-4653-8e63-747157c20af1",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+      "full": "https://cards.scryfall.io/display/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "376271a6-80f0-47a6-990a-5ec5517aae42",
+    "uri": "https://scryfall.com/card/shm/23/spectral-procession?utm_source=api",
+  },
+  "setCode": "SHM",
+  "setName": "Shadowmoor",
+  "source": "scryfall:shm",
+  "text": "Create three 1/1 white Spirit creature tokens with flying.",
+  "type": "Sorcery",
+}
+`;
+
+exports[`normal: Lightning Bolt 1`] = `
+{
+  "artist": "Christopher Moeller",
+  "collectorNumber": "146",
+  "colors": [
+    "R",
+  ],
+  "cost": "{R}",
+  "flavorText": "The sparkmage shrieked, calling on the rage of the storms of his youth. To his surprise, the sky responded with a fierce energy he'd never thought to see again.",
+  "id": "scry:435589bb-27c6-4a6d-9d63-394d5092b9d8",
+  "name": "Lightning Bolt",
+  "rarity": "C",
+  "scryfall": {
+    "id": "435589bb-27c6-4a6d-9d63-394d5092b9d8",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+      "full": "https://cards.scryfall.io/display/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "4457ed35-7c10-48c8-9776-456485fdf070",
+    "uri": "https://scryfall.com/card/m10/146/lightning-bolt?utm_source=api",
+  },
+  "setCode": "M10",
+  "setName": "Magic 2010",
+  "source": "scryfall:m10",
+  "text": "Lightning Bolt deals 3 damage to any target.",
+  "type": "Instant",
+}
+`;
+
+exports[`planeswalker: loyalty goes into powerToughness 1`] = `
+{
+  "artist": "Steve Argyle",
+  "collectorNumber": "105",
+  "colors": [
+    "B",
+  ],
+  "cost": "{1}{B}{B}",
+  "id": "scry:ac506c17-adc8-49c6-9d8d-43db7cb1ec9d",
+  "name": "Liliana of the Veil",
+  "powerToughness": "3",
+  "rarity": "M",
+  "scryfall": {
+    "id": "ac506c17-adc8-49c6-9d8d-43db7cb1ec9d",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/a/c/ac506c17-adc8-49c6-9d8d-43db7cb1ec9d.webp?1783940954",
+      "full": "https://cards.scryfall.io/display/front/a/c/ac506c17-adc8-49c6-9d8d-43db7cb1ec9d.webp?1783940954",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "0ba134d8-ee7d-48ec-8dc6-57942b8e9261",
+    "uri": "https://scryfall.com/card/isd/105/liliana-of-the-veil?utm_source=api",
+  },
+  "setCode": "ISD",
+  "setName": "Innistrad",
+  "source": "scryfall:isd",
+  "text": "+1: Each player discards a card.
+−2: Target player sacrifices a creature.
+−6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice.",
+  "type": "Legendary Planeswalker — Liliana",
+}
+`;
+
+exports[`reversible: both sides, oracle id from face 0 1`] = `
+{
+  "artist": "Mike Burns",
+  "backFace": {
+    "cost": "{2}{G}{U}",
+    "name": "Adrix and Nev, Twincasters",
+    "powerToughness": "2/2",
+    "text": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+If one or more tokens would be created under your control, twice that many of those tokens are created instead.",
+    "type": "Legendary Creature — Merfolk Wizard",
+  },
+  "collectorNumber": "1544",
+  "colors": [
+    "Multicolor",
+    "U",
+    "G",
+  ],
+  "cost": "{2}{G}{U}",
+  "id": "scry:6adadbc9-4a08-4c1d-adf7-edee73799d9e",
+  "name": "Adrix and Nev, Twincasters",
+  "powerToughness": "2/2",
+  "rarity": "M",
+  "scryfall": {
+    "id": "6adadbc9-4a08-4c1d-adf7-edee73799d9e",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/6/a/6adadbc9-4a08-4c1d-adf7-edee73799d9e.webp?1783913089",
+      "artBack": "https://cards.scryfall.io/art/back/6/a/6adadbc9-4a08-4c1d-adf7-edee73799d9e.webp?1783913089",
+      "full": "https://cards.scryfall.io/display/front/6/a/6adadbc9-4a08-4c1d-adf7-edee73799d9e.webp?1783913089",
+      "fullBack": "https://cards.scryfall.io/display/back/6/a/6adadbc9-4a08-4c1d-adf7-edee73799d9e.webp?1783913089",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "reversible_card",
+    "oracleId": "12a6cad9-eb42-43bd-9e68-aaf862cd83db",
+    "uri": "https://scryfall.com/card/sld/1544/adrix-and-nev-twincasters-adrix-and-nev-twincasters?utm_source=api",
+  },
+  "setCode": "SLD",
+  "setName": "Secret Lair Drop",
+  "source": "scryfall:sld",
+  "text": "Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+If one or more tokens would be created under your control, twice that many of those tokens are created instead.",
+  "type": "Legendary Creature — Merfolk Wizard",
+}
+`;
+
+exports[`saga: maps as a single-face card 1`] = `
+{
+  "artist": "Ravenna Tran",
+  "collectorNumber": "90",
+  "colors": [
+    "B",
+  ],
+  "cost": "{4}{B}",
+  "id": "scry:c8318f40-ecd5-429e-8fe2-febf31f64841",
+  "name": "The Eldest Reborn",
+  "rarity": "U",
+  "scryfall": {
+    "id": "c8318f40-ecd5-429e-8fe2-febf31f64841",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+      "full": "https://cards.scryfall.io/display/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "saga",
+    "oracleId": "44ed4c0c-a012-4895-a547-b04150553bba",
+    "uri": "https://scryfall.com/card/dom/90/the-eldest-reborn?utm_source=api",
+  },
+  "setCode": "DOM",
+  "setName": "Dominaria",
+  "source": "scryfall:dom",
+  "text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
+I — Each opponent sacrifices a creature or planeswalker of their choice.
+II — Each opponent discards a card.
+III — Put target creature or planeswalker card from a graveyard onto the battlefield under your control.",
+  "type": "Enchantment — Saga",
+}
+`;
+
+exports[`snow-basic: basic lands are rarity L and colourless 1`] = `
+{
+  "artist": "Adam Paquette",
+  "collectorNumber": "284",
+  "colors": [
+    "Colorless",
+  ],
+  "id": "scry:ca17acea-f079-4e53-8176-a2f5c5c408a1",
+  "name": "Snow-Covered Forest",
+  "rarity": "L",
+  "scryfall": {
+    "id": "ca17acea-f079-4e53-8176-a2f5c5c408a1",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+      "full": "https://cards.scryfall.io/display/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "5f0d3be8-e63e-4ade-ae58-6b0c14f2ce6d",
+    "uri": "https://scryfall.com/card/khm/284/snow-covered-forest?utm_source=api",
+  },
+  "setCode": "KHM",
+  "setName": "Kaldheim",
+  "source": "scryfall:khm",
+  "text": "({T}: Add {G}.)",
+  "type": "Basic Snow Land — Forest",
+}
+`;
+
+exports[`snow-cost: maps as a single-face card 1`] = `
+{
+  "artist": "Paul Scott Canavan",
+  "collectorNumber": "224",
+  "colors": [
+    "Colorless",
+  ],
+  "cost": "{S}",
+  "flavorText": "In colder climates, ice is more obedient than stone.",
+  "id": "scry:b2671c36-96fa-49e3-90dc-52820b2c8a62",
+  "name": "Icehide Golem",
+  "powerToughness": "2/2",
+  "rarity": "U",
+  "scryfall": {
+    "id": "b2671c36-96fa-49e3-90dc-52820b2c8a62",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+      "full": "https://cards.scryfall.io/display/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "normal",
+    "oracleId": "29b925e9-1e98-471c-9b23-e0372ac86485",
+    "uri": "https://scryfall.com/card/mh1/224/icehide-golem?utm_source=api",
+  },
+  "setCode": "MH1",
+  "setName": "Modern Horizons",
+  "source": "scryfall:mh1",
+  "text": "({S} can be paid with one mana from a snow source.)",
+  "type": "Snow Artifact Creature — Golem",
+}
+`;
+
+exports[`split: the left half is the front, the right half the back 1`] = `
+{
+  "artist": "Dan Murayama Scott",
+  "backFace": {
+    "cost": "{1}{U}",
+    "name": "Ice",
+    "text": "Tap target permanent.
+Draw a card.",
+    "type": "Instant",
+  },
+  "collectorNumber": "290",
+  "colors": [
+    "Multicolor",
+    "U",
+    "R",
+  ],
+  "cost": "{1}{R}",
+  "id": "scry:0e09b054-4d33-4a12-bf2a-9b0009f33044",
+  "name": "Fire",
+  "rarity": "R",
+  "scryfall": {
+    "id": "0e09b054-4d33-4a12-bf2a-9b0009f33044",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+      "full": "https://cards.scryfall.io/display/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "split",
+    "oracleId": "ae92942b-919c-4ea9-b693-85fcef765d5a",
+    "uri": "https://scryfall.com/card/mh2/290/fire-ice?utm_source=api",
+  },
+  "setCode": "MH2",
+  "setName": "Modern Horizons 2",
+  "source": "scryfall:mh2",
+  "text": "Fire deals 2 damage divided as you choose among one or two targets.",
+  "type": "Instant",
+}
+`;
+
+exports[`token: rarity T in the parent set 1`] = `
+{
+  "artist": "Mila Pesic",
+  "collectorNumber": "1",
+  "colors": [
+    "Colorless",
+  ],
+  "id": "scry:be84f259-2809-48c9-9c70-861437f08c23",
+  "name": "Pilot",
+  "powerToughness": "1/1",
+  "rarity": "T",
+  "scryfall": {
+    "id": "be84f259-2809-48c9-9c70-861437f08c23",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/b/e/be84f259-2809-48c9-9c70-861437f08c23.webp?1783923717",
+      "full": "https://cards.scryfall.io/display/front/b/e/be84f259-2809-48c9-9c70-861437f08c23.webp?1783923717",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "token",
+    "oracleId": "425c9e23-3227-44a5-8e10-0cf4d0967799",
+    "uri": "https://scryfall.com/card/tneo/1/pilot?utm_source=api",
+  },
+  "setCode": "NEO",
+  "setName": "Kamigawa: Neon Dynasty",
+  "source": "scryfall:tneo",
+  "text": "This creature crews Vehicles as though its power were 2 greater.",
+  "type": "Token Creature — Pilot",
+}
+`;
+
+exports[`transform: front and back faces with their own images 1`] = `
+{
+  "artist": "Nils Hamm",
+  "backFace": {
+    "flavorText": ""Unfortunately, all my test animals have died or escaped, so I shall be the final subject. I feel no fear. This is a momentous night."
+—Laboratory notes, final entry",
+    "name": "Insectile Aberration",
+    "powerToughness": "3/2",
+    "text": "Flying",
+    "type": "Creature — Human Insect",
+  },
+  "collectorNumber": "51",
+  "colors": [
+    "U",
+  ],
+  "cost": "{U}",
+  "id": "scry:11bf83bb-c95b-4b4f-9a56-ce7a1816307a",
+  "name": "Delver of Secrets",
+  "powerToughness": "1/1",
+  "rarity": "C",
+  "scryfall": {
+    "id": "11bf83bb-c95b-4b4f-9a56-ce7a1816307a",
+    "image": {
+      "art": "https://cards.scryfall.io/art/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+      "artBack": "https://cards.scryfall.io/art/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+      "full": "https://cards.scryfall.io/display/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+      "fullBack": "https://cards.scryfall.io/display/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+    },
+    "importedAt": "2026-10-26T00:00:00.000Z",
+    "layout": "transform",
+    "oracleId": "edd531b9-f615-4399-8c8c-1c5e18c4acbf",
+    "uri": "https://scryfall.com/card/isd/51/delver-of-secrets-insectile-aberration?utm_source=api",
+  },
+  "setCode": "ISD",
+  "setName": "Innistrad",
+  "source": "scryfall:isd",
+  "text": "At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform this creature.",
+  "type": "Creature — Human Wizard",
+}
+`;
