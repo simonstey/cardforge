@@ -1,7 +1,7 @@
 import React, { useId, useMemo } from 'react';
 import { BoosterSlotConfig, Card } from '../types/card';
 import { listCardSets } from '../utils/boosterCollation';
-import { SET_NAMES } from '../utils/cardHelpers';
+import { setDisplayName } from '../utils/cardHelpers';
 import { playClickSound } from '../utils/audioFeedback';
 import { Button, ToggleChip } from './ui/Button';
 import { Stepper } from './ui/Stepper';
@@ -283,7 +283,7 @@ export const BoosterConfigurator: React.FC<BoosterConfiguratorProps> = ({
                     className="size-4 shrink-0 cursor-pointer disabled:cursor-not-allowed"
                   />
                   <span>
-                    {SET_NAMES[set.code] ?? set.code} <span className="text-fg-muted">({set.count})</span>
+                    {setDisplayName(set.code, cards)} <span className="text-fg-muted">({set.count})</span>
                   </span>
                 </label>
               );

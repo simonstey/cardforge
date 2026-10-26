@@ -109,6 +109,11 @@ export const SET_NAMES: Record<string, string> = {
   RBL: 'Rebels',
 };
 
+/** Display name for a set code: the static name, else the `setName` of a card in that set, else the code. */
+export function setDisplayName(code: string, cards: Card[] = []): string {
+  return SET_NAMES[code] ?? cards.find(c => c.setCode === code && c.setName)?.setName ?? code;
+}
+
 export const MANA_ORDER: CardColor[] = ['W', 'U', 'B', 'R', 'G', 'Multicolor', 'Colorless'];
 
 const BASIC_LAND_IDENTITY: Record<string, CardColor> = {

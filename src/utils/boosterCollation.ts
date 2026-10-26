@@ -83,11 +83,12 @@ const emptyPresence = (): Record<StandardColor, number> => ({ W: 0, U: 0, B: 0, 
 // ---------------------------------------------------------------------------
 
 /**
- * Set code for a card, derived from its `source`:
+ * Set code for a card: its `setCode` (imported cards), else derived from its `source`:
  * 'swtg-base-*' → 'Main', 'swtg-expansion-NN-XYZ.pdf' → 'XYZ' (TFA, RO, ...), otherwise the source
  * text itself (e.g. 'Custom Import'), or 'Custom' when there is none.
  */
 export function getCardSetCode(card: Card): string {
+  if (card.setCode) return card.setCode;
   const source = (card.source ?? '').trim();
   if (/swtg-base-/i.test(source)) return 'Main';
   const expansion = /swtg-expansion-\d+-([a-z0-9]+)/i.exec(source);

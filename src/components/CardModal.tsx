@@ -1,6 +1,6 @@
 import React, { useId, useState } from 'react';
 import { Card } from '../types/card';
-import { MANA, RARITY, SET_NAMES, colorPips } from '../utils/cardHelpers';
+import { MANA, RARITY, colorPips, setDisplayName } from '../utils/cardHelpers';
 import { getCardSetCode } from '../utils/boosterCollation';
 import { getCardArt } from '../utils/cardArt';
 import { Dialog } from './ui/Dialog';
@@ -28,7 +28,7 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
   const rarity = RARITY[card.rarity];
   const setCode = getCardSetCode(card);
   const setName = card.source
-    ? `${SET_NAMES[setCode] ?? setCode}${card.rarity === 'T' ? ' · Tokens' : card.rarity === 'L' ? ' · Basic lands' : ''}`
+    ? `${setDisplayName(setCode, [card])}${card.rarity === 'T' ? ' · Tokens' : card.rarity === 'L' ? ' · Basic lands' : ''}`
     : undefined;
   const hasBack = Boolean(card.backFace || art?.fullBackSrc);
   // The face whose text is shown: the back face's details when it is turned over.

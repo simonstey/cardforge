@@ -9,6 +9,16 @@ export interface CardFace {
   text?: string;
   flavorText?: string;
   powerToughness?: string;
+  /** Mana cost of this face; MDFC/transform/split/adventure faces carry their own. */
+  cost?: string;
+}
+
+/** Remote Scryfall image URLs: `art` crops to the art window, `full` is the whole card. */
+export interface ScryfallImage {
+  art?: string;
+  full?: string;
+  artBack?: string;
+  fullBack?: string;
 }
 
 export interface Card {
@@ -29,6 +39,25 @@ export interface Card {
   artKey?: string;
   /** User-supplied artwork for custom cards. */
   customImageUrl?: string;
+  /** Set code (Scryfall code, upper-cased, e.g. 'NEO'); wins over the source-derived code. */
+  setCode?: string;
+  /** Set name, e.g. 'Kamigawa: Neon Dynasty'. */
+  setName?: string;
+  /** String because of values like '213★' or 'DSC-300'. */
+  collectorNumber?: string;
+  /** Provenance and remote images of a card imported from Scryfall. */
+  scryfall?: {
+    id: string;
+    oracleId?: string;
+    /** scryfall_uri, for "View on Scryfall". */
+    uri?: string;
+    layout?: string;
+    image?: ScryfallImage;
+    /** ISO timestamp. */
+    importedAt: string;
+    /** Set by the editor; protects the card from being overwritten by a re-import. */
+    userModified?: boolean;
+  };
 }
 
 export interface BoosterSlotConfig {
