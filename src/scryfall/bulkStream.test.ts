@@ -160,27 +160,34 @@ describe('scanBulk / collectBulk', () => {
 });
 
 describe('resolveTokenParents', () => {
-  const sum = (code: string, setType = 'expansion'): BulkSetSummary => ({ code, name: code, setType, count: 1 });
+  const sum = (code: string, setType = 'expansion', name = code): BulkSetSummary => ({ code, name, setType, count: 1 });
 
-  it('prefers known parent_set_code, else t-prefix', () => {
+  it('maps each set to the one token set the shared rule picks', () => {
     const summaries = [
       sum('neo'),
+      sum('sneo', 'token', 'Kamigawa: Neon Dynasty Substitute Cards'),
       sum('tneo', 'token'),
       sum('mh3'),
       sum('wmh3', 'token'),
       sum('tzzz', 'token'),
-      sum('tmh3', 'token'),
     ];
     const known = [
-      { code: 'wmh3', set_type: 'token', parent_set_code: 'mh3' },
-      { code: 'tmh3', set_type: 'token', parent_set_code: 'neo' },
+      { code: 'sneo', name: 'Kamigawa: Neon Dynasty Substitute Cards', set_type: 'token', parent_set_code: 'neo' },
+      { code: 'wmh3', name: 'Modern Horizons 3 Tokens', set_type: 'token', parent_set_code: 'mh3' },
     ] as ScryfallSet[];
-    const m = resolveTokenParents(summaries, known);
-    expect(m.get('tneo')).toBe('neo');
-    expect(m.get('wmh3')).toBe('mh3');
-    expect(m.get('tmh3')).toBe('neo');
-    expect(m.has('tzzz')).toBe(false);
-    expect(m.has('neo')).toBe(false);
-    expect(resolveTokenParents(summaries).get('tmh3')).toBe('mh3');
+    const online = resolveTokenParents(summaries, known);
+    expect([...online]).toEqual([
+      ['tneo', 'neo'],
+      ['wmh3', 'mh3'],
+    ]);
+    // Offline only the `t<code>` convention applies.
+    expect([...resolveTokenParents(summaries)]).toEqual([['tneo', 'neo']]);
+  });
+
+  it('reads a token set from the set list even when its cards say otherwise', () => {
+    const summaries = [sum('neo'), sum('tneo')];
+    const known = [{ code: 'tneo', name: 'Kamigawa: Neon Dynasty Tokens', set_type: 'token', parent_set_code: 'neo' }] as ScryfallSet[];
+    expect(resolveTokenParents(summaries, known).get('tneo')).toBe('neo');
+    expect(resolveTokenParents(summaries).size).toBe(0);
   });
 });

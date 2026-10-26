@@ -1,5 +1,7 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import type { Card } from '../types/card';
+import { bulkSetOptions, bulkTargets, collectCodes } from './bulkSets';
+import type { BulkSetSummary } from './bulkStream';
 import { ScryfallApiError, type ScryfallClient } from './client';
 import { DEFAULT_IMPORT_OPTIONS, type ImportOptions } from './filters';
 import {
@@ -9,9 +11,9 @@ import {
   IMPORTABLE_SET_TYPES,
   importableSets,
   normalizeSetCode,
-  tokenSetFor,
   type ImportTarget,
 } from './importSet';
+import { tokenSetFor } from './tokenSets';
 import type { ScryfallCard, ScryfallList, ScryfallSet } from './types';
 import artSeries from './__fixtures__/art-series.json';
 import basic from './__fixtures__/basic.json';
@@ -36,6 +38,10 @@ const NEO = set({});
 const TNEO = set({
   code: 'tneo', name: 'Kamigawa: Neon Dynasty Tokens', set_type: 'token', parent_set_code: 'neo', card_count: 20,
 });
+/** Also a token-type child of NEO, but substitute cards for the double-faced ones, not tokens. */
+const SNEO = set({
+  code: 'sneo', name: 'Kamigawa: Neon Dynasty Substitute Cards', set_type: 'token', parent_set_code: 'neo', card_count: 9,
+});
 
 /** A NEO printing built on the Lightning Bolt fixture. */
 const neo = (id: string, over: Partial<ScryfallCard> = {}): ScryfallCard => ({
@@ -56,7 +62,8 @@ const PAGE_2 = '/cards/search?page=2&q=e:neo&unique=prints&order=set';
 
 /**
  * A client that replays `routes` (decoded URL → response, or an Error to reject with). Like the
- * real client, it follows `next_page` and rejects with an AbortError before any request once aborted.
+ * real client, it follows `next_page`, turns a 404 on a search's first page into an empty list, and
+ * rejects with an AbortError before any request once aborted.
  */
 function stubClient(routes: Map<string, unknown>) {
   const requests: string[] = [];
@@ -74,7 +81,12 @@ function stubClient(routes: Map<string, unknown>) {
       const items: T[] = [];
       let next: string | null | undefined = url;
       while (next) {
-        const page = (await reply(next, signal)) as ScryfallList<T>;
+        const first = next === url;
+        const page = (await reply(next, signal).catch((err: unknown) => {
+          const notFound = err instanceof ScryfallApiError && err.status === 404;
+          if (notFound && first && url.startsWith('/cards/search')) return list<T>([]);
+          throw err;
+        })) as ScryfallList<T>;
         items.push(...page.data);
         onPage?.(items.length, page.total_cards);
         next = page.has_more ? page.next_page : undefined;
@@ -224,6 +236,118 @@ test('fetches tokens from the token set when requested', async () => {
   const noTokenSet = stubClient(routes);
   expect((await fetchSetTarget('m10', WITH_TOKENS, { client: noTokenSet.client, sets })).tokens).toEqual([]);
   expect(noTokenSet.requests).toEqual([search('m10')]);
+});
+
+const noMatches = () => new ScryfallApiError('Your query didn’t match any cards.', 404, 'not_found');
+
+/** A token from NEO's token set, and a substitute card from `sneo`, which is a token-type set too. */
+const tneoToken = (id: string): ScryfallCard => ({ ...(token as ScryfallCard), id, set: 'tneo', collector_number: id });
+const sneoCard = (id: string): ScryfallCard => ({
+  ...(token as ScryfallCard),
+  id,
+  name: 'Substitute card',
+  layout: 'normal',
+  set: 'sneo',
+  set_name: SNEO.name,
+  collector_number: id,
+});
+
+test('API and bulk import pick the same token set: tneo, never sneo', async () => {
+  const neoCards = [neo('a', { collector_number: '1', booster: true }), neo('b', { collector_number: '2', booster: true })];
+  const tokens = [tneoToken('t1'), tneoToken('t2')];
+  const substitutes = [sneoCard('s1')];
+  // `sneo` is listed first, so "the first token-type child" would pick it.
+  const sets = [NEO, SNEO, TNEO];
+
+  const { client, requests } = stubClient(
+    new Map<string, unknown>([
+      [search('neo'), list(neoCards)],
+      [search('tneo'), list(tokens)],
+      [search('sneo'), list(substitutes)],
+    ]),
+  );
+  const api = await fetchSetTarget('neo', WITH_TOKENS, { client, sets });
+  expect(requests).toEqual([search('neo'), search('tneo')]);
+  expect(api.tokens).toEqual(tokens);
+  const apiIds = buildPreview([api], WITH_TOKENS, [], NOW).incoming.map((c) => c.id);
+  expect(apiIds).toEqual(['scry:a', 'scry:b', 'scry:t1', 'scry:t2']);
+
+  const summaries: BulkSetSummary[] = [
+    { code: 'sneo', name: SNEO.name, setType: 'token', count: 1 },
+    { code: 'neo', name: NEO.name, setType: 'expansion', count: 2 },
+    { code: 'tneo', name: TNEO.name, setType: 'token', count: 2 },
+  ];
+  const file = [...substitutes, ...tokens, ...neoCards];
+  // Online (with the set list) and offline (the `t<code>` convention) group the file the same way.
+  for (const known of [sets, undefined]) {
+    const options = bulkSetOptions(summaries, known);
+    expect(options.map((o) => [o.code, o.tokenCodes])).toEqual([
+      ['neo', ['tneo']],
+      ['sneo', []],
+    ]);
+    const chosen = options.filter((o) => o.code === 'neo');
+    expect(collectCodes(chosen, true)).toEqual(['neo', 'tneo']);
+    const targets = bulkTargets(chosen, file, true);
+    expect(buildPreview(targets, WITH_TOKENS, [], NOW).incoming.map((c) => c.id)).toEqual(apiIds);
+  }
+});
+
+test('without a set list, tokens come from probing the t<code> set', async () => {
+  const tokens = [tneoToken('t1'), tneoToken('t2')];
+  const routes = new Map<string, unknown>([
+    ['/sets/neo', NEO],
+    [search('neo'), list([neo('a')])],
+    [search('tneo'), list(tokens)],
+    ['/sets/m10', set({ code: 'm10', name: 'Magic 2010', set_type: 'core' })],
+    [search('m10'), list([normal])],
+    [search('tm10'), noMatches()],
+  ]);
+
+  const probed = stubClient(routes);
+  const found = await fetchSetTarget('neo', WITH_TOKENS, { client: probed.client, sets: [] });
+  expect(probed.requests).toEqual(['/sets/neo', search('neo'), search('tneo')]);
+  expect(found.tokens).toEqual(tokens);
+
+  // No `t<code>` set: the search's 404 is an empty list, not an error.
+  const none = stubClient(routes);
+  expect((await fetchSetTarget('m10', WITH_TOKENS, { client: none.client, sets: [] })).tokens).toEqual([]);
+  expect(none.requests).toEqual(['/sets/m10', search('m10'), search('tm10')]);
+
+  // A `t<code>` set that isn't a token set (`tsp` next to a set `sp`) adds no tokens.
+  const notTokens = stubClient(
+    new Map<string, unknown>([
+      ['/sets/sp', set({ code: 'sp', name: 'Some Set' })],
+      [search('sp'), list([neo('a', { set: 'sp' })])],
+      [search('tsp'), list([neo('ts', { set: 'tsp', set_type: 'expansion' })])],
+    ]),
+  );
+  expect((await fetchSetTarget('sp', WITH_TOKENS, { client: notTokens.client, sets: [] })).tokens).toEqual([]);
+
+  // Without "Include tokens" there is no probe.
+  const off = stubClient(routes);
+  await fetchSetTarget('neo', DEFAULT_IMPORT_OPTIONS, { client: off.client, sets: [] });
+  expect(off.requests).toEqual(['/sets/neo', search('neo')]);
+});
+
+test('a token set fetched on its own imports its cards as tokens', async () => {
+  const tokens = [tneoToken('t1'), tneoToken('t2')];
+  for (const sets of [[NEO, TNEO], []]) {
+    const { client, requests } = stubClient(
+      new Map<string, unknown>([
+        ['/sets/tneo', TNEO],
+        [search('tneo'), list(tokens)],
+      ]),
+    );
+    // Booster-only is on and tokens are never booster cards, yet they import.
+    const target = await fetchSetTarget('TNEO', DEFAULT_IMPORT_OPTIONS, { client, sets });
+    expect(target).toEqual({ code: 'tneo', name: TNEO.name, cards: [], tokens });
+    expect(requests.filter((r) => r.startsWith('/cards/'))).toEqual([search('tneo')]);
+
+    const preview = buildPreview([target], DEFAULT_IMPORT_OPTIONS, [], NOW);
+    expect(preview.incoming.map((c) => c.id)).toEqual(['scry:t1', 'scry:t2']);
+    expect(preview.byRarity.T).toBe(2);
+    expect(preview.incoming[0]).toMatchObject({ setCode: 'TNEO', setName: TNEO.name, source: 'scryfall:tneo' });
+  }
 });
 
 test('rejects and keeps nothing when a later page fails', async () => {

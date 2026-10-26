@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import type { Card } from '../types/card';
 import { determineColors } from '../utils/cardHelpers';
-import { isDoubleSided, mapCard, type MapContext } from './mapCard';
+import { isDoubleSided, isTokenLike, mapCard, type MapContext } from './mapCard';
 import type { ScryfallCard } from './types';
 import adventure from './__fixtures__/adventure.json';
 import artSeries from './__fixtures__/art-series.json';
@@ -146,9 +146,21 @@ test.each([
   expect(card.source).toBe(`scryfall:${fixture.set}`);
 });
 
-test('a non-token layout from a token set also joins the parent set', () => {
-  const helper = { ...clone(token), layout: 'normal' };
-  expect(mapCard(helper, ctx)).toMatchObject({ setCode: 'NEO', setName: 'Kamigawa: Neon Dynasty' });
+test('a non-token layout from a token set is a token in the parent set', () => {
+  // Helper and checklist cards keep their printed rarity on Scryfall; as tokens they stay out of the common slot.
+  const helper = { ...clone(token), layout: 'normal', rarity: 'common' };
+  expect(mapCard(helper, ctx)).toMatchObject({ rarity: 'T', setCode: 'NEO', setName: 'Kamigawa: Neon Dynasty' });
+});
+
+test('isTokenLike: token layouts, or any card from a token set', () => {
+  expect(isTokenLike(token)).toBe(true);
+  expect(isTokenLike(emblem)).toBe(true);
+  expect(isTokenLike(dfcToken)).toBe(true);
+  expect(isTokenLike({ ...clone(token), layout: 'normal' })).toBe(true);
+  // A token layout printed in a main set is still a token.
+  expect(isTokenLike({ ...clone(normal), layout: 'token' })).toBe(true);
+  expect(isTokenLike(normal)).toBe(false);
+  expect(isTokenLike({ ...clone(normal), set_type: undefined })).toBe(false);
 });
 
 test('art-series: not representable', () => {

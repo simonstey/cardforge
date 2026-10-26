@@ -11,9 +11,10 @@ export interface BulkSetOption extends BulkSetSummary {
 }
 
 /**
- * The sets a scanned bulk file offers, by name. A token set whose parent is in the file folds
- * into that parent (it imports through "Include tokens"); any other token set is listed as a set.
- * `known` is the `/sets` list, when there is one (spec 6.12).
+ * The sets a scanned bulk file offers, by name. The token set the API path would fetch for a set in
+ * the file (`tokenSetFor`) folds into that set (it imports through "Include tokens"); any other token
+ * set, such as substitute cards, is listed as a set of its own. `known` is the `/sets` list, when there
+ * is one (spec 6.12).
  */
 export function bulkSetOptions(summaries: BulkSetSummary[], known?: ScryfallSet[]): BulkSetOption[] {
   const parents = resolveTokenParents(summaries, known);

@@ -4,6 +4,7 @@ import { ScryfallApiError, type ScryfallClient } from './client';
 import { shouldImport, type ImportOptions } from './filters';
 import { KNOWN_LAYOUTS, mapCard, type MapContext } from './mapCard';
 import { syncImported, type SyncResult } from './merge';
+import { tokenSetFor } from './tokenSets';
 import type { ScryfallCard, ScryfallSet } from './types';
 
 /** Set types with booster products; the set picker offers only these (spec 6.6). */
@@ -45,11 +46,6 @@ export function importableSets(sets: ScryfallSet[]): ScryfallSet[] {
 
 export const normalizeSetCode = (input: string): string => input.trim().toLowerCase();
 
-/** The token set Scryfall files under `code` (e.g. `tneo` for `neo`), if any. */
-export function tokenSetFor(code: string, sets: ScryfallSet[]): ScryfallSet | undefined {
-  return sets.find((s) => s.parent_set_code === code && s.set_type === 'token');
-}
-
 /** One set's fetched printings, ready for `buildPreview`. */
 export interface ImportTarget {
   code: string;
@@ -81,8 +77,19 @@ function fetchPrints(client: ScryfallClient, code: string, signal?: AbortSignal,
 }
 
 /**
+ * The code to fetch tokens from: the token set the set list names (see `tokenSetFor`), or, when there is
+ * no set list (it failed to load), the `t<code>` convention, probed with a search; no such set is no tokens.
+ */
+function tokenSourceFor(code: string, sets: ScryfallSet[]): { code: string; probe: boolean } | undefined {
+  if (sets.length === 0) return { code: `t${code}`, probe: true };
+  const tokenSet = tokenSetFor(code, sets);
+  return tokenSet && { code: tokenSet.code, probe: false };
+}
+
+/**
  * Resolves a typed or picked set code and fetches its cards, plus its token set when
- * `opts.includeTokens` (spec 6.6). Any failure or abort rejects; nothing partial is returned.
+ * `opts.includeTokens` (spec 6.6). A token set fetched on its own (say "tneo") imports as tokens, as
+ * on the bulk path. Any failure or abort rejects; nothing partial is returned.
  */
 export async function fetchSetTarget(
   input: string,
@@ -92,13 +99,17 @@ export async function fetchSetTarget(
   const { client, sets, signal, onProgress } = deps;
   const set = await resolveSet(normalizeSetCode(input), sets, client, signal);
   const cards = await fetchPrints(client, set.code, signal, onProgress);
-  const tokenSet = opts.includeTokens ? tokenSetFor(set.code, sets) : undefined;
+  if (set.set_type === 'token') return { code: set.code, name: set.name, cards: [], tokens: cards };
+
+  const source = opts.includeTokens ? tokenSourceFor(set.code, sets) : undefined;
   // Tokens continue the set's count, so progress never goes backwards.
-  const tokens = tokenSet
-    ? await fetchPrints(client, tokenSet.code, signal, (fetched, total) =>
-        onProgress?.(cards.length + fetched, total === undefined ? undefined : cards.length + total),
+  const fetched = source
+    ? await fetchPrints(client, source.code, signal, (n, total) =>
+        onProgress?.(cards.length + n, total === undefined ? undefined : cards.length + total),
       )
     : [];
+  // A probed `t<code>` that turns out not to be a token set holds no tokens.
+  const tokens = source?.probe ? fetched.filter((c) => c.set_type === 'token') : fetched;
   return { code: set.code, name: set.name, cards, tokens };
 }
 

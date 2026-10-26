@@ -26,14 +26,23 @@ describe('bulkSetOptions', () => {
     expect(options.find(o => o.code === 'sneo')).toMatchObject({ setType: 'token', tokenCodes: [], tokenCount: 0 });
   });
 
-  it('uses the known set list when it has one', () => {
+  it('folds only the token set the shared rule picks, even when the set list files more under the parent', () => {
     const known = [
-      { code: 'sneo', set_type: 'token', parent_set_code: 'neo' },
-      { code: 'tneo', set_type: 'token', parent_set_code: 'neo' },
+      { code: 'sneo', name: 'Kamigawa: Neon Dynasty Substitute Cards', set_type: 'token', parent_set_code: 'neo' },
+      { code: 'tneo', name: 'Kamigawa: Neon Dynasty Tokens', set_type: 'token', parent_set_code: 'neo' },
     ] as ScryfallSet[];
     const options = bulkSetOptions(SUMMARIES, known);
-    expect(options.map(o => o.code)).toEqual(['dmu', 'neo', 'l12']);
-    expect(options.find(o => o.code === 'neo')).toMatchObject({ tokenCodes: ['tneo', 'sneo'], tokenCount: 25 });
+    expect(options.map(o => o.code)).toEqual(['dmu', 'neo', 'sneo', 'l12']);
+    expect(options.find(o => o.code === 'neo')).toMatchObject({ tokenCodes: ['tneo'], tokenCount: 19 });
+    expect(options.find(o => o.code === 'sneo')).toMatchObject({ setType: 'token', tokenCodes: [] });
+  });
+
+  it('uses the known set list for a token set named "… Tokens" without the t<code> name', () => {
+    const summaries = [sum('dmu', 'Dominaria United'), sum('xdmu', 'Dominaria United Tokens', 'token', 12)];
+    const known = [{ code: 'xdmu', name: 'Dominaria United Tokens', set_type: 'token', parent_set_code: 'dmu' }] as ScryfallSet[];
+    expect(bulkSetOptions(summaries, known)).toEqual([{ ...summaries[0], tokenCodes: ['xdmu'], tokenCount: 12 }]);
+    // Offline there is no parent code to go on, so it stays a set of its own.
+    expect(bulkSetOptions(summaries).map(o => o.code)).toEqual(['dmu', 'xdmu']);
   });
 
   it('lists a token set whose parent is missing from the file', () => {
@@ -43,8 +52,8 @@ describe('bulkSetOptions', () => {
 
   it('never folds a token set into another folded token set', () => {
     const known = [
-      { code: 'tneo', set_type: 'token', parent_set_code: 'neo' },
-      { code: 'sneo', set_type: 'token', parent_set_code: 'tneo' },
+      { code: 'tneo', name: 'Kamigawa: Neon Dynasty Tokens', set_type: 'token', parent_set_code: 'neo' },
+      { code: 'sneo', name: 'Neon Dynasty Token Tokens', set_type: 'token', parent_set_code: 'tneo' },
     ] as ScryfallSet[];
     const options = bulkSetOptions(SUMMARIES, known);
     expect(options.map(o => o.code)).toEqual(['dmu', 'neo', 'sneo', 'l12']);

@@ -20,6 +20,14 @@ export const SKIPPED_LAYOUTS: ReadonlySet<string> = new Set(['art_series', 'vang
 
 const TOKEN_LAYOUTS: ReadonlySet<string> = new Set(['token', 'double_faced_token', 'emblem']);
 
+/**
+ * Tokens, emblems, and anything else from a token set (helper and checklist cards). They are rarity `T`
+ * and share the parent set's chip, so they never fill a printed-rarity slot.
+ */
+export function isTokenLike(card: Pick<ScryfallCard, 'layout' | 'set_type'>): boolean {
+  return TOKEN_LAYOUTS.has(card.layout) || card.set_type === 'token';
+}
+
 const RARITIES: Record<string, Rarity> = { common: 'C', uncommon: 'U', rare: 'R', mythic: 'M', special: 'R', bonus: 'R' };
 
 /** Colour letters in the order `determineColors` reports them. */
@@ -74,7 +82,7 @@ function faceOf(sources: ScryfallCardFace[]): CardFace {
 }
 
 function rarityOf(card: ScryfallCard): Rarity {
-  if (TOKEN_LAYOUTS.has(card.layout)) return 'T';
+  if (isTokenLike(card)) return 'T';
   // The English type line, so a localised "Basic Land" still counts.
   const typeLine = card.type_line ?? card.card_faces?.[0]?.type_line ?? '';
   if (/\bBasic\b/.test(typeLine) && /\bLand\b/.test(typeLine)) return 'L';
@@ -124,8 +132,7 @@ export function mapCard(card: ScryfallCard, ctx: MapContext): Card | null {
   if (!front.name && !front.type) return null;
 
   const artist = pick(sources, 'artist');
-  // Tokens, emblems and anything else fetched from a token set share the parent set's chip.
-  const parent = card.set_type === 'token' || TOKEN_LAYOUTS.has(card.layout);
+  const parent = isTokenLike(card);
   const oracleId = card.oracle_id ?? faces[0]?.oracle_id;
   const image = imageOf(card);
 

@@ -1,3 +1,4 @@
+import { tokenSetFor, type TokenSetCandidate } from './tokenSets';
 import type { ScryfallCard, ScryfallSet } from './types';
 
 export interface BulkSetSummary {
@@ -149,19 +150,27 @@ export async function collectBulk(
   return { cards, malformed };
 }
 
-/** Token-set code -> parent set code. Known `/sets` data wins; otherwise the `t<code>` convention. */
+/**
+ * Token-set code -> parent set code, for the sets in a bulk file. Each set gets the one token set
+ * `tokenSetFor` picks, as on the API path: the `t<code>` set, else (with the `/sets` list) a child named
+ * "… Tokens". Any other token-type set has no parent here.
+ */
 export function resolveTokenParents(summaries: BulkSetSummary[], known: ScryfallSet[] = []): Map<string, string> {
   const knownByCode = new Map(known.map(s => [s.code, s]));
-  const present = new Set(summaries.map(s => s.code));
+  // The file's sets, with what the set list knows about them (card objects carry no parent code).
+  const candidates: TokenSetCandidate[] = summaries.map(s => {
+    const k = knownByCode.get(s.code);
+    return {
+      code: s.code,
+      name: k?.name ?? s.name,
+      set_type: s.setType === 'token' || k?.set_type === 'token' ? 'token' : s.setType,
+      ...(k?.parent_set_code !== undefined && { parent_set_code: k.parent_set_code }),
+    };
+  });
   const result = new Map<string, string>();
   for (const s of summaries) {
-    const k = knownByCode.get(s.code);
-    if (s.setType !== 'token' && k?.set_type !== 'token') continue;
-    if (k?.parent_set_code) {
-      result.set(s.code, k.parent_set_code);
-    } else if (s.code.length > 1 && s.code.startsWith('t') && present.has(s.code.slice(1))) {
-      result.set(s.code, s.code.slice(1));
-    }
+    const tokenSet = tokenSetFor(s.code, candidates);
+    if (tokenSet && !result.has(tokenSet.code)) result.set(tokenSet.code, s.code);
   }
   return result;
 }
