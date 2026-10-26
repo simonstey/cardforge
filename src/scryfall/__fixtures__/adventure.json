@@ -1,0 +1,63 @@
+{
+  "id": "09fd2d9c-1793-4beb-a3fb-7a869f660cd4",
+  "name": "Bonecrusher Giant // Stomp",
+  "layout": "adventure",
+  "set": "eld",
+  "set_name": "Throne of Eldraine",
+  "collector_number": "115",
+  "rarity": "rare",
+  "oracle_id": "d6d72f5f-8f5d-4180-b514-f22ff5482902",
+  "scryfall_uri": "https://scryfall.com/card/eld/115/bonecrusher-giant-stomp?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "arena",
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{2}{R} // {1}{R}",
+  "type_line": "Creature — Giant // Instant — Adventure",
+  "flavor_text": "Not every tale ends in glory.",
+  "power": "4",
+  "toughness": "3",
+  "colors": [
+    "R"
+  ],
+  "artist": "Victor Adame Minguez",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.jpg?1783932628",
+    "normal": "https://cards.scryfall.io/normal/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.jpg?1783932628",
+    "large": "https://cards.scryfall.io/large/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.jpg?1783932628",
+    "png": "https://cards.scryfall.io/png/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.png?1783932628",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.jpg?1783932628",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.jpg?1783932628",
+    "thumb": "https://cards.scryfall.io/thumb/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+    "grid": "https://cards.scryfall.io/grid/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+    "display": "https://cards.scryfall.io/display/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+    "art": "https://cards.scryfall.io/art/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+    "crop": "https://cards.scryfall.io/crop/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.webp?1783932628",
+    "jpeg": "https://cards.scryfall.io/normal/front/0/9/09fd2d9c-1793-4beb-a3fb-7a869f660cd4.jpg?1783932628"
+  },
+  "card_faces": [
+    {
+      "name": "Bonecrusher Giant",
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature — Giant",
+      "oracle_text": "Whenever this creature becomes the target of a spell, this creature deals 2 damage to that spell's controller.",
+      "flavor_text": "Not every tale ends in glory.",
+      "power": "4",
+      "toughness": "3",
+      "artist": "Victor Adame Minguez"
+    },
+    {
+      "name": "Stomp",
+      "mana_cost": "{1}{R}",
+      "type_line": "Instant — Adventure",
+      "oracle_text": "Damage can't be prevented this turn. Stomp deals 2 damage to any target.",
+      "artist": "Victor Adame Minguez"
+    }
+  ]
+}

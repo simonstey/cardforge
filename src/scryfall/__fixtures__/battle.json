@@ -1,0 +1,77 @@
+{
+  "id": "8fed056f-a8f5-41ec-a7d2-a80a238872d1",
+  "name": "Invasion of Zendikar // Awakened Skyclave",
+  "layout": "transform",
+  "set": "mom",
+  "set_name": "March of the Machine",
+  "collector_number": "194",
+  "rarity": "uncommon",
+  "oracle_id": "4b1874af-4ea5-4e22-a4d4-e718d75fe95e",
+  "scryfall_uri": "https://scryfall.com/card/mom/194/invasion-of-zendikar-awakened-skyclave?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo",
+    "arena"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "type_line": "Battle — Siege // Creature — Elemental",
+  "artist": "Diego Gisbert",
+  "card_faces": [
+    {
+      "name": "Invasion of Zendikar",
+      "mana_cost": "{3}{G}",
+      "type_line": "Battle — Siege",
+      "oracle_text": "(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen this Siege enters, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.",
+      "defense": "3",
+      "colors": [
+        "G"
+      ],
+      "artist": "Diego Gisbert",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "normal": "https://cards.scryfall.io/normal/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "large": "https://cards.scryfall.io/large/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "png": "https://cards.scryfall.io/png/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.png?1783916973",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "border_crop": "https://cards.scryfall.io/border_crop/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "thumb": "https://cards.scryfall.io/thumb/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "grid": "https://cards.scryfall.io/grid/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "display": "https://cards.scryfall.io/display/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "art": "https://cards.scryfall.io/art/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "crop": "https://cards.scryfall.io/crop/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "jpeg": "https://cards.scryfall.io/normal/front/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973"
+      }
+    },
+    {
+      "name": "Awakened Skyclave",
+      "mana_cost": "",
+      "type_line": "Creature — Elemental",
+      "oracle_text": "Vigilance, haste\nAs long as this creature is on the battlefield, it's a land in addition to its other types.\n{T}: Add one mana of any color.",
+      "flavor_text": "Nahiri tried to bend Zendikar to Phyrexia's will. In response, the world rose against her.",
+      "power": "4",
+      "toughness": "4",
+      "colors": [
+        "G"
+      ],
+      "artist": "Diego Gisbert",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "normal": "https://cards.scryfall.io/normal/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "large": "https://cards.scryfall.io/large/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "png": "https://cards.scryfall.io/png/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.png?1783916973",
+        "art_crop": "https://cards.scryfall.io/art_crop/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "border_crop": "https://cards.scryfall.io/border_crop/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973",
+        "thumb": "https://cards.scryfall.io/thumb/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "grid": "https://cards.scryfall.io/grid/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "display": "https://cards.scryfall.io/display/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "art": "https://cards.scryfall.io/art/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "crop": "https://cards.scryfall.io/crop/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.webp?1783916973",
+        "jpeg": "https://cards.scryfall.io/normal/back/8/f/8fed056f-a8f5-41ec-a7d2-a80a238872d1.jpg?1783916973"
+      }
+    }
+  ]
+}

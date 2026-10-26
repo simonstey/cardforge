@@ -1,0 +1,44 @@
+{
+  "id": "222a736e-d819-452d-aeda-eb848c4b2302",
+  "name": "Tamiyo, Compleated Sage",
+  "layout": "normal",
+  "set": "neo",
+  "set_name": "Kamigawa: Neon Dynasty",
+  "collector_number": "238",
+  "rarity": "mythic",
+  "oracle_id": "021b4745-4a15-462c-a6b0-2dee1dc9d196",
+  "scryfall_uri": "https://scryfall.com/card/neo/238/tamiyo-compleated-sage?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo",
+    "arena"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{2}{G}{G/U/P}{U}",
+  "type_line": "Legendary Planeswalker — Tamiyo",
+  "oracle_text": "Compleated ({G/U/P} can be paid with {G}, {U}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n+1: Tap up to one target artifact or creature. It doesn't untap during its controller's next untap step.\n−X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.\n−7: Create Tamiyo's Notebook, a legendary colorless Book artifact token with \"Spells you cast cost {2} less to cast\" and \"{T}: Draw a card.\"",
+  "loyalty": "5",
+  "colors": [
+    "G",
+    "U"
+  ],
+  "artist": "Chris Rahn",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.jpg?1783923828",
+    "normal": "https://cards.scryfall.io/normal/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.jpg?1783923828",
+    "large": "https://cards.scryfall.io/large/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.jpg?1783923828",
+    "png": "https://cards.scryfall.io/png/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.png?1783923828",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.jpg?1783923828",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.jpg?1783923828",
+    "thumb": "https://cards.scryfall.io/thumb/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+    "grid": "https://cards.scryfall.io/grid/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+    "display": "https://cards.scryfall.io/display/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+    "art": "https://cards.scryfall.io/art/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+    "crop": "https://cards.scryfall.io/crop/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.webp?1783923828",
+    "jpeg": "https://cards.scryfall.io/normal/front/2/2/222a736e-d819-452d-aeda-eb848c4b2302.jpg?1783923828"
+  }
+}

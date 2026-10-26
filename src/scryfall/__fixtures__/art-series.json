@@ -1,0 +1,67 @@
+{
+  "id": "8de2ff37-fdb7-4f77-9d48-e99afac9a79e",
+  "name": "Chillerpillar // Chillerpillar",
+  "layout": "art_series",
+  "set": "amh1",
+  "set_name": "Modern Horizons Art Series",
+  "collector_number": "1",
+  "rarity": "common",
+  "oracle_id": "7b21e8b3-8093-4773-b3d7-3647a21a3562",
+  "scryfall_uri": "https://scryfall.com/card/amh1/1/chillerpillar-chillerpillar?utm_source=api",
+  "set_type": "memorabilia",
+  "lang": "en",
+  "games": [
+    "paper"
+  ],
+  "booster": false,
+  "digital": false,
+  "image_status": "highres_scan",
+  "type_line": "Card // Card",
+  "artist": "Suzanne Helmigh",
+  "card_faces": [
+    {
+      "name": "Chillerpillar",
+      "mana_cost": "",
+      "type_line": "Card",
+      "oracle_text": "",
+      "colors": [],
+      "artist": "Suzanne Helmigh",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "normal": "https://cards.scryfall.io/normal/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "large": "https://cards.scryfall.io/large/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "png": "https://cards.scryfall.io/png/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.png?1783933230",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "border_crop": "https://cards.scryfall.io/border_crop/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "thumb": "https://cards.scryfall.io/thumb/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "grid": "https://cards.scryfall.io/grid/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "display": "https://cards.scryfall.io/display/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "art": "https://cards.scryfall.io/art/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "crop": "https://cards.scryfall.io/crop/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "jpeg": "https://cards.scryfall.io/normal/front/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230"
+      }
+    },
+    {
+      "name": "Chillerpillar",
+      "mana_cost": "",
+      "type_line": "Card",
+      "oracle_text": "",
+      "colors": [],
+      "artist": "Suzanne Helmigh",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "normal": "https://cards.scryfall.io/normal/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "large": "https://cards.scryfall.io/large/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "png": "https://cards.scryfall.io/png/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.png?1783933230",
+        "art_crop": "https://cards.scryfall.io/art_crop/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "border_crop": "https://cards.scryfall.io/border_crop/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230",
+        "thumb": "https://cards.scryfall.io/thumb/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "grid": "https://cards.scryfall.io/grid/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "display": "https://cards.scryfall.io/display/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "art": "https://cards.scryfall.io/art/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "crop": "https://cards.scryfall.io/crop/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.webp?1783933230",
+        "jpeg": "https://cards.scryfall.io/normal/back/8/d/8de2ff37-fdb7-4f77-9d48-e99afac9a79e.jpg?1783933230"
+      }
+    }
+  ]
+}

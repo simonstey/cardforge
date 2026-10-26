@@ -1,0 +1,57 @@
+{
+  "id": "0e09b054-4d33-4a12-bf2a-9b0009f33044",
+  "name": "Fire // Ice",
+  "layout": "split",
+  "set": "mh2",
+  "set_name": "Modern Horizons 2",
+  "collector_number": "290",
+  "rarity": "rare",
+  "oracle_id": "ae92942b-919c-4ea9-b693-85fcef765d5a",
+  "scryfall_uri": "https://scryfall.com/card/mh2/290/fire-ice?utm_source=api",
+  "set_type": "draft_innovation",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{1}{R} // {1}{U}",
+  "type_line": "Instant // Instant",
+  "colors": [
+    "R",
+    "U"
+  ],
+  "artist": "Dan Murayama Scott",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.jpg?1783926779",
+    "normal": "https://cards.scryfall.io/normal/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.jpg?1783926779",
+    "large": "https://cards.scryfall.io/large/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.jpg?1783926779",
+    "png": "https://cards.scryfall.io/png/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.png?1783926779",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.jpg?1783926779",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.jpg?1783926779",
+    "thumb": "https://cards.scryfall.io/thumb/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+    "grid": "https://cards.scryfall.io/grid/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+    "display": "https://cards.scryfall.io/display/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+    "art": "https://cards.scryfall.io/art/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+    "crop": "https://cards.scryfall.io/crop/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.webp?1783926779",
+    "jpeg": "https://cards.scryfall.io/normal/front/0/e/0e09b054-4d33-4a12-bf2a-9b0009f33044.jpg?1783926779"
+  },
+  "card_faces": [
+    {
+      "name": "Fire",
+      "mana_cost": "{1}{R}",
+      "type_line": "Instant",
+      "oracle_text": "Fire deals 2 damage divided as you choose among one or two targets.",
+      "artist": "Dan Murayama Scott"
+    },
+    {
+      "name": "Ice",
+      "mana_cost": "{1}{U}",
+      "type_line": "Instant",
+      "oracle_text": "Tap target permanent.\nDraw a card.",
+      "artist": "Dan Murayama Scott"
+    }
+  ]
+}

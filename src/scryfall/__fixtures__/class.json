@@ -1,0 +1,42 @@
+{
+  "id": "d1f629fb-b097-4240-8560-ef47f5678f48",
+  "name": "Wizard Class",
+  "layout": "class",
+  "set": "afr",
+  "set_name": "Adventures in the Forgotten Realms",
+  "collector_number": "81",
+  "rarity": "uncommon",
+  "oracle_id": "36f68aa3-9955-46f1-bc87-497f16ef5222",
+  "scryfall_uri": "https://scryfall.com/card/afr/81/wizard-class?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "arena",
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{U}",
+  "type_line": "Enchantment — Class",
+  "oracle_text": "(Gain the next level as a sorcery to add its ability.)\nYou have no maximum hand size.\n{2}{U}: Level 2\nWhen this Class becomes level 2, draw two cards.\n{4}{U}: Level 3\nWhenever you draw a card, put a +1/+1 counter on target creature you control.",
+  "colors": [
+    "U"
+  ],
+  "artist": "Marta Nael",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.jpg?1783926504",
+    "normal": "https://cards.scryfall.io/normal/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.jpg?1783926504",
+    "large": "https://cards.scryfall.io/large/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.jpg?1783926504",
+    "png": "https://cards.scryfall.io/png/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.png?1783926504",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.jpg?1783926504",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.jpg?1783926504",
+    "thumb": "https://cards.scryfall.io/thumb/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+    "grid": "https://cards.scryfall.io/grid/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+    "display": "https://cards.scryfall.io/display/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+    "art": "https://cards.scryfall.io/art/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+    "crop": "https://cards.scryfall.io/crop/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.webp?1783926504",
+    "jpeg": "https://cards.scryfall.io/normal/front/d/1/d1f629fb-b097-4240-8560-ef47f5678f48.jpg?1783926504"
+  }
+}

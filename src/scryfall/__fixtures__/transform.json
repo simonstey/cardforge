@@ -1,0 +1,77 @@
+{
+  "id": "11bf83bb-c95b-4b4f-9a56-ce7a1816307a",
+  "name": "Delver of Secrets // Insectile Aberration",
+  "layout": "transform",
+  "set": "isd",
+  "set_name": "Innistrad",
+  "collector_number": "51",
+  "rarity": "common",
+  "oracle_id": "edd531b9-f615-4399-8c8c-1c5e18c4acbf",
+  "scryfall_uri": "https://scryfall.com/card/isd/51/delver-of-secrets-insectile-aberration?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "type_line": "Creature — Human Wizard // Creature — Human Insect",
+  "artist": "Nils Hamm",
+  "card_faces": [
+    {
+      "name": "Delver of Secrets",
+      "mana_cost": "{U}",
+      "type_line": "Creature — Human Wizard",
+      "oracle_text": "At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform this creature.",
+      "power": "1",
+      "toughness": "1",
+      "colors": [
+        "U"
+      ],
+      "artist": "Nils Hamm",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "normal": "https://cards.scryfall.io/normal/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "large": "https://cards.scryfall.io/large/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "png": "https://cards.scryfall.io/png/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.png?1783940984",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "border_crop": "https://cards.scryfall.io/border_crop/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "thumb": "https://cards.scryfall.io/thumb/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "grid": "https://cards.scryfall.io/grid/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "display": "https://cards.scryfall.io/display/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "art": "https://cards.scryfall.io/art/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "crop": "https://cards.scryfall.io/crop/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "jpeg": "https://cards.scryfall.io/normal/front/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984"
+      }
+    },
+    {
+      "name": "Insectile Aberration",
+      "mana_cost": "",
+      "type_line": "Creature — Human Insect",
+      "oracle_text": "Flying",
+      "flavor_text": "\"Unfortunately, all my test animals have died or escaped, so I shall be the final subject. I feel no fear. This is a momentous night.\"\n—Laboratory notes, final entry",
+      "power": "3",
+      "toughness": "2",
+      "colors": [
+        "U"
+      ],
+      "artist": "Nils Hamm",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "normal": "https://cards.scryfall.io/normal/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "large": "https://cards.scryfall.io/large/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "png": "https://cards.scryfall.io/png/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.png?1783940984",
+        "art_crop": "https://cards.scryfall.io/art_crop/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "border_crop": "https://cards.scryfall.io/border_crop/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984",
+        "thumb": "https://cards.scryfall.io/thumb/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "grid": "https://cards.scryfall.io/grid/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "display": "https://cards.scryfall.io/display/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "art": "https://cards.scryfall.io/art/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "crop": "https://cards.scryfall.io/crop/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.webp?1783940984",
+        "jpeg": "https://cards.scryfall.io/normal/back/1/1/11bf83bb-c95b-4b4f-9a56-ce7a1816307a.jpg?1783940984"
+      }
+    }
+  ]
+}

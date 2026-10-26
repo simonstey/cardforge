@@ -1,0 +1,42 @@
+{
+  "id": "b2671c36-96fa-49e3-90dc-52820b2c8a62",
+  "name": "Icehide Golem",
+  "layout": "normal",
+  "set": "mh1",
+  "set_name": "Modern Horizons",
+  "collector_number": "224",
+  "rarity": "uncommon",
+  "oracle_id": "29b925e9-1e98-471c-9b23-e0372ac86485",
+  "scryfall_uri": "https://scryfall.com/card/mh1/224/icehide-golem?utm_source=api",
+  "set_type": "draft_innovation",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{S}",
+  "type_line": "Snow Artifact Creature — Golem",
+  "oracle_text": "({S} can be paid with one mana from a snow source.)",
+  "flavor_text": "In colder climates, ice is more obedient than stone.",
+  "power": "2",
+  "toughness": "2",
+  "colors": [],
+  "artist": "Paul Scott Canavan",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.jpg?1783933074",
+    "normal": "https://cards.scryfall.io/normal/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.jpg?1783933074",
+    "large": "https://cards.scryfall.io/large/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.jpg?1783933074",
+    "png": "https://cards.scryfall.io/png/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.png?1783933074",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.jpg?1783933074",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.jpg?1783933074",
+    "thumb": "https://cards.scryfall.io/thumb/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+    "grid": "https://cards.scryfall.io/grid/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+    "display": "https://cards.scryfall.io/display/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+    "art": "https://cards.scryfall.io/art/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+    "crop": "https://cards.scryfall.io/crop/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.webp?1783933074",
+    "jpeg": "https://cards.scryfall.io/normal/front/b/2/b2671c36-96fa-49e3-90dc-52820b2c8a62.jpg?1783933074"
+  }
+}

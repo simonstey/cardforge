@@ -1,0 +1,42 @@
+{
+  "id": "435589bb-27c6-4a6d-9d63-394d5092b9d8",
+  "name": "Lightning Bolt",
+  "layout": "normal",
+  "set": "m10",
+  "set_name": "Magic 2010",
+  "collector_number": "146",
+  "rarity": "common",
+  "oracle_id": "4457ed35-7c10-48c8-9776-456485fdf070",
+  "scryfall_uri": "https://scryfall.com/card/m10/146/lightning-bolt?utm_source=api",
+  "set_type": "core",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{R}",
+  "type_line": "Instant",
+  "oracle_text": "Lightning Bolt deals 3 damage to any target.",
+  "flavor_text": "The sparkmage shrieked, calling on the rage of the storms of his youth. To his surprise, the sky responded with a fierce energy he'd never thought to see again.",
+  "colors": [
+    "R"
+  ],
+  "artist": "Christopher Moeller",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.jpg?1783942371",
+    "normal": "https://cards.scryfall.io/normal/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.jpg?1783942371",
+    "large": "https://cards.scryfall.io/large/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.jpg?1783942371",
+    "png": "https://cards.scryfall.io/png/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.png?1783942371",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.jpg?1783942371",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.jpg?1783942371",
+    "thumb": "https://cards.scryfall.io/thumb/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+    "grid": "https://cards.scryfall.io/grid/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+    "display": "https://cards.scryfall.io/display/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+    "art": "https://cards.scryfall.io/art/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+    "crop": "https://cards.scryfall.io/crop/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.webp?1783942371",
+    "jpeg": "https://cards.scryfall.io/normal/front/4/3/435589bb-27c6-4a6d-9d63-394d5092b9d8.jpg?1783942371"
+  }
+}

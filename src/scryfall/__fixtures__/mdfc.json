@@ -1,0 +1,73 @@
+{
+  "id": "228e551e-023a-4c9a-8f32-58dae6ffdf7f",
+  "name": "Valakut Awakening // Valakut Stoneforge",
+  "layout": "modal_dfc",
+  "set": "znr",
+  "set_name": "Zendikar Rising",
+  "collector_number": "174",
+  "rarity": "rare",
+  "oracle_id": "ff0ab867-b710-4b1a-baed-95fc3cf68f79",
+  "scryfall_uri": "https://scryfall.com/card/znr/174/valakut-awakening-valakut-stoneforge?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "arena",
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "type_line": "Instant // Land",
+  "artist": "Campbell White",
+  "card_faces": [
+    {
+      "name": "Valakut Awakening",
+      "mana_cost": "{2}{R}",
+      "type_line": "Instant",
+      "oracle_text": "Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.",
+      "flavor_text": "\"My ancestors reshaped the world to their vision. I have a few ideas of my own.\"\n—Tars Olan, stoneforge mystic",
+      "colors": [
+        "R"
+      ],
+      "artist": "Campbell White",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "normal": "https://cards.scryfall.io/normal/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "large": "https://cards.scryfall.io/large/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "png": "https://cards.scryfall.io/png/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.png?1783929350",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "border_crop": "https://cards.scryfall.io/border_crop/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "thumb": "https://cards.scryfall.io/thumb/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "grid": "https://cards.scryfall.io/grid/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "display": "https://cards.scryfall.io/display/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "art": "https://cards.scryfall.io/art/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "crop": "https://cards.scryfall.io/crop/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "jpeg": "https://cards.scryfall.io/normal/front/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350"
+      }
+    },
+    {
+      "name": "Valakut Stoneforge",
+      "mana_cost": "",
+      "type_line": "Land",
+      "oracle_text": "This land enters tapped.\n{T}: Add {R}.",
+      "flavor_text": "\"I can hear the echo of their hammers, long stilled.\"\n—Tars Olan, stoneforge mystic",
+      "colors": [],
+      "artist": "Campbell White",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "normal": "https://cards.scryfall.io/normal/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "large": "https://cards.scryfall.io/large/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "png": "https://cards.scryfall.io/png/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.png?1783929350",
+        "art_crop": "https://cards.scryfall.io/art_crop/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "border_crop": "https://cards.scryfall.io/border_crop/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350",
+        "thumb": "https://cards.scryfall.io/thumb/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "grid": "https://cards.scryfall.io/grid/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "display": "https://cards.scryfall.io/display/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "art": "https://cards.scryfall.io/art/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "crop": "https://cards.scryfall.io/crop/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.webp?1783929350",
+        "jpeg": "https://cards.scryfall.io/normal/back/2/2/228e551e-023a-4c9a-8f32-58dae6ffdf7f.jpg?1783929350"
+      }
+    }
+  ]
+}

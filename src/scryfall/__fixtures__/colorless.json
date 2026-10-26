@@ -1,0 +1,41 @@
+{
+  "id": "bffc360e-db41-48f3-9365-680d55046e04",
+  "name": "Thought-Knot Seer",
+  "layout": "normal",
+  "set": "ogw",
+  "set_name": "Oath of the Gatewatch",
+  "collector_number": "9",
+  "rarity": "rare",
+  "oracle_id": "cef7396d-2168-4282-bf38-670ca9eebd91",
+  "scryfall_uri": "https://scryfall.com/card/ogw/9/thought-knot-seer?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{3}{C}",
+  "type_line": "Creature — Eldrazi",
+  "oracle_text": "({C} represents colorless mana.)\nWhen this creature enters, target opponent reveals their hand. You choose a nonland card from it and exile that card.\nWhen this creature leaves the battlefield, target opponent draws a card.",
+  "power": "4",
+  "toughness": "4",
+  "colors": [],
+  "artist": "Svetlin Velinov",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.jpg?1783937929",
+    "normal": "https://cards.scryfall.io/normal/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.jpg?1783937929",
+    "large": "https://cards.scryfall.io/large/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.jpg?1783937929",
+    "png": "https://cards.scryfall.io/png/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.png?1783937929",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.jpg?1783937929",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.jpg?1783937929",
+    "thumb": "https://cards.scryfall.io/thumb/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+    "grid": "https://cards.scryfall.io/grid/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+    "display": "https://cards.scryfall.io/display/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+    "art": "https://cards.scryfall.io/art/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+    "crop": "https://cards.scryfall.io/crop/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.webp?1783937929",
+    "jpeg": "https://cards.scryfall.io/normal/front/b/f/bffc360e-db41-48f3-9365-680d55046e04.jpg?1783937929"
+  }
+}

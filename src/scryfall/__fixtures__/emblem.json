@@ -1,0 +1,38 @@
+{
+  "id": "5fdc53ba-e023-4ee4-bb14-fd8c52955ee9",
+  "name": "Chandra, Torch of Defiance Emblem",
+  "layout": "emblem",
+  "set": "tfra",
+  "set_name": "Reality Fracture Tokens",
+  "collector_number": "18",
+  "rarity": "common",
+  "oracle_id": "1c944fa3-ff6c-4638-a8cd-77d3ca68e599",
+  "scryfall_uri": "https://scryfall.com/card/tfra/18/chandra-torch-of-defiance-emblem?utm_source=api",
+  "set_type": "token",
+  "lang": "en",
+  "games": [
+    "paper"
+  ],
+  "booster": false,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "",
+  "type_line": "Emblem — Chandra",
+  "oracle_text": "Whenever you cast a spell, this emblem deals 5 damage to any target.",
+  "colors": [],
+  "artist": "Kieran Yanner",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.jpg?1789735329",
+    "normal": "https://cards.scryfall.io/normal/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.jpg?1789735329",
+    "large": "https://cards.scryfall.io/large/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.jpg?1789735329",
+    "png": "https://cards.scryfall.io/png/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.png?1789735329",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.jpg?1789735329",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.jpg?1789735329",
+    "thumb": "https://cards.scryfall.io/thumb/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+    "grid": "https://cards.scryfall.io/grid/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+    "display": "https://cards.scryfall.io/display/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+    "art": "https://cards.scryfall.io/art/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+    "crop": "https://cards.scryfall.io/crop/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.webp?1789735329",
+    "jpeg": "https://cards.scryfall.io/normal/front/5/f/5fdc53ba-e023-4ee4-bb14-fd8c52955ee9.jpg?1789735329"
+  }
+}

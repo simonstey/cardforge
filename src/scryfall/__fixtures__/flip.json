@@ -1,0 +1,62 @@
+{
+  "id": "6ee6cd34-c117-4d7e-97d1-8f8464bfaac8",
+  "name": "Akki Lavarunner // Tok-Tok, Volcano Born",
+  "layout": "flip",
+  "set": "chk",
+  "set_name": "Champions of Kamigawa",
+  "collector_number": "153",
+  "rarity": "rare",
+  "oracle_id": "47795817-73e5-4af6-bd1e-d69b193e8e9e",
+  "scryfall_uri": "https://scryfall.com/card/chk/153/akki-lavarunner-tok-tok-volcano-born?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{3}{R}",
+  "type_line": "Creature — Goblin Warrior // Legendary Creature — Goblin Shaman",
+  "power": "1",
+  "toughness": "1",
+  "colors": [
+    "R"
+  ],
+  "artist": "Matt Cavotta",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.jpg?1783944304",
+    "normal": "https://cards.scryfall.io/normal/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.jpg?1783944304",
+    "large": "https://cards.scryfall.io/large/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.jpg?1783944304",
+    "png": "https://cards.scryfall.io/png/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.png?1783944304",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.jpg?1783944304",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.jpg?1783944304",
+    "thumb": "https://cards.scryfall.io/thumb/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+    "grid": "https://cards.scryfall.io/grid/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+    "display": "https://cards.scryfall.io/display/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+    "art": "https://cards.scryfall.io/art/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+    "crop": "https://cards.scryfall.io/crop/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.webp?1783944304",
+    "jpeg": "https://cards.scryfall.io/normal/front/6/e/6ee6cd34-c117-4d7e-97d1-8f8464bfaac8.jpg?1783944304"
+  },
+  "card_faces": [
+    {
+      "name": "Akki Lavarunner",
+      "mana_cost": "{3}{R}",
+      "type_line": "Creature — Goblin Warrior",
+      "oracle_text": "Haste\nWhenever this creature deals damage to an opponent, flip it.",
+      "power": "1",
+      "toughness": "1",
+      "artist": "Matt Cavotta"
+    },
+    {
+      "name": "Tok-Tok, Volcano Born",
+      "mana_cost": "",
+      "type_line": "Legendary Creature — Goblin Shaman",
+      "oracle_text": "Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.",
+      "power": "2",
+      "toughness": "2",
+      "artist": "Matt Cavotta"
+    }
+  ]
+}

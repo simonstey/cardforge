@@ -1,0 +1,44 @@
+{
+  "id": "27907985-b5f6-4098-ab43-15a0c2bf94d5",
+  "name": "Bruna, the Fading Light",
+  "layout": "meld",
+  "set": "emn",
+  "set_name": "Eldritch Moon",
+  "collector_number": "15",
+  "rarity": "rare",
+  "oracle_id": "bce7e45d-b2c5-43aa-91a6-3a3c24f30850",
+  "scryfall_uri": "https://scryfall.com/card/emn/15/bruna-the-fading-light?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{5}{W}{W}",
+  "type_line": "Legendary Creature — Angel Horror",
+  "oracle_text": "When you cast this spell, you may return target Angel or Human creature card from your graveyard to the battlefield.\nFlying, vigilance\n(Melds with Gisela, the Broken Blade.)",
+  "flavor_text": "She now sees only Emrakul's visions.",
+  "power": "5",
+  "toughness": "7",
+  "colors": [
+    "W"
+  ],
+  "artist": "Clint Cearley",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.jpg?1783937523",
+    "normal": "https://cards.scryfall.io/normal/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.jpg?1783937523",
+    "large": "https://cards.scryfall.io/large/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.jpg?1783937523",
+    "png": "https://cards.scryfall.io/png/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.png?1783937523",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.jpg?1783937523",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.jpg?1783937523",
+    "thumb": "https://cards.scryfall.io/thumb/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+    "grid": "https://cards.scryfall.io/grid/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+    "display": "https://cards.scryfall.io/display/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+    "art": "https://cards.scryfall.io/art/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+    "crop": "https://cards.scryfall.io/crop/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.webp?1783937523",
+    "jpeg": "https://cards.scryfall.io/normal/front/2/7/27907985-b5f6-4098-ab43-15a0c2bf94d5.jpg?1783937523"
+  }
+}

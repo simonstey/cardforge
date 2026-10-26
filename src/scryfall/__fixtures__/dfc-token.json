@@ -1,0 +1,69 @@
+{
+  "id": "7b7f2e3a-ec43-4408-affd-a09338566ce3",
+  "name": "Incubator // Phyrexian",
+  "layout": "double_faced_token",
+  "set": "tfrc",
+  "set_name": "Reality Fracture Commander Tokens",
+  "collector_number": "13",
+  "rarity": "common",
+  "oracle_id": "dd3bf75e-9ef0-4ded-9b65-1a60a78a6253",
+  "scryfall_uri": "https://scryfall.com/card/tfrc/13/incubator-phyrexian?utm_source=api",
+  "set_type": "token",
+  "lang": "en",
+  "games": [
+    "paper"
+  ],
+  "booster": false,
+  "digital": false,
+  "image_status": "highres_scan",
+  "type_line": "Token Artifact — Incubator // Token Artifact Creature — Phyrexian",
+  "artist": "Johann Bodin",
+  "card_faces": [
+    {
+      "name": "Incubator",
+      "mana_cost": "",
+      "type_line": "Token Artifact — Incubator",
+      "oracle_text": "{2}: Transform this artifact.",
+      "colors": [],
+      "artist": "Johann Bodin",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "normal": "https://cards.scryfall.io/normal/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "large": "https://cards.scryfall.io/large/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "png": "https://cards.scryfall.io/png/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.png?1789599993",
+        "art_crop": "https://cards.scryfall.io/art_crop/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "border_crop": "https://cards.scryfall.io/border_crop/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "thumb": "https://cards.scryfall.io/thumb/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "grid": "https://cards.scryfall.io/grid/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "display": "https://cards.scryfall.io/display/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "art": "https://cards.scryfall.io/art/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "crop": "https://cards.scryfall.io/crop/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "jpeg": "https://cards.scryfall.io/normal/front/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993"
+      }
+    },
+    {
+      "name": "Phyrexian",
+      "mana_cost": "",
+      "type_line": "Token Artifact Creature — Phyrexian",
+      "oracle_text": "",
+      "power": "0",
+      "toughness": "0",
+      "colors": [],
+      "artist": "Johann Bodin",
+      "image_uris": {
+        "small": "https://cards.scryfall.io/small/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "normal": "https://cards.scryfall.io/normal/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "large": "https://cards.scryfall.io/large/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "png": "https://cards.scryfall.io/png/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.png?1789599993",
+        "art_crop": "https://cards.scryfall.io/art_crop/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "border_crop": "https://cards.scryfall.io/border_crop/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993",
+        "thumb": "https://cards.scryfall.io/thumb/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "grid": "https://cards.scryfall.io/grid/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "display": "https://cards.scryfall.io/display/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "art": "https://cards.scryfall.io/art/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "crop": "https://cards.scryfall.io/crop/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.webp?1789599993",
+        "jpeg": "https://cards.scryfall.io/normal/back/7/b/7b7f2e3a-ec43-4408-affd-a09338566ce3.jpg?1789599993"
+      }
+    }
+  ]
+}

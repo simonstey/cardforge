@@ -1,0 +1,42 @@
+{
+  "id": "c8318f40-ecd5-429e-8fe2-febf31f64841",
+  "name": "The Eldest Reborn",
+  "layout": "saga",
+  "set": "dom",
+  "set_name": "Dominaria",
+  "collector_number": "90",
+  "rarity": "uncommon",
+  "oracle_id": "44ed4c0c-a012-4895-a547-b04150553bba",
+  "scryfall_uri": "https://scryfall.com/card/dom/90/the-eldest-reborn?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "arena",
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{4}{B}",
+  "type_line": "Enchantment — Saga",
+  "oracle_text": "(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each opponent sacrifices a creature or planeswalker of their choice.\nII — Each opponent discards a card.\nIII — Put target creature or planeswalker card from a graveyard onto the battlefield under your control.",
+  "colors": [
+    "B"
+  ],
+  "artist": "Ravenna Tran",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.jpg?1783935009",
+    "normal": "https://cards.scryfall.io/normal/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.jpg?1783935009",
+    "large": "https://cards.scryfall.io/large/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.jpg?1783935009",
+    "png": "https://cards.scryfall.io/png/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.png?1783935009",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.jpg?1783935009",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.jpg?1783935009",
+    "thumb": "https://cards.scryfall.io/thumb/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+    "grid": "https://cards.scryfall.io/grid/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+    "display": "https://cards.scryfall.io/display/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+    "art": "https://cards.scryfall.io/art/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+    "crop": "https://cards.scryfall.io/crop/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.webp?1783935009",
+    "jpeg": "https://cards.scryfall.io/normal/front/c/8/c8318f40-ecd5-429e-8fe2-febf31f64841.jpg?1783935009"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "ca17acea-f079-4e53-8176-a2f5c5c408a1",
+  "name": "Snow-Covered Forest",
+  "layout": "normal",
+  "set": "khm",
+  "set_name": "Kaldheim",
+  "collector_number": "284",
+  "rarity": "common",
+  "oracle_id": "5f0d3be8-e63e-4ade-ae58-6b0c14f2ce6d",
+  "scryfall_uri": "https://scryfall.com/card/khm/284/snow-covered-forest?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "arena",
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "",
+  "type_line": "Basic Snow Land — Forest",
+  "oracle_text": "({T}: Add {G}.)",
+  "colors": [],
+  "artist": "Adam Paquette",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.jpg?1783928164",
+    "normal": "https://cards.scryfall.io/normal/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.jpg?1783928164",
+    "large": "https://cards.scryfall.io/large/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.jpg?1783928164",
+    "png": "https://cards.scryfall.io/png/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.png?1783928164",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.jpg?1783928164",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.jpg?1783928164",
+    "thumb": "https://cards.scryfall.io/thumb/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+    "grid": "https://cards.scryfall.io/grid/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+    "display": "https://cards.scryfall.io/display/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+    "art": "https://cards.scryfall.io/art/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+    "crop": "https://cards.scryfall.io/crop/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.webp?1783928164",
+    "jpeg": "https://cards.scryfall.io/normal/front/c/a/ca17acea-f079-4e53-8176-a2f5c5c408a1.jpg?1783928164"
+  }
+}

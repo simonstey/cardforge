@@ -1,0 +1,42 @@
+{
+  "id": "5e26bd0c-5ec7-4653-8e63-747157c20af1",
+  "name": "Spectral Procession",
+  "layout": "normal",
+  "set": "shm",
+  "set_name": "Shadowmoor",
+  "collector_number": "23",
+  "rarity": "uncommon",
+  "oracle_id": "376271a6-80f0-47a6-990a-5ec5517aae42",
+  "scryfall_uri": "https://scryfall.com/card/shm/23/spectral-procession?utm_source=api",
+  "set_type": "expansion",
+  "lang": "en",
+  "games": [
+    "paper",
+    "mtgo"
+  ],
+  "booster": true,
+  "digital": false,
+  "image_status": "highres_scan",
+  "mana_cost": "{2/W}{2/W}{2/W}",
+  "type_line": "Sorcery",
+  "oracle_text": "Create three 1/1 white Spirit creature tokens with flying.",
+  "flavor_text": "\"The dead have it easy. They suffer no more. If breaking their rest helps the living, so be it.\"\n—Olka, mistmeadow witch",
+  "colors": [
+    "W"
+  ],
+  "artist": "Jeremy Enecio",
+  "image_uris": {
+    "small": "https://cards.scryfall.io/small/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.jpg?1783942765",
+    "normal": "https://cards.scryfall.io/normal/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.jpg?1783942765",
+    "large": "https://cards.scryfall.io/large/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.jpg?1783942765",
+    "png": "https://cards.scryfall.io/png/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.png?1783942765",
+    "art_crop": "https://cards.scryfall.io/art_crop/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.jpg?1783942765",
+    "border_crop": "https://cards.scryfall.io/border_crop/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.jpg?1783942765",
+    "thumb": "https://cards.scryfall.io/thumb/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+    "grid": "https://cards.scryfall.io/grid/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+    "display": "https://cards.scryfall.io/display/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+    "art": "https://cards.scryfall.io/art/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+    "crop": "https://cards.scryfall.io/crop/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.webp?1783942765",
+    "jpeg": "https://cards.scryfall.io/normal/front/5/e/5e26bd0c-5ec7-4653-8e63-747157c20af1.jpg?1783942765"
+  }
+}
