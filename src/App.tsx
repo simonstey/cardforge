@@ -176,6 +176,9 @@ export default function App() {
   };
 
   const handleResetToDefaultCards = () => {
+    // Before the load, `cards` is a placeholder: the load would overwrite the reset, and Undo would
+    // then restore the empty placeholder over the saved database.
+    if (!loaded) return;
     const previous = cards;
     setCards(STAR_WARS_SET.cards);
     toast({
@@ -309,7 +312,7 @@ export default function App() {
             >
               <Printer aria-hidden className="size-4" />
             </IconButton>
-            <IconButton label="Reset card database to the original set" onClick={handleResetToDefaultCards}>
+            <IconButton label="Reset card database to the original set" onClick={handleResetToDefaultCards} disabled={!loaded}>
               <RotateCcw aria-hidden className="size-4" />
             </IconButton>
           </div>

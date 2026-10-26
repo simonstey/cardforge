@@ -50,10 +50,20 @@ function readScryfall(raw: unknown): Card['scryfall'] {
   };
 }
 
-/** Rebuilds a card from untrusted JSON, coercing the base fields and keeping every optional one. */
+/** An optional text field as a string, or undefined when it is missing or empty. */
+const optionalText = (v: unknown): string | undefined => (v ? String(v) : undefined);
+
+/**
+ * Rebuilds a card from untrusted JSON, coercing the base fields and keeping every optional one.
+ * Empty optional text is left out, as `mapCard` leaves it out, so an exported import re-imports unchanged.
+ */
 export function normalizeImportedCard(item: Record<string, unknown>, index: number, now: number = Date.now()): Card {
-  const cost = String(item.cost || '');
+  const cost = optionalText(item.cost);
   const type = String(item.type || 'Card');
+  const text = optionalText(item.text);
+  const flavorText = optionalText(item.flavorText);
+  const powerToughness = optionalText(item.powerToughness);
+  const artist = optionalText(item.artist);
   const colors =
     Array.isArray(item.colors) && item.colors.length > 0 && item.colors.every(c => typeof c === 'string' && VALID_COLORS.has(c))
       ? (item.colors as CardColor[])
@@ -69,13 +79,13 @@ export function normalizeImportedCard(item: Record<string, unknown>, index: numb
   return {
     id: typeof item.id === 'string' && item.id ? item.id : `imported-${now}-${index}`,
     name: String(item.name || 'Untitled Card'),
-    cost,
+    ...(cost !== undefined && { cost }),
     type,
-    text: String(item.text || ''),
-    flavorText: String(item.flavorText || ''),
-    powerToughness: String(item.powerToughness || ''),
+    ...(text !== undefined && { text }),
+    ...(flavorText !== undefined && { flavorText }),
+    ...(powerToughness !== undefined && { powerToughness }),
     rarity: (VALID_RARITIES.has(item.rarity as string) ? item.rarity : 'C') as Rarity,
-    artist: String(item.artist || ''),
+    ...(artist !== undefined && { artist }),
     source: String(item.source || 'Custom Import'),
     colors,
     ...(backFace && { backFace }),

@@ -1,7 +1,19 @@
 import { describe, expect, it } from 'vitest';
+import { mapCard, type MapContext } from '../scryfall/mapCard';
+import { syncImported } from '../scryfall/merge';
+import type { ScryfallCard } from '../scryfall/types';
 import type { Card } from '../types/card';
 import { determineColors } from './cardHelpers';
 import { normalizeImportedCard } from './cardImport';
+import basic from '../scryfall/__fixtures__/basic.json';
+import emblem from '../scryfall/__fixtures__/emblem.json';
+import normal from '../scryfall/__fixtures__/normal.json';
+import planeswalker from '../scryfall/__fixtures__/planeswalker.json';
+import split from '../scryfall/__fixtures__/split.json';
+import token from '../scryfall/__fixtures__/token.json';
+import transform from '../scryfall/__fixtures__/transform.json';
+
+const ctx: MapContext = { setCode: 'NEO', setName: 'Kamigawa: Neon Dynasty', importedAt: '2026-10-26T00:00:00.000Z' };
 
 const full: Card = {
   id: 'scry:abc',
@@ -64,5 +76,38 @@ describe('normalizeImportedCard', () => {
 
   it('export then import round-trips a Scryfall card', () => {
     expect(normalizeImportedCard(JSON.parse(JSON.stringify(full)), 0)).toEqual(full);
+  });
+
+  it('round-trips a card without the optional text fields exactly, adding no empty strings', () => {
+    const partial: Card = {
+      id: 'scry:tok',
+      name: 'Spirit',
+      type: 'Token Creature — Spirit',
+      rarity: 'T',
+      source: 'scryfall:tneo',
+      colors: ['Colorless'],
+      setCode: 'NEO',
+      scryfall: { id: 'tok', importedAt: '2026-10-26T00:00:00.000Z' },
+    };
+    expect(normalizeImportedCard(JSON.parse(JSON.stringify(partial)), 0)).toStrictEqual(partial);
+    // Empty strings in the file are dropped too; the name and type keep their defaults.
+    const blank = normalizeImportedCard({ id: 'x', cost: '', text: '', flavorText: '', powerToughness: '', artist: '' }, 0);
+    expect(blank).toStrictEqual({ id: 'x', name: 'Untitled Card', type: 'Card', rarity: 'C', source: 'Custom Import', colors: ['Colorless'] });
+  });
+
+  it.each([
+    ['normal', normal],
+    ['basic land', basic],
+    ['token', token],
+    ['emblem', emblem],
+    ['transform', transform],
+    ['planeswalker', planeswalker],
+    ['split', split],
+  ])('a JSON export of an imported %s re-imports as unchanged', (_, fixture) => {
+    const mapped = mapCard(fixture as ScryfallCard, ctx);
+    if (!mapped) throw new Error('fixture mapped to null');
+    const restored = normalizeImportedCard(JSON.parse(JSON.stringify(mapped)), 0);
+    const sync = syncImported([restored], [mapped], [mapped.setCode ?? '']);
+    expect(sync).toMatchObject({ unchanged: 1, updated: 0, added: 0, removed: 0 });
   });
 });
