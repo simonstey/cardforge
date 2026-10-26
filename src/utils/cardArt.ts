@@ -33,6 +33,12 @@ export interface CardArt {
   fullBackSrc?: string;
 }
 
+/** Scryfall `art` (art crop) and `display` scan sizes in pixels. */
+const SCRYFALL_ART_W = 626;
+const SCRYFALL_ART_H = 457;
+const SCRYFALL_FULL_W = 672;
+const SCRYFALL_FULL_H = 936;
+
 /** Asset paths are relative so the app works under a sub-path (GitHub Pages). */
 const asset = (path: string) => `${import.meta.env?.BASE_URL ?? './'}${path}`;
 
@@ -42,6 +48,19 @@ const asset = (path: string) => `${import.meta.env?.BASE_URL ?? './'}${path}`;
  */
 export function getCardArt(card: Card, variantSeed = 0): CardArt | null {
   if (card.customImageUrl) return { src: card.customImageUrl };
+
+  // Imported cards use only their own remote images: never the SWTG manifest or land variants.
+  if (card.scryfall) {
+    const { art, full, fullBack } = card.scryfall.image ?? {};
+    const src = art ?? full;
+    if (!src) return null;
+    return {
+      src,
+      ...(art && { width: SCRYFALL_ART_W, height: SCRYFALL_ART_H }),
+      ...(full && { fullSrc: full, fullWidth: SCRYFALL_FULL_W, fullHeight: SCRYFALL_FULL_H }),
+      ...(fullBack && { fullBackSrc: fullBack }),
+    };
+  }
 
   const entry = (card.artKey && manifest.cards[card.artKey]) || manifest.cards[`${card.source}::${card.name}`];
 

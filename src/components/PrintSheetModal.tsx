@@ -208,12 +208,12 @@ export const PrintSheetModal: React.FC<PrintSheetModalProps> = ({ packs, onClose
                           >
                             {slot &&
                               (src ? (
-                                <img src={src} alt={slot.card.name} loading="lazy" className="size-full object-cover" />
+                                <img src={src} alt={slot.card.name} crossOrigin="anonymous" loading="lazy" className="size-full object-cover" />
                               ) : (
                                 <div aria-hidden className="flex size-full flex-col bg-white p-[6%] text-stone-900">
                                   <span className="truncate text-[0.5rem] font-bold leading-tight">{slot.card.name}</span>
                                   <span className="mt-[4%] block aspect-[55/28] w-full overflow-hidden bg-stone-300">
-                                    {art && <img src={art.src} alt="" loading="lazy" className="size-full object-cover" />}
+                                    {art && <img src={art.src} alt="" crossOrigin="anonymous" loading="lazy" className="size-full object-cover" />}
                                   </span>
                                   <span className="mt-auto truncate text-[0.45rem] text-stone-600">#{slot.packNumber}</span>
                                 </div>

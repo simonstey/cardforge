@@ -36,6 +36,8 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
   const art = getCardArt(card, artSeed);
   const isMythic = card.rarity === 'M';
   const isRare = card.rarity === 'R';
+  // Real scans get no sheen overlay, so a foil one is marked by its frame instead.
+  const foilRing = Boolean(isFoil && card.scryfall);
   const pips = colorPips(card);
   const hasText = Boolean(card.text || card.flavorText);
 
@@ -44,8 +46,7 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
       className={cx(
         '@container relative flex size-full flex-col gap-1 overflow-hidden rounded-[0.8rem] border-2 bg-gradient-to-b p-1.5 text-left',
         mana.frame,
-        isMythic && 'ring-1 ring-rarity-m/70',
-        isRare && 'ring-1 ring-rarity-r/50'
+        foilRing ? 'ring-2 ring-foil/70' : isMythic ? 'ring-1 ring-rarity-m/70' : isRare && 'ring-1 ring-rarity-r/50'
       )}
     >
       {/* Title bar */}
@@ -72,6 +73,7 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
             width={art.width}
             height={art.height}
             alt=""
+            crossOrigin="anonymous"
             loading={eagerArt ? 'eager' : 'lazy'}
             decoding="async"
             draggable={false}
@@ -86,7 +88,7 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
             </span>
           </span>
         )}
-        {(isFoil || isMythic) && (
+        {(isFoil || isMythic) && !card.scryfall && (
           <span
             aria-hidden
             className={cx(

@@ -29,6 +29,8 @@ interface PreparedImage {
 async function loadAsJpeg(url: string, aspect?: number): Promise<string | null> {
   try {
     const img = new Image();
+    // CORS mode, or the canvas is tainted and remote art cannot be exported.
+    img.crossOrigin = 'anonymous';
     img.src = url;
     await img.decode();
     const sw = img.naturalWidth;

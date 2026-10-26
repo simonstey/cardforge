@@ -61,6 +61,7 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
                     src={showBack && art.fullBackSrc ? art.fullBackSrc : art.fullSrc}
                     width={art.fullWidth}
                     height={art.fullHeight}
+                    crossOrigin="anonymous"
                     alt={`Original card scan of ${card.name}${showBack ? ', back face' : ''}`}
                     className="w-full h-auto rounded-[0.9rem] shadow-xl shadow-black/60"
                   />
