@@ -417,6 +417,11 @@ export default function App() {
           </p>
           <p>Print sheets use the standard 63 × 88 mm card size (2.5 × 3.5 in).</p>
         </div>
+        {cards.some(c => c.scryfall) && (
+          <p className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
+            Magic: The Gathering card data and images via Scryfall. CardForge is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.
+          </p>
+        )}
       </footer>
     </div>
   );

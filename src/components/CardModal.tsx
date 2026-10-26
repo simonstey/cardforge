@@ -30,7 +30,7 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
   const setName = card.source
     ? `${setDisplayName(setCode, [card])}${card.rarity === 'T' ? ' · Tokens' : card.rarity === 'L' ? ' · Basic lands' : ''}`
     : undefined;
-  const hasBack = Boolean(card.backFace || art?.fullBackSrc);
+  const hasBack = Boolean(card.backFace);
   // The face whose text is shown: the back face's details when it is turned over.
   const face = showBack && card.backFace ? card.backFace : card;
 
@@ -45,7 +45,7 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
             <p className="text-sm text-fg-muted">{face.type}</p>
           </div>
           <div className="flex items-center gap-3">
-            {!showBack && <ManaCost cost={card.cost} size="md" />}
+            <ManaCost cost={showBack && card.backFace ? card.backFace.cost : card.cost} size="md" />
             <IconButton label="Close" variant="ghost" onClick={onClose} autoFocus>
               <X aria-hidden className="size-5" />
             </IconButton>
@@ -62,20 +62,20 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
                     width={art.fullWidth}
                     height={art.fullHeight}
                     crossOrigin="anonymous"
-                    alt={`Original card scan of ${card.name}${showBack ? ', back face' : ''}`}
+                    alt={`Original card scan of ${card.name}${showBack && art.fullBackSrc ? ', back face' : ''}`}
                     className="w-full h-auto rounded-[0.9rem] shadow-xl shadow-black/60"
                   />
-                  {hasBack && (
-                    <Button aria-pressed={showBack} onClick={() => setShowBack(b => !b)} className="mt-3 w-full">
-                      <Repeat2 aria-hidden className="size-4" />
-                      {showBack ? 'Show front face' : 'Show other face'}
-                    </Button>
-                  )}
                 </>
               ) : (
                 <div inert>
-                  <CardItem card={card} eagerArt />
+                  <CardItem card={showBack && card.backFace ? { ...card, ...card.backFace } : card} eagerArt />
                 </div>
+              )}
+              {hasBack && (
+                <Button aria-pressed={showBack} onClick={() => setShowBack(b => !b)} className="mt-3 w-full">
+                  <Repeat2 aria-hidden className="size-4" />
+                  {showBack ? 'Show front face' : 'Show other face'}
+                </Button>
               )}
             </div>
 
@@ -124,6 +124,20 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
 
               <p className="px-1 text-sm text-fg-muted">
                 Illustrated by <span className="text-fg-soft">{card.artist || 'an unknown artist'}</span>
+                {card.scryfall && ' · © Wizards of the Coast'}
+                {card.scryfall?.uri && (
+                  <>
+                    {' · '}
+                    <a
+                      href={card.scryfall.uri}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-fg-soft underline decoration-line-strong underline-offset-3 hover:text-accent-fg hover:decoration-accent-fg"
+                    >
+                      View on Scryfall
+                    </a>
+                  </>
+                )}
               </p>
             </div>
           </div>
