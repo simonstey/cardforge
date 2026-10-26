@@ -1,6 +1,6 @@
 # Scryfall import — design
 
-Status: draft for approval · 2026-10-26 · branch `feat/scryfall-import`
+Status: approved 2026-10-26 (amended during implementation: token rules R8/R13) · branch `feat/scryfall-import`
 
 Consolidates `docs/plan.md` (first import plan) with the verified research in `docs/scryfall-api.md`. Where they disagree, this document wins. `docs/scryfall-api.md` remains the API reference: limits, CORS, image keys, layouts and licensing quotes.
 
@@ -153,7 +153,7 @@ Detect by the presence of images, not by a layout whitelist, so new layouts degr
 | `backFace` | `card_faces[1]` for every card with ≥ 2 faces: name, type, text, flavour, P/T, `cost` = face `mana_cost`. |
 | `rarity` | Layout `token`/`double_faced_token`/`emblem` → `T`; `type_line` matching `/\bBasic\b/` and `/\bLand\b/` → `L`; `common`→`C`, `uncommon`→`U`, `rare`→`R`, `mythic`→`M`, `special`/`bonus`→`R`. |
 | `colors` | Root `colors`, else the union of `card_faces[].colors`. `[]` → `['Colorless']`; 1 → `[c]`; ≥ 2 → `['Multicolor', …]`. Same shape as `determineColors`, so `frameIdentity`, filters and collation keep working. |
-| `setCode` / `setName` | `set.toUpperCase()` / `set_name`. Tokens take the **parent** set's code and name (passed in by the importer), so they share the set chip. |
+| `setCode` / `setName` | `set.toUpperCase()` / `set_name`. Tokens take the **parent** set's code and name (passed in by the importer), so they share the set chip. Any card that is token-like — token layouts **or** a card from a `set_type: token` set — gets rarity `T` and the parent context *(amended, R8)*. |
 | `collectorNumber` | `collector_number`. |
 | `source` | `scryfall:${set}`. |
 | `scryfall.image.art` | Face-or-root `image_uris.art`, then `art_crop`. |
@@ -170,7 +170,7 @@ Not mapped: prices, legalities, keywords, purchase/related URIs, `all_parts`.
 Defaults, each switchable in the dialog:
 
 - **Booster cards only** (on): keep `booster === true`. For NEO that's 302 of 514 printings, the main sheet including basics. With it off, every printing is imported (showcase, borderless, extended art, promo-pack).
-- **Include tokens** (off): also fetch the token set (the `/sets` entry with `parent_set_code === code` and `set_type === 'token'`), all printings.
+- **Include tokens** (off): also fetch the token set, all printings. The token set for a parent is the `t<code>` set when present, else a `set_type: token` child whose name ends in "Tokens", else none; substitute/helper sets (e.g. `sneo`) are not folded in. Same rule on the API and bulk paths; with no set list the API path probes `e:t<code>`; a token set picked on its own imports as tokens under its own code *(amended, R13)*.
 - Always: `games` includes `paper` when the field is present; `mapCard` doesn't return `null`; `lang` is whatever the search returns (English by default).
 
 ### 6.5 API client (`client.ts`)
