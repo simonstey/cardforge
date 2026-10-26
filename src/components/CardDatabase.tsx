@@ -7,7 +7,7 @@ import { normalizeImportedCard } from '../utils/cardImport';
 import { plainRulesText } from '../utils/rulesText';
 import { Button, IconButton, ToggleChip } from './ui/Button';
 import { useToast } from './ui/Toast';
-import { Search, Plus, Download, Upload, Pencil, Trash2, Database, SearchX } from 'lucide-react';
+import { Search, Plus, Download, Upload, Pencil, Trash2, Database, SearchX, CloudDownload } from 'lucide-react';
 
 interface CardDatabaseProps {
   cards: Card[];
@@ -16,6 +16,7 @@ interface CardDatabaseProps {
   onDeleteCard: (id: string) => void;
   onInspectCard: (card: Card) => void;
   onImportCards: (cards: Card[]) => void;
+  onOpenScryfallImport: () => void;
 }
 
 type RarityFilter = Rarity | 'ALL';
@@ -28,6 +29,7 @@ export const CardDatabase: React.FC<CardDatabaseProps> = ({
   onDeleteCard,
   onInspectCard,
   onImportCards,
+  onOpenScryfallImport,
 }) => {
   const id = useId();
   const toast = useToast();
@@ -141,6 +143,10 @@ export const CardDatabase: React.FC<CardDatabaseProps> = ({
 
           <div className="flex items-center gap-2 flex-wrap">
             <input ref={fileInput} type="file" accept=".json,application/json" onChange={handleImportJson} className="hidden" />
+            <Button onClick={onOpenScryfallImport}>
+              <CloudDownload aria-hidden className="size-4" />
+              Import from Scryfall
+            </Button>
             <Button onClick={() => fileInput.current?.click()}>
               <Upload aria-hidden className="size-4" />
               Import JSON

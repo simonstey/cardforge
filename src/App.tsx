@@ -10,6 +10,9 @@ import { BoosterSimulator } from './components/BoosterSimulator';
 import { CardDatabase } from './components/CardDatabase';
 import { CardModal } from './components/CardModal';
 import { CardEditorDialog } from './components/CardEditorDialog';
+import { ScryfallImportDialog } from './components/ScryfallImportDialog';
+import { describeSync, removeImportedSet, type SyncResult } from './scryfall/merge';
+import { setDisplayName } from './utils/cardHelpers';
 import { Button, IconButton } from './components/ui/Button';
 import { useToast } from './components/ui/Toast';
 import { cx } from './components/ui/cx';
@@ -33,6 +36,12 @@ const DEFAULT_CONFIG: BoosterSlotConfig = {
   balanceColorsInCommons: true,
   // Saved configs are merged over these defaults, so foils stay off for existing users.
   foilRate: 0,
+};
+
+/** Stands in for the store when the database couldn't be opened: the set list is just never cached. */
+const NO_CACHE: Pick<CardStore, 'getCache' | 'setCache'> = {
+  getCache: async () => undefined,
+  setCache: async () => {},
 };
 
 type View = 'simulator' | 'database';
@@ -80,6 +89,7 @@ export default function App() {
   const [inspecting, setInspecting] = useState<{ card: Card; artSeed?: number } | null>(null);
   const [editor, setEditor] = useState<EditorState>(null);
   const [isPrintModalOpen, setIsPrintModalOpen] = useState<boolean>(false);
+  const [isScryfallOpen, setIsScryfallOpen] = useState<boolean>(false);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
   useEffect(() => {
@@ -205,6 +215,29 @@ export default function App() {
     });
   };
 
+  const handleApplyImport = (result: SyncResult, label: string) => {
+    const previous = cards;
+    setCards(result.cards);
+    toast({
+      message: describeSync(result, label),
+      actionLabel: 'Undo',
+      onAction: () => setCards(previous),
+      duration: 8000,
+    });
+  };
+
+  const handleRemoveImportedSet = (code: string) => {
+    const previous = cards;
+    const { cards: kept, removed } = removeImportedSet(cards, code);
+    setCards(kept);
+    toast({
+      message: `Removed ${removed} ${removed === 1 ? 'card' : 'cards'} from ${setDisplayName(code, cards)}.`,
+      actionLabel: 'Undo',
+      onAction: () => setCards(previous),
+      duration: 8000,
+    });
+  };
+
   const navItems: { view: View; label: string; count: number; Icon: typeof Package }[] = [
     { view: 'simulator', label: 'Booster Packs', count: packs.length, Icon: Package },
     { view: 'database', label: 'Card Database', count: cards.length, Icon: Database },
@@ -314,6 +347,7 @@ export default function App() {
             onDeleteCard={handleDeleteCard}
             onInspectCard={card => setInspecting({ card })}
             onImportCards={handleImportCards}
+            onOpenScryfallImport={() => setIsScryfallOpen(true)}
           />
         )}
       </main>
@@ -348,6 +382,16 @@ export default function App() {
           card={editor.mode === 'edit' ? editor.card : null}
           onCancel={() => setEditor(null)}
           onSave={handleSaveCard}
+        />
+      )}
+
+      {isScryfallOpen && (
+        <ScryfallImportDialog
+          cards={cards}
+          cache={store ?? NO_CACHE}
+          onApply={handleApplyImport}
+          onRemoveSet={handleRemoveImportedSet}
+          onClose={() => setIsScryfallOpen(false)}
         />
       )}
 
