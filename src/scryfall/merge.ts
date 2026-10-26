@@ -110,7 +110,8 @@ export function describeSync(result: SyncResult, label: string): string {
   const notes = [
     result.updated && `${result.updated} updated`,
     result.removed && `${result.removed} removed`,
-    result.protected && `${result.protected} kept because you edited them`,
+    result.protected && `${result.protected} kept because you edited ${result.protected === 1 ? 'it' : 'them'}`,
   ].filter(Boolean);
-  return `Imported ${result.imported} cards from ${label}${notes.length ? ` (${notes.join(', ')})` : ''}`;
+  const cards = `${result.imported} ${result.imported === 1 ? 'card' : 'cards'}`;
+  return `Imported ${cards} from ${label}${notes.length ? ` (${notes.join(', ')})` : ''}`;
 }

@@ -29,7 +29,7 @@ export const ImportPreviewPanel: React.FC<ImportPreviewPanelProps> = ({ preview,
     { n: sync.updated, label: 'updated' },
     { n: sync.unchanged, label: 'unchanged' },
     { n: sync.removed, label: 'removed' },
-    { n: sync.protected, label: 'kept because you edited them' },
+    { n: sync.protected, label: `kept because you edited ${sync.protected === 1 ? 'it' : 'them'}` },
   ].filter(c => c.n > 0);
 
   return (

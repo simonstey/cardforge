@@ -426,6 +426,9 @@ test('buildPreview counts rarities, skips art series and warns on unknown layout
   const plain = buildPreview([target({ cards: [neo('c')] })], ALL, [], NOW);
   expect(plain.warnings).toEqual([]);
   expect(plain.skipped).toBe(0);
+
+  const one = buildPreview([target({ cards: [neo('c'), neo('m1', { layout: 'mystery' })] })], ALL, [], NOW);
+  expect(one.warnings).toEqual(['1 card has an unfamiliar layout (mystery) and was imported as a normal card.']);
 });
 
 test('buildPreview assigns tokens to the parent set', () => {

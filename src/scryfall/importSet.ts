@@ -162,9 +162,12 @@ export function buildPreview(
   for (const card of incoming) byRarity[card.rarity]++;
 
   const layouts = [...unknownLayouts].join(', ');
-  const warnings = unfamiliar
-    ? [`${unfamiliar} cards have an unfamiliar layout (${layouts}) and were imported as normal cards.`]
-    : [];
+  const warnings =
+    unfamiliar === 1
+      ? [`1 card has an unfamiliar layout (${layouts}) and was imported as a normal card.`]
+      : unfamiliar
+        ? [`${unfamiliar} cards have an unfamiliar layout (${layouts}) and were imported as normal cards.`]
+        : [];
 
   return {
     targets: targets.map(({ code, name }) => ({ code, name })),

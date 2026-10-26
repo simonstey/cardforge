@@ -138,3 +138,13 @@ test('describeSync omits zero counts', () => {
   expect(describeSync({ ...zero, imported: 5, removed: 1 }, 'NEO')).toBe('Imported 5 cards from NEO (1 removed)');
   expect(describeSync({ ...zero, imported: 5 }, 'NEO')).toBe('Imported 5 cards from NEO');
 });
+
+test('describeSync uses the singular for one card', () => {
+  expect(describeSync({ ...zero, imported: 1 }, 'NEO')).toBe('Imported 1 card from NEO');
+  expect(describeSync({ ...zero, imported: 1, protected: 1 }, 'NEO')).toBe(
+    'Imported 1 card from NEO (1 kept because you edited it)',
+  );
+  expect(describeSync({ ...zero, imported: 3, updated: 1, removed: 1, protected: 1 }, 'NEO')).toBe(
+    'Imported 3 cards from NEO (1 updated, 1 removed, 1 kept because you edited it)',
+  );
+});
