@@ -1,6 +1,7 @@
 import React, { useId, useState } from 'react';
 import { Card, Rarity } from '../types/card';
 import { determineColors, colorPips, MANA, RARITY, RARITY_ORDER } from '../utils/cardHelpers';
+import { markUserModified } from '../scryfall/merge';
 import { Dialog } from './ui/Dialog';
 import { Button, IconButton } from './ui/Button';
 import { X } from 'lucide-react';
@@ -69,7 +70,7 @@ export const CardEditorDialog: React.FC<CardEditorDialogProps> = ({ card, onCanc
       colors,
     };
     if (card) {
-      onSave({ ...card, ...fields }, false);
+      onSave(markUserModified({ ...card, ...fields }), false);
     } else {
       onSave({ id: `card-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`, ...fields }, true);
     }

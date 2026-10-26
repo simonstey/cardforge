@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useRef, useId } from 'react';
 import { Card, Rarity, CardColor } from '../types/card';
 import { CardItem } from './CardItem';
-import { determineColors, MANA, MANA_ORDER, RARITY, RARITY_ORDER } from '../utils/cardHelpers';
+import { MANA, MANA_ORDER, RARITY, RARITY_ORDER } from '../utils/cardHelpers';
 import { playClickSound } from '../utils/audioFeedback';
+import { normalizeImportedCard } from '../utils/cardImport';
 import { plainRulesText } from '../utils/rulesText';
 import { Button, IconButton, ToggleChip } from './ui/Button';
 import { useToast } from './ui/Toast';
@@ -19,8 +20,6 @@ interface CardDatabaseProps {
 
 type RarityFilter = Rarity | 'ALL';
 type ColorFilter = CardColor | 'ALL';
-
-const VALID_RARITIES = new Set<string>(RARITY_ORDER);
 
 export const CardDatabase: React.FC<CardDatabaseProps> = ({
   cards,
@@ -110,25 +109,14 @@ export const CardDatabase: React.FC<CardDatabaseProps> = ({
         return;
       }
 
-      const entries = parsed.filter((item): item is Record<string, any> => !!item && typeof item === 'object');
+      const entries = parsed.filter((item): item is Record<string, unknown> => !!item && typeof item === 'object');
       if (entries.length === 0) {
         toast({ tone: 'error', message: 'No card objects found in the file. Nothing was imported.' });
         return;
       }
 
-      const imported = entries.map((item, idx) => ({
-        id: typeof item.id === 'string' && item.id ? item.id : `imported-${Date.now()}-${idx}`,
-        name: String(item.name || 'Untitled Card'),
-        cost: String(item.cost || ''),
-        type: String(item.type || 'Card'),
-        text: String(item.text || ''),
-        flavorText: String(item.flavorText || ''),
-        powerToughness: String(item.powerToughness || ''),
-        rarity: (VALID_RARITIES.has(item.rarity) ? item.rarity : 'C') as Rarity,
-        artist: String(item.artist || ''),
-        source: String(item.source || 'Custom Import'),
-        colors: determineColors(item.cost, item.type),
-      }));
+      const now = Date.now();
+      const imported = entries.map((item, idx) => normalizeImportedCard(item, idx, now));
 
       onImportCards(imported);
     };
