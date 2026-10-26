@@ -1,5 +1,5 @@
 import { gzipSync } from 'node:zlib';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   collectBulk,
   isGzip,
@@ -75,6 +75,49 @@ describe('readBulkStream', () => {
     expect(got[3]).toMatchObject({ set_name: 'Ünïcode ☃' });
     expect(r.malformed).toBe(0);
     expect(seen[seen.length - 1]).toBe(bytes.length);
+  });
+
+  it('stops reading and cancels the source when the signal aborts', async () => {
+    let cancelled = false;
+    let pulls = 0;
+    const stream = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        // Finite, so a reader that ignores the signal fails the test instead of hanging it.
+        if (++pulls > 1000) controller.close();
+        else controller.enqueue(enc(jsonl([card(String(pulls), 'neo')])));
+      },
+      cancel() {
+        cancelled = true;
+      },
+    });
+    const controller = new AbortController();
+    const got: unknown[] = [];
+    const read = readBulkStream(stream, false, c => {
+      got.push(c);
+      if (got.length === 2) controller.abort();
+    }, undefined, controller.signal);
+    await expect(read).rejects.toMatchObject({ name: 'AbortError' });
+    await vi.waitFor(() => expect(cancelled).toBe(true));
+    expect(got).toHaveLength(2);
+  });
+
+  it('lets timers run during a long cancellable read, so a cancel message can arrive', async () => {
+    const lines = enc(jsonl(Array.from({ length: 50 }, (_, i) => card(String(i), 'neo'))));
+    let pulls = 0;
+    // Synchronous pulls: without a yield, the whole read runs on microtasks.
+    const stream = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        if (++pulls > 4000) controller.close();
+        else controller.enqueue(lines);
+      },
+    });
+    const controller = new AbortController();
+    setTimeout(() => controller.abort(), 0);
+    let cards = 0;
+    await expect(readBulkStream(stream, false, () => cards++, undefined, controller.signal)).rejects.toMatchObject({
+      name: 'AbortError',
+    });
+    expect(cards).toBeLessThan(4000 * 50);
   });
 
   it('flushes a final line without trailing newline', async () => {

@@ -36,7 +36,7 @@ export const ImportOptionsFields: React.FC<{ value: ImportOptions; onChange: (ne
       checked={value.includeTokens}
       onChange={includeTokens => onChange({ ...value, includeTokens })}
       title="Include tokens"
-      hint="Also fetches the set’s tokens"
+      hint="Also imports the set’s tokens"
     />
   </div>
 );

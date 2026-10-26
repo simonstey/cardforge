@@ -16,16 +16,21 @@ function cleanLine(raw: string): string {
   return line;
 }
 
+/** How often a cancellable read yields to the event loop (ms). */
+const YIELD_EVERY_MS = 50;
+
 /**
  * Stream a Scryfall bulk file (JSONL or legacy one-card-per-line JSON array) card by card.
  * `onBytes` receives the cumulative number of source (compressed, if gzip) bytes read.
- * Never buffers more than one chunk plus one partial line.
+ * Never buffers more than one chunk plus one partial line. An aborted `signal` cancels the
+ * source and rejects with the signal's reason.
  */
 export async function readBulkStream(
   stream: ReadableStream<Uint8Array>,
   gzip: boolean,
   onCard: (card: unknown) => void,
   onBytes?: (bytes: number) => void,
+  signal?: AbortSignal,
 ): Promise<{ malformed: number }> {
   let total = 0;
   const counter = new TransformStream<Uint8Array, Uint8Array>({
@@ -57,7 +62,21 @@ export async function readBulkStream(
   };
 
   let carry = '';
+  let yielded = performance.now();
   for (;;) {
+    if (signal) {
+      // In Chromium a fast file read can run for seconds without a task boundary, so a worker
+      // wouldn't see a cancel message until the end. A timer gives the message its turn.
+      if (performance.now() - yielded >= YIELD_EVERY_MS) {
+        await new Promise(resolve => setTimeout(resolve, 0));
+        yielded = performance.now();
+      }
+      if (signal.aborted) {
+        // Not awaited: the cancel only has to reach the source, and nothing else waits on it.
+        reader.cancel(signal.reason).catch(() => {});
+        throw signal.reason;
+      }
+    }
     const { done, value } = await reader.read();
     if (done) break;
     const parts = (carry + value).split('\n');
@@ -77,6 +96,7 @@ async function readBlob(
   file: Blob,
   onCard: (card: unknown) => void,
   onProgress?: (read: number, total: number) => void,
+  signal?: AbortSignal,
 ): Promise<{ malformed: number }> {
   const gzip = await isGzip(file);
   return readBulkStream(
@@ -84,12 +104,14 @@ async function readBlob(
     gzip,
     onCard,
     onProgress && (read => onProgress(read, file.size)),
+    signal,
   );
 }
 
 export async function scanBulk(
   file: Blob,
   onProgress?: (read: number, total: number) => void,
+  signal?: AbortSignal,
 ): Promise<{ sets: BulkSetSummary[]; malformed: number }> {
   const sets = new Map<string, BulkSetSummary>();
   const { malformed } = await readBlob(
@@ -102,6 +124,7 @@ export async function scanBulk(
       else sets.set(c.set, { code: c.set, name: c.set_name ?? c.set, setType: c.set_type ?? '', count: 1 });
     },
     onProgress,
+    signal,
   );
   return { sets: [...sets.values()], malformed };
 }
@@ -110,6 +133,7 @@ export async function collectBulk(
   file: Blob,
   codes: string[],
   onProgress?: (read: number, total: number) => void,
+  signal?: AbortSignal,
 ): Promise<{ cards: ScryfallCard[]; malformed: number }> {
   const wanted = new Set(codes);
   const cards: ScryfallCard[] = [];
@@ -120,6 +144,7 @@ export async function collectBulk(
       if (c && wanted.has(c.set)) cards.push(c);
     },
     onProgress,
+    signal,
   );
   return { cards, malformed };
 }

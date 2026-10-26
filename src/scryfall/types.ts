@@ -48,6 +48,8 @@ export interface ScryfallCard {
   lang?: string;
   games?: string[];
   booster?: boolean;
+  /** A rare variant of another printing; `/cards/search` leaves these out by default. */
+  variation?: boolean;
   digital?: boolean;
   image_status?: string;
   mana_cost?: string;

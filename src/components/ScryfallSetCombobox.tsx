@@ -4,12 +4,13 @@ import { cx } from './ui/cx';
 
 /**
  * Sets whose code or name contains `query`, case-insensitively. An exact code or name comes
- * first, then code prefixes, then the rest; ties keep the list's order (newest first).
+ * first, then code prefixes, then the rest; ties keep the list's order. The bulk tab filters its
+ * scanned sets with it too.
  */
-export function matchSets(sets: ScryfallSet[], query: string): ScryfallSet[] {
+export function matchSets<T extends { code: string; name: string }>(sets: T[], query: string): T[] {
   const q = query.trim().toLowerCase();
   if (!q) return sets;
-  const rank = (s: ScryfallSet) => (s.code === q || s.name.toLowerCase() === q ? 0 : s.code.startsWith(q) ? 1 : 2);
+  const rank = (s: T) => (s.code === q || s.name.toLowerCase() === q ? 0 : s.code.startsWith(q) ? 1 : 2);
   return sets.filter(s => s.code.includes(q) || s.name.toLowerCase().includes(q)).sort((a, b) => rank(a) - rank(b));
 }
 
