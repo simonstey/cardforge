@@ -31,6 +31,7 @@ const STORE_NAME = 'kv';
 
 const LEGACY_CARDS_KEY = 'cardforge_custom_cards_v1';
 const LEGACY_VERSION_KEY = 'cardforge_card_set_version';
+const CORRUPT_BACKUP_KEY = 'cardforge_custom_cards_v1_corrupt';
 const CACHE_PREFIX = 'cardforge_cache_';
 
 /** Runs one request in its own transaction and settles once the transaction has committed. */
@@ -122,6 +123,21 @@ async function toLoaded(kv: KeyValueStore, cards: unknown): Promise<LoadedCards>
   return { cards, version: Number(await kv.get('cardSetVersion')) || 1 };
 }
 
+/**
+ * localStorage mode saves over the legacy key, so a database the loader can't use is first copied
+ * to a backup key (unless a backup already exists). Throws if the copy can't be written.
+ */
+function backUpUnusable(storage: Storage): void {
+  const raw = storage.getItem(LEGACY_CARDS_KEY);
+  if (raw === null || storage.getItem(CORRUPT_BACKUP_KEY) !== null) return;
+  try {
+    if (Array.isArray(JSON.parse(raw))) return;
+  } catch {
+    // Unparseable: back it up.
+  }
+  storage.setItem(CORRUPT_BACKUP_KEY, raw);
+}
+
 /** Read errors fall back to "nothing saved", as the old loader did. */
 async function loadLegacy(legacy: KeyValueStore): Promise<LoadedCards> {
   try {
@@ -139,7 +155,7 @@ interface CacheEntry<T> {
 
 /**
  * Opens the card database in IndexedDB, or in localStorage when IndexedDB is unavailable or
- * fails to open. With IndexedDB, the first load migrates a localStorage database.
+ * fails to open. With IndexedDB, a localStorage database is migrated before the first load or save.
  */
 export async function openCardStore(
   deps: { indexedDB?: IDBFactory | null; localStorage?: Storage } = {}
@@ -156,7 +172,20 @@ export async function openCardStore(
     : null;
   const kv = idb ?? legacy;
 
+  // IndexedDB: the one-time migration, decided by whether IndexedDB has `cards` yet.
   let migration: Promise<MigrationResult> | undefined;
+  const migrate = (target: KeyValueStore, cards: unknown) =>
+    (migration ??=
+      cards === undefined ? migrateLegacy(target, storage) : Promise.resolve<MigrationResult>('none'));
+  // localStorage: the one-time backup of an unusable database.
+  let backup: Promise<void> | undefined;
+  const backUp = () => (backup ??= (async () => backUpUnusable(storage))());
+  /** Every save waits for this, so it can't land before the legacy copy or the backup. */
+  const beforeSave = async () => {
+    if (!idb) return backUp();
+    await (migration ?? migrate(idb, await idb.get('cards')));
+  };
+
   let latestSave = 0;
   let saveQueue: Promise<void> = Promise.resolve();
 
@@ -164,21 +193,23 @@ export async function openCardStore(
     kind: idb ? 'indexeddb' : 'localstorage',
 
     async load() {
-      if (!idb) return loadLegacy(legacy);
-      let cards = await idb.get('cards');
-      if (cards === undefined) {
-        migration ??= migrateLegacy(idb, storage);
-        const result = await migration;
-        // Show a database that couldn't be copied over instead of starting empty.
-        if (result === 'kept-legacy') return loadLegacy(legacy);
-        if (result === 'migrated') cards = await idb.get('cards');
+      if (!idb) {
+        // A failed backup blocks saves (they reject with its error), so loading can go on.
+        await backUp().catch(e => console.error('Failed to back up the unreadable card database', e));
+        return loadLegacy(legacy);
       }
-      return toLoaded(idb, cards);
+      let cards = await idb.get('cards');
+      const result = await migrate(idb, cards);
+      if (cards === undefined && result === 'migrated') cards = await idb.get('cards');
+      const saved = await toLoaded(idb, cards);
+      // Show a database that couldn't be copied over instead of starting empty.
+      return saved.cards === null && result === 'kept-legacy' ? loadLegacy(legacy) : saved;
     },
 
     save(cards, version) {
       const ticket = ++latestSave;
       const result = saveQueue.then(async () => {
+        await beforeSave();
         if (ticket !== latestSave) return; // a newer save is queued and will write its state
         // Cards first: if only they land, the old version just makes the next load rebase them again.
         await kv.set('cards', cards);

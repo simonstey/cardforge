@@ -5,6 +5,7 @@ import { KeyValueStore, localStorageStore, migrateLegacy, openCardStore, openIdb
 
 const LEGACY_CARDS = 'cardforge_custom_cards_v1';
 const LEGACY_VERSION = 'cardforge_card_set_version';
+const CORRUPT_BACKUP = 'cardforge_custom_cards_v1_corrupt';
 
 const card: Card = { id: 'c1', name: 'Test Card', type: 'Creature', rarity: 'C', text: 'Flying' };
 
@@ -93,6 +94,53 @@ test('leaves an unparseable legacy database in place', async () => {
   expect(await store.load()).toEqual({ cards: null, version: 1 });
   expect(localStorage.getItem(LEGACY_CARDS)).toBe('{not json');
   expect(await migrateLegacy(await openIdbStore(indexedDB), localStorage)).toBe('kept-legacy');
+  expect(localStorage.getItem(LEGACY_CARDS)).toBe('{not json');
+});
+
+test('migrates the legacy database before a save that comes before the first load', async () => {
+  const put = vi.spyOn(IDBObjectStore.prototype, 'put');
+  const localStorage = legacyStorage();
+  const store = await openCardStore({ indexedDB: new IDBFactory(), localStorage });
+  const other = { ...card, id: 'c2' };
+  await store.save([other], 2);
+  // The legacy copy is committed first; the save then writes the latest state over it.
+  expect(put.mock.calls.map(([value, key]) => [key, value])).toEqual([
+    ['cardSetVersion', 2],
+    ['cards', [card]],
+    ['cards', [other]],
+    ['cardSetVersion', 2],
+  ]);
+  expect(localStorage.getItem(LEGACY_CARDS)).toBeNull();
+  expect(localStorage.getItem(LEGACY_VERSION)).toBeNull();
+  expect(await store.load()).toEqual({ cards: [other], version: 2 });
+});
+
+test('backs up an unparseable localStorage database before saving over it', async () => {
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+  const localStorage = memoryStorage({ [LEGACY_CARDS]: '{not json' });
+  const store = await openCardStore({ indexedDB: null, localStorage });
+  expect(await store.load()).toEqual({ cards: null, version: 1 });
+  expect(localStorage.getItem(CORRUPT_BACKUP)).toBe('{not json');
+  await store.save([card], 2);
+  expect(localStorage.getItem(CORRUPT_BACKUP)).toBe('{not json');
+  expect(localStorage.getItem(LEGACY_CARDS)).toBe(JSON.stringify([card]));
+  // Also when a save comes before any load.
+  const unloaded = memoryStorage({ [LEGACY_CARDS]: '{not json' });
+  await (await openCardStore({ indexedDB: null, localStorage: unloaded })).save([card], 2);
+  expect(unloaded.getItem(CORRUPT_BACKUP)).toBe('{not json');
+});
+
+test('does not save over an unparseable database it could not back up', async () => {
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+  const localStorage = memoryStorage({ [LEGACY_CARDS]: '{not json' });
+  const setItem = localStorage.setItem;
+  localStorage.setItem = (key, value) => {
+    if (key === CORRUPT_BACKUP) throw new DOMException('full', 'QuotaExceededError');
+    setItem(key, value);
+  };
+  const store = await openCardStore({ indexedDB: null, localStorage });
+  expect(await store.load()).toEqual({ cards: null, version: 1 });
+  await expect(store.save([card], 2)).rejects.toHaveProperty('name', 'QuotaExceededError');
   expect(localStorage.getItem(LEGACY_CARDS)).toBe('{not json');
 });
 
