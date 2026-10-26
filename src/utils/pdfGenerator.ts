@@ -19,14 +19,22 @@ export interface PdfExportOptions {
   newSheetPerPack?: boolean;
 }
 
-interface PreparedImage {
+interface JpegImage {
   data: string;
+  /** Pixel size of the encoded image. */
+  width: number;
+  height: number;
+}
+
+interface PreparedImage extends JpegImage {
   /** jsPDF alias, so each distinct image is embedded in the file once. */
   alias: string;
+  /** A whole real card standing in for art: fitted into the art box uncropped, never cut to fill it. */
+  contain?: boolean;
 }
 
 /** Decode an image and re-encode it as JPEG, center-cropped to `aspect` (w/h) when given. */
-async function loadAsJpeg(url: string, aspect?: number): Promise<string | null> {
+async function loadAsJpeg(url: string, aspect?: number): Promise<JpegImage | null> {
   try {
     const img = new Image();
     // CORS mode, or the canvas is tainted and remote art cannot be exported.
@@ -54,7 +62,7 @@ async function loadAsJpeg(url: string, aspect?: number): Promise<string | null> 
     const ctx = canvas.getContext('2d');
     if (!ctx) return null;
     ctx.drawImage(img, sx, sy, cw, ch, 0, 0, cw, ch);
-    return canvas.toDataURL('image/jpeg', 0.92);
+    return { data: canvas.toDataURL('image/jpeg', 0.92), width: cw, height: ch };
   } catch {
     return null;
   }
@@ -66,6 +74,13 @@ export const CARD_HEIGHT_MM = 88;
 
 /** Art box of the generated layout, in mm (see drawCardFace). */
 const LAYOUT_ART = { x: 4, y: 12.5, w: CARD_WIDTH_MM - 8, h: 28 };
+
+/** The largest `aspect` (w/h) rectangle that fits in `box`, centred in it. */
+export function fitInBox(box: { x: number; y: number; w: number; h: number }, aspect: number) {
+  const w = Math.min(box.w, box.h * aspect);
+  const h = w / aspect;
+  return { x: box.x + (box.w - w) / 2, y: box.y + (box.h - h) / 2, w, h };
+}
 
 export async function generatePrintPdf(
   packs: BoosterPack[],
@@ -117,7 +132,7 @@ export async function generatePrintPdf(
   const artAspect = LAYOUT_ART.w / LAYOUT_ART.h;
   const scanFor = new Map<PrintableItem, PreparedImage>();
   const artFor = new Map<PrintableItem, PreparedImage>();
-  const cache = new Map<string, Promise<string | null>>();
+  const cache = new Map<string, Promise<JpegImage | null>>();
   const load = (key: string, url: string, aspect?: number) => {
     if (!cache.has(key)) cache.set(key, loadAsJpeg(url, aspect));
     return cache.get(key)!;
@@ -131,12 +146,14 @@ export async function generatePrintPdf(
       const pack = packs.find(p => p.packNumber === item.packNumber);
       const art = getCardArt(item.card, item.packNumber * 31 + (pack ? pack.cards.indexOf(item.card) : 0));
       if (art?.fullSrc && faceStyle === 'scan') {
-        const data = await load(`scan:${art.fullSrc}`, art.fullSrc);
-        if (data) scanFor.set(item, { data, alias: `scan:${art.fullSrc}` });
+        const image = await load(`scan:${art.fullSrc}`, art.fullSrc);
+        if (image) scanFor.set(item, { ...image, alias: `scan:${art.fullSrc}` });
       }
       if (art && !scanFor.has(item)) {
-        const data = await load(`art:${art.src}`, art.src, artAspect);
-        if (data) artFor.set(item, { data, alias: `art:${art.src}` });
+        // Only art is cut to the art box; a whole card standing in for it keeps its edges.
+        const key = art.srcIsFull ? `fit:${art.src}` : `art:${art.src}`;
+        const image = await load(key, art.src, art.srcIsFull ? undefined : artAspect);
+        if (image) artFor.set(item, { ...image, alias: key, contain: art.srcIsFull });
       }
       loaded++;
       if (onProgress && loaded % 9 === 0) {
@@ -269,15 +286,24 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
   }
 
   // Art box: the card's artwork, or a neutral panel for cards without art
+  const box = { ...LAYOUT_ART, x: x + LAYOUT_ART.x, y: y + LAYOUT_ART.y };
   if (art) {
-    pdf.addImage(art.data, 'JPEG', x + LAYOUT_ART.x, y + LAYOUT_ART.y, LAYOUT_ART.w, LAYOUT_ART.h, art.alias);
+    if (art.contain) {
+      // A whole real card stands in for the art: letterboxed on the neutral panel, never cropped.
+      pdf.setFillColor(215, 222, 230);
+      pdf.rect(box.x, box.y, box.w, box.h, 'F');
+      const fit = fitInBox(box, art.width / art.height);
+      pdf.addImage(art.data, 'JPEG', fit.x, fit.y, fit.w, fit.h, art.alias);
+    } else {
+      pdf.addImage(art.data, 'JPEG', box.x, box.y, box.w, box.h, art.alias);
+    }
     pdf.setDrawColor(60, 60, 60);
     pdf.setLineWidth(0.2);
-    pdf.rect(x + LAYOUT_ART.x, y + LAYOUT_ART.y, LAYOUT_ART.w, LAYOUT_ART.h, 'D');
+    pdf.rect(box.x, box.y, box.w, box.h, 'D');
   } else {
     pdf.setFillColor(215, 222, 230);
     pdf.setDrawColor(120, 120, 120);
-    pdf.rect(x + LAYOUT_ART.x, y + LAYOUT_ART.y, LAYOUT_ART.w, LAYOUT_ART.h, 'FD');
+    pdf.rect(box.x, box.y, box.w, box.h, 'FD');
   }
 
   // Type line bar

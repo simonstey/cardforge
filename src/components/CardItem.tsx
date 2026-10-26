@@ -36,8 +36,9 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
   const art = getCardArt(card, artSeed);
   const isMythic = card.rarity === 'M';
   const isRare = card.rarity === 'R';
-  // Real scans get no sheen overlay, so a foil one is marked by its frame instead.
-  const foilRing = Boolean(isFoil && card.scryfall);
+  // Real scans get no sheen overlay, so a foil one gets a foil outline (plus the Foil tag) instead. It
+  // sits 1px outside the rarity ring, which stays, and gives way to the button's focus ring (2px out).
+  const foilOutline = Boolean(isFoil && card.scryfall);
   const pips = colorPips(card);
   const hasText = Boolean(card.text || card.flavorText);
 
@@ -46,7 +47,8 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
       className={cx(
         '@container relative flex size-full flex-col gap-1 overflow-hidden rounded-[0.8rem] border-2 bg-gradient-to-b p-1.5 text-left',
         mana.frame,
-        foilRing ? 'ring-2 ring-foil/70' : isMythic ? 'ring-1 ring-rarity-m/70' : isRare && 'ring-1 ring-rarity-r/50'
+        isMythic ? 'ring-1 ring-rarity-m/70' : isRare && 'ring-1 ring-rarity-r/50',
+        foilOutline && 'outline-2 outline-offset-1 outline-foil/70 group-focus-visible:outline-transparent'
       )}
     >
       {/* Title bar */}
@@ -77,7 +79,8 @@ const CardFace: React.FC<{ card: Card; isFoil?: boolean; artSeed?: number; eager
             loading={eagerArt ? 'eager' : 'lazy'}
             decoding="async"
             draggable={false}
-            className="absolute inset-0 size-full object-cover"
+            // A whole real card standing in for missing art is letterboxed, never cropped.
+            className={cx('absolute inset-0 size-full', art.srcIsFull ? 'object-contain' : 'object-cover')}
           />
         ) : (
           <span className="absolute inset-0 grid place-items-center bg-[radial-gradient(ellipse_at_top,rgb(255_255_255/0.08),transparent_70%)]">

@@ -32,9 +32,15 @@ test('uses scryfall images for basic lands instead of manifest variants', () => 
   expect(getCardArt(card)?.src).toBe('a');
 });
 
-test('falls back to the full image when art is missing', () => {
+test('falls back to the full image when art is missing, marked so it is never cropped', () => {
   const art = getCardArt({ ...base, scryfall: scry({ full: 'f' }) });
-  expect(art).toEqual({ src: 'f', fullSrc: 'f', fullWidth: 672, fullHeight: 936 });
+  expect(art).toStrictEqual({ src: 'f', srcIsFull: true, fullSrc: 'f', fullWidth: 672, fullHeight: 936 });
+});
+
+test('marks only the full-scan fallback', () => {
+  expect(getCardArt({ ...base, scryfall: scry({ art: 'a', full: 'f' }) })).not.toHaveProperty('srcIsFull');
+  expect(getCardArt({ ...base, scryfall: scry({ art: 'a' }) })).not.toHaveProperty('srcIsFull');
+  expect(getCardArt({ ...base, customImageUrl: 'data:custom' })).not.toHaveProperty('srcIsFull');
 });
 
 test('returns null for a scryfall card without images', () => {

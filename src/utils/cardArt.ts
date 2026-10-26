@@ -23,6 +23,11 @@ const manifest = artData as ArtManifest;
 
 export interface CardArt {
   src: string;
+  /**
+   * `src` is a whole real card (a Scryfall card with no art crop), not art. It is shown and printed
+   * uncropped, letterboxed in the art window, because the artist and copyright line must stay on it.
+   */
+  srcIsFull?: true;
   width?: number;
   height?: number;
   /** Full card scan, when one exists. */
@@ -56,7 +61,7 @@ export function getCardArt(card: Card, variantSeed = 0): CardArt | null {
     if (!src) return null;
     return {
       src,
-      ...(art && { width: SCRYFALL_ART_W, height: SCRYFALL_ART_H }),
+      ...(art ? { width: SCRYFALL_ART_W, height: SCRYFALL_ART_H } : { srcIsFull: true as const }),
       ...(full && { fullSrc: full, fullWidth: SCRYFALL_FULL_W, fullHeight: SCRYFALL_FULL_H }),
       ...(fullBack && { fullBackSrc: fullBack }),
     };
