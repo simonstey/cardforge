@@ -1,6 +1,6 @@
 import React, { useId, useState } from 'react';
 import { Card } from '../types/card';
-import { MANA, RARITY, colorPips, setDisplayName } from '../utils/cardHelpers';
+import { MANA, RARITY, backFaceCard, colorPips, setDisplayName } from '../utils/cardHelpers';
 import { getCardSetCode } from '../utils/boosterCollation';
 import { getCardArt } from '../utils/cardArt';
 import { Dialog } from './ui/Dialog';
@@ -68,7 +68,7 @@ export const CardModal: React.FC<CardModalProps> = ({ card, artSeed, onClose, on
                 </>
               ) : (
                 <div inert>
-                  <CardItem card={showBack && card.backFace ? { ...card, ...card.backFace } : card} eagerArt />
+                  <CardItem card={(showBack && backFaceCard(card)) || card} eagerArt />
                 </div>
               )}
               {hasBack && (

@@ -173,6 +173,8 @@ export const ScryfallImportDialog: React.FC<ScryfallImportDialogProps> = ({ card
     const controller = new AbortController();
     abortRef.current = controller;
     const opts = options;
+    // A pause from before (the client reports it when the dialog opens) is announced with what's left of it.
+    setPause(p => p && { ...p, seconds: Math.ceil((p.resumeAt - Date.now()) / 1000) });
     setState({ kind: 'fetching', fetched: 0 });
     try {
       // The token set is found through the set list, so wait for it if it's still loading.
@@ -290,7 +292,7 @@ export const ScryfallImportDialog: React.FC<ScryfallImportDialogProps> = ({ card
                     </Button>
                   </div>
                   {codeMissing && (
-                    <p id={`${id}-set-error`} className="mt-1.5 text-sm text-danger">
+                    <p id={`${id}-set-error`} role="alert" className="mt-1.5 text-sm text-danger">
                       Pick a set or type a set code.
                     </p>
                   )}
@@ -340,12 +342,13 @@ export const ScryfallImportDialog: React.FC<ScryfallImportDialogProps> = ({ card
                     Scryfall asked us to slow down, resuming in {secondsLeft} s
                   </p>
                 )}
-                {/* Announced once; the visible countdown above ticks silently. */}
-                <p aria-live="polite" className="sr-only">
-                  {pause && secondsLeft > 0 ? `Scryfall asked us to slow down, resuming in ${pause.seconds} seconds.` : ''}
-                </p>
               </div>
             )}
+            {/* Announced once; the visible countdown above ticks silently. Always mounted, so a pause that
+                was already running when the fetch started is announced too. */}
+            <p aria-live="polite" className="sr-only">
+              {busy && pause && secondsLeft > 0 ? `Scryfall asked us to slow down, resuming in ${pause.seconds} seconds.` : ''}
+            </p>
 
             {state.kind === 'error' && (
               <p role="alert" className="flex items-start gap-2 rounded-xl border border-rose-800 bg-danger-soft p-3 text-sm text-rose-100">

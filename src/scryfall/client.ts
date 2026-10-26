@@ -31,6 +31,10 @@ export interface ClientDeps {
 export interface ScryfallClient {
   get<T>(pathOrUrl: string, signal?: AbortSignal): Promise<T>;
   getAll<T>(pathOrUrl: string, signal?: AbortSignal, onPage?: (fetched: number, total?: number) => void): Promise<T[]>;
+  /**
+   * Replaces the status listener. A 429 pause still in progress is reported to the new listener at once,
+   * so a dialog reopened during the pause can say why requests wait.
+   */
   setStatusListener(fn?: (s: ClientStatus) => void): void;
 }
 
@@ -154,6 +158,15 @@ export function createClient(deps: ClientDeps = {}): ScryfallClient {
       total ??= page.total_cards;
       items.push(...page.data);
       onPage?.(items.length, total);
+      if (page.has_more && !page.next_page) {
+        // Returning the pages so far would look like the whole list, and a sync would then remove the rest.
+        const of = total === undefined ? '' : ` of ${total}`;
+        throw new ScryfallApiError(
+          `Scryfall’s results stopped after ${items.length}${of} with no next page. Try again in a moment.`,
+          200,
+          'incomplete_list',
+        );
+      }
       url = page.has_more ? page.next_page : undefined;
     }
     return items;
@@ -164,6 +177,7 @@ export function createClient(deps: ClientDeps = {}): ScryfallClient {
     getAll,
     setStatusListener(fn) {
       onStatus = fn;
+      if (fn && rateLimited && pausedUntil > now()) fn({ kind: 'rate-limited', resumeAt: pausedUntil });
     },
   };
 }

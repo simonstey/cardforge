@@ -1,6 +1,6 @@
 import React, { useId, useState } from 'react';
 import { Card, Rarity } from '../types/card';
-import { determineColors, colorPips, MANA, RARITY, RARITY_ORDER } from '../utils/cardHelpers';
+import { editedColors, colorPips, MANA, RARITY, RARITY_ORDER } from '../utils/cardHelpers';
 import { markUserModified } from '../scryfall/merge';
 import { Dialog } from './ui/Dialog';
 import { Button, IconButton } from './ui/Button';
@@ -48,7 +48,8 @@ export const CardEditorDialog: React.FC<CardEditorDialogProps> = ({ card, onCanc
 
   const nameMissing = !form.name.trim();
   const typeMissing = !form.type.trim();
-  const colors = determineColors(form.cost, form.type);
+  // From the cost, unless it is unchanged: a cost-less coloured card (a token) keeps its colours.
+  const colors = editedColors(card, form.cost, form.type);
   const pips = colorPips({ colors } as Card);
 
   const handleSubmit = (e: React.FormEvent) => {

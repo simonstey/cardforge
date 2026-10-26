@@ -109,6 +109,26 @@ export const SET_NAMES: Record<string, string> = {
   RBL: 'Rebels',
 };
 
+/**
+ * The back face as a card of its own, for drawing it with the card face component. The front's cost,
+ * text, flavour and stats don't carry over to a back face that has none; everything else (rarity,
+ * colours, artist, images) is the card's.
+ */
+export function backFaceCard(card: Card): Card | undefined {
+  if (!card.backFace) return undefined;
+  const { backFace, cost: _cost, text: _text, flavorText: _flavor, powerToughness: _stats, ...rest } = card;
+  return { ...rest, ...backFace };
+}
+
+/**
+ * The colours of a card saved from the editor. They come from the cost, except that an unchanged cost
+ * keeps the stored colours: tokens and other cards with colours their cost doesn't show stay coloured.
+ */
+export function editedColors(original: Card | null, cost: string, type: string): CardColor[] {
+  if (original?.colors?.length && cost.trim() === (original.cost ?? '').trim()) return original.colors;
+  return determineColors(cost, type);
+}
+
 /** Display name for a set code: the static name, else the `setName` of a card in that set, else the code. */
 export function setDisplayName(code: string, cards: Card[] = []): string {
   return SET_NAMES[code] ?? cards.find(c => c.setCode === code && c.setName)?.setName ?? code;

@@ -31,7 +31,8 @@ function setup(responses: (Response | Error)[], latencyMs = 0) {
     },
     onStatus: (s) => statuses.push(s),
   });
-  return { client, sleeps, requests, statuses, hooks };
+  const clock = { advance: (ms: number) => void (time += ms) };
+  return { client, sleeps, requests, statuses, hooks, clock };
 }
 
 afterEach(() => {
@@ -99,6 +100,24 @@ test('setStatusListener replaces the status callback', async () => {
   expect(seen.map((s) => s.kind)).toEqual(['rate-limited', 'ok']);
 });
 
+test('a new status listener hears about a 429 pause still in progress', async () => {
+  const controller = new AbortController();
+  const { client, hooks, clock } = setup([tooMany()]);
+  // The import is cancelled (the dialog closed) during the pause, which outlives it.
+  hooks.onSleep = () => controller.abort();
+  await client.get('/sets/neo', controller.signal).catch(() => undefined);
+
+  const seen: ClientStatus[] = [];
+  client.setStatusListener((s) => seen.push(s));
+  expect(seen).toEqual([{ kind: 'rate-limited', resumeAt: 40_000 }]);
+
+  // Once the pause is over there is nothing to replay.
+  clock.advance(30_000);
+  const later: ClientStatus[] = [];
+  client.setStatusListener((s) => later.push(s));
+  expect(later).toEqual([]);
+});
+
 test('follows next_page until has_more is false', async () => {
   const page2 = `${API}/cards/search?format=json&page=2&q=e%3Aneo&unique=prints`;
   const { client, sleeps, requests } = setup([
@@ -115,6 +134,20 @@ test('follows next_page until has_more is false', async () => {
   ]);
   // The absolute next_page URL is still spaced as a search.
   expect(sleeps).toEqual([500]);
+});
+
+test('a page with has_more but no next_page is an error, not a short list', async () => {
+  const { client, requests } = setup([
+    json({ object: 'list', total_cards: 514, has_more: true, data: [{ id: 'a' }, { id: 'b' }] }),
+  ]);
+  const err = await client.getAll('/cards/search?q=e:neo').catch((e: unknown) => e);
+  expect(err).toBeInstanceOf(ScryfallApiError);
+  expect(err).toMatchObject({ message: 'Scryfall’s results stopped after 2 of 514 with no next page. Try again in a moment.' });
+  expect(requests).toHaveLength(1);
+
+  // Lists without a total (the set list) say how many arrived.
+  const sets = setup([json({ object: 'list', has_more: true, next_page: null, data: [{ code: 'neo' }] })]);
+  await expect(sets.client.getAll('/sets')).rejects.toThrow('Scryfall’s results stopped after 1 with no next page.');
 });
 
 const noMatches = { object: 'error', code: 'not_found', status: 404, details: 'Your query didn’t match any cards.' };
