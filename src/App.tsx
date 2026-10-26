@@ -1,6 +1,8 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Card, BoosterSlotConfig, BoosterPack } from './types/card';
 import { STAR_WARS_SET } from './data/starWarsSet';
+import { CARD_SET_VERSION, resolveLoadedCards } from './utils/cardDatabase';
+import { openCardStore, CardStore } from './utils/storage';
 import { generateBoosterBox } from './utils/boosterCollation';
 import { setSoundEnabled } from './utils/audioFeedback';
 import { BoosterConfigurator } from './components/BoosterConfigurator';
@@ -18,10 +20,6 @@ const PrintSheetModal = lazy(() =>
   import('./components/PrintSheetModal').then(m => ({ default: m.PrintSheetModal }))
 );
 
-const STORAGE_KEY_CARDS = 'cardforge_custom_cards_v1';
-const STORAGE_KEY_CARD_SET_VERSION = 'cardforge_card_set_version';
-/** Bump when the built-in card set changes; databases saved with an older set are rebased onto the new one. */
-const CARD_SET_VERSION = 2;
 const STORAGE_KEY_CONFIG = 'cardforge_booster_config_v1';
 const STORAGE_KEY_SOUND = 'cardforge_sound_v1';
 
@@ -50,25 +48,6 @@ function readStorage<T>(key: string, fallback: T, parse: (raw: string) => T): T 
   return fallback;
 }
 
-/** Built-in set cards come from the SWTG PDFs; anything else was created or imported by the user. */
-const isSetCard = (card: Card) => (card.source ?? '').startsWith('swtg-');
-
-/**
- * Load the saved card database. A database saved with an older built-in set keeps the
- * user's own cards and takes the current set for everything else.
- */
-function loadCards(): { cards: Card[]; keptCustom: number | null } {
-  const saved = readStorage<Card[] | null>(STORAGE_KEY_CARDS, null, raw => {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
-  });
-  if (!saved) return { cards: STAR_WARS_SET.cards, keptCustom: null };
-  const version = readStorage(STORAGE_KEY_CARD_SET_VERSION, 1, raw => Number(raw) || 1);
-  if (version === CARD_SET_VERSION) return { cards: saved, keptCustom: null };
-  const custom = saved.filter(c => !isSetCard(c));
-  return { cards: [...custom, ...STAR_WARS_SET.cards], keptCustom: custom.length };
-}
-
 function writeStorage(key: string, value: string) {
   try {
     localStorage.setItem(key, value);
@@ -80,8 +59,12 @@ function writeStorage(key: string, value: string) {
 export default function App() {
   const toast = useToast();
 
-  const [initialLoad] = useState(loadCards);
-  const [cards, setCards] = useState<Card[]>(initialLoad.cards);
+  // The card database lives in IndexedDB, so it loads asynchronously after mount.
+  const [store, setStore] = useState<CardStore | null>(null);
+  const [cards, setCards] = useState<Card[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const saveCounter = useRef(0);
+  const saveFailing = useRef(false);
 
   const [config, setConfig] = useState<BoosterSlotConfig>(() =>
     readStorage(STORAGE_KEY_CONFIG, DEFAULT_CONFIG, raw => ({ ...DEFAULT_CONFIG, ...JSON.parse(raw) }))
@@ -100,21 +83,64 @@ export default function App() {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
   useEffect(() => {
-    writeStorage(STORAGE_KEY_CARDS, JSON.stringify(cards));
-    writeStorage(STORAGE_KEY_CARD_SET_VERSION, String(CARD_SET_VERSION));
-  }, [cards]);
-
-  // Tell returning users their saved database moved to the updated card set.
-  useEffect(() => {
-    if (initialLoad.keptCustom === null) return;
-    const kept = initialLoad.keptCustom;
-    toast({
-      message: `The card set was updated to ${STAR_WARS_SET.cards.length} cards.${
-        kept > 0 ? ` Your ${kept} custom ${kept === 1 ? 'card was' : 'cards were'} kept.` : ''
-      }`,
-      duration: 8000,
-    });
+    let cancelled = false;
+    (async () => {
+      try {
+        const opened = await openCardStore();
+        const { cards: saved, version } = await opened.load();
+        if (cancelled) return;
+        const resolved = resolveLoadedCards(saved, version);
+        setStore(opened);
+        setCards(resolved.cards);
+        setLoaded(true);
+        // Tell returning users their saved database moved to the updated card set.
+        if (resolved.keptCustom !== null) {
+          const kept = resolved.keptCustom;
+          toast({
+            message: `The card set was updated to ${STAR_WARS_SET.cards.length} cards.${
+              kept > 0 ? ` Your ${kept} custom ${kept === 1 ? 'card was' : 'cards were'} kept.` : ''
+            }`,
+            duration: 8000,
+          });
+        }
+      } catch (e) {
+        if (cancelled) return;
+        console.error('Failed to open the card database', e);
+        // No store is kept, so nothing is ever written over the database we couldn't read.
+        setCards(STAR_WARS_SET.cards);
+        setLoaded(true);
+        toast({
+          message: `Couldn’t open your saved card database (${e instanceof Error ? e.name : 'unknown error'}). Changes in this tab won’t be saved.`,
+          tone: 'error',
+          duration: 8000,
+        });
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  useEffect(() => {
+    if (!loaded || !store) return;
+    const id = ++saveCounter.current;
+    store.save(cards, CARD_SET_VERSION).then(
+      () => {
+        // A superseded save resolves without writing, so only the latest one ends a failure streak.
+        if (id === saveCounter.current) saveFailing.current = false;
+      },
+      (e: unknown) => {
+        console.error('Failed to save the card database', e);
+        if (saveFailing.current) return;
+        saveFailing.current = true;
+        toast({
+          message: `Couldn’t save your card database (${e instanceof Error ? e.name : 'unknown error'}). Your changes stay in this tab until you reload.`,
+          tone: 'error',
+          duration: 8000,
+        });
+      }
+    );
+  }, [cards, loaded, store]);
 
   useEffect(() => {
     writeStorage(STORAGE_KEY_CONFIG, JSON.stringify(config));
@@ -125,10 +151,10 @@ export default function App() {
     writeStorage(STORAGE_KEY_SOUND, String(isSoundEnabled));
   }, [isSoundEnabled]);
 
-  // Generate initial box on initial load
+  // Generate the initial box once the database has loaded
   useEffect(() => {
-    handleGeneratePacks();
-  }, []);
+    if (loaded) handleGeneratePacks();
+  }, [loaded]);
 
   const handleGeneratePacks = () => {
     setIsGenerating(true);
@@ -258,7 +284,9 @@ export default function App() {
       </header>
 
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-6">
-        {activeView === 'simulator' ? (
+        {!loaded ? (
+          <p className="text-sm text-fg-muted">Loading your card database…</p>
+        ) : activeView === 'simulator' ? (
           <>
             <BoosterConfigurator
               cards={cards}
