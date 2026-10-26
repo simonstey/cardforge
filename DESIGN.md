@@ -250,12 +250,12 @@ Controls are precise and quiet: small radii, hairline borders, one bright filled
 A cool slate-navy ramp for chrome, one electric cyan for tools, one warm foil gold for ceremony, and a separate identity vocabulary (mana, rarity) that belongs to the cards.
 
 ### Primary
-- **Hologram Cyan** (`accent`, oklch(78.9% 0.154 211.53)): fill of the primary action button, the wordmark tile, distribution bars, `::selection`, the focus ring, caret and native `accent-color`. Carries **Accent Ink** (`accent-ink`, the well color) as text, never white. Hover brightens to **Hologram Cyan Bright** (`accent-hover`).
+- **Hologram Cyan** (`accent`, oklch(78.9% 0.154 211.53)): fill of the primary action button, the card and anvil of the logo mark, distribution bars, `::selection`, the focus ring, caret and native `accent-color`. Carries **Accent Ink** (`accent-ink`, the well color) as text, never white. Hover brightens to **Hologram Cyan Bright** (`accent-hover`).
 - **Cyan Glow** (`accent-fg`): cyan text on dark, used for selected chip and nav labels, the toast Undo action, and icons in an active toggle.
 - **Cyan Depth** (`accent-soft`) and **Cyan Edge** (`accent-line`): the fill and border pair for selected chips, the active nav item, the selected pack in the strip, and the tinted icon tile in panel headers.
 
 ### Secondary
-- **Foil Gold** (`foil`, oklch(82.8% 0.189 84.429)): the pack-opening signature. Fills the Open pack button and the Tear open pill on the wrapper, tints the wrapper border, the card back's rings and its "CardForge" mark. Carries **Foil Ink** (`foil-ink`), a deep amber-brown. Hover goes to **Foil Bright** (`foil-hover`).
+- **Foil Gold** (`foil`, oklch(82.8% 0.189 84.429)): the pack-opening signature. Fills the Open pack button and the Tear open pill on the wrapper, tints the wrapper border, the card back's rings and its "CardForge" mark. Outside the ceremony it appears once more, as the spark dashes of the logo mark (`LogoMark`, a card struck on an anvil, on a Void tile; `public/favicon.svg` is the same drawing). Carries **Foil Ink** (`foil-ink`), a deep amber-brown. Hover goes to **Foil Bright** (`foil-hover`).
 
 ### Tertiary (identity vocabulary, cards only)
 - **Rarity identity** (`rarity-c` Pale Slate, `rarity-u` Sky, `rarity-r` Gold Leaf, `rarity-m` Mythic Ember, `rarity-l` Jade, `rarity-t` Lilac): the rarity gem on each card face, rarity badges, rarity counts in the database summary, and the mythic tone of the toggle chip. All are light (75 to 88% L) so they read on every surface. Mythic also has a fill and an edge, **Ember Depth** (`rarity-m-soft`) and **Ember Edge** (`rarity-m-line`), for mythic badges, the mythic chip tone and the mythic card's shadow tint.

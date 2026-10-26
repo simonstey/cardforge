@@ -16,6 +16,7 @@ import { setDisplayName } from './utils/cardHelpers';
 import { Button, IconButton } from './components/ui/Button';
 import { useToast } from './components/ui/Toast';
 import { cx } from './components/ui/cx';
+import { LogoMark } from './components/LogoMark';
 import { Package, Database, Printer, RotateCcw } from 'lucide-react';
 
 // jsPDF only loads when the print dialog is first opened.
@@ -252,8 +253,8 @@ export default function App() {
       <header className="sticky top-0 z-40 border-b border-line bg-void sm:bg-void/85 sm:backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-14 sm:min-h-16 py-2 flex items-center gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="grid place-items-center size-9 rounded-xl bg-accent text-accent-ink shrink-0" aria-hidden>
-              <Package className="size-5" />
+            <div className="grid place-items-center size-9 rounded-xl border border-line-strong bg-void shrink-0" aria-hidden>
+              <LogoMark sparks={2} className="size-8" />
             </div>
             <div className="min-w-0">
               <h1 className="text-wordmark text-fg-strong">CardForge</h1>
