@@ -2,7 +2,8 @@ import jsPDF from 'jspdf';
 import { Card, BoosterPack } from '../types/card';
 import { getRarityLabel } from './cardHelpers';
 import { getCardArt } from './cardArt';
-import { plainRulesText } from './rulesText';
+import { pdfSafeText } from './pdfText';
+import { plainCost, plainRulesText } from './rulesText';
 
 export interface PdfExportOptions {
   paperSize: 'letter' | 'a4';
@@ -274,7 +275,9 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(7.5);
   pdf.setTextColor(20, 20, 20);
-  const title = card.name.length > 22 ? card.name.substring(0, 20) + '...' : card.name;
+  // Every card string goes through pdfSafeText: the standard font garbles a line with any character it lacks.
+  const name = pdfSafeText(card.name);
+  const title = name.length > 22 ? name.substring(0, 20) + '...' : name;
   pdf.text(title, x + 5, y + 8.8);
 
   // Mana Cost
@@ -282,7 +285,7 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
     pdf.setFont('helvetica', 'bold');
     pdf.setFontSize(7);
     pdf.setTextColor(60, 60, 60);
-    pdf.text(card.cost, x + w - 5, y + 8.8, { align: 'right' });
+    pdf.text(pdfSafeText(plainCost(card.cost)), x + w - 5, y + 8.8, { align: 'right' });
   }
 
   // Art box: the card's artwork, or a neutral panel for cards without art
@@ -313,7 +316,8 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(6.5);
   pdf.setTextColor(30, 30, 30);
-  const typeText = card.type.length > 28 ? card.type.substring(0, 26) + '...' : card.type;
+  const type = pdfSafeText(card.type);
+  const typeText = type.length > 28 ? type.substring(0, 26) + '...' : type;
   pdf.text(typeText, x + 5, y + 45.8);
 
   // Rarity Symbol / Badge
@@ -340,7 +344,7 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
   pdf.setFontSize(5.8);
   pdf.setTextColor(30, 30, 30);
 
-  const textLines = pdf.splitTextToSize(plainRulesText(card.text || ''), w - 10);
+  const textLines = pdf.splitTextToSize(pdfSafeText(plainRulesText(card.text || '')), w - 10);
   const maxLines = 6;
   const displayLines = textLines.slice(0, maxLines);
   let textY = y + 52.8;
@@ -355,7 +359,7 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
     pdf.setFont('helvetica', 'italic');
     pdf.setFontSize(5.2);
     pdf.setTextColor(110, 110, 110);
-    const flavorLines = pdf.splitTextToSize(card.flavorText, w - 10).slice(0, 2);
+    const flavorLines = pdf.splitTextToSize(pdfSafeText(card.flavorText), w - 10).slice(0, 2);
     flavorLines.forEach((line: string) => {
       pdf.text(line, x + 5, textY + 1);
       textY += 2.8;
@@ -370,14 +374,14 @@ function drawCardFace(pdf: jsPDF, card: Card, x: number, y: number, packNum: num
     pdf.setFont('helvetica', 'bold');
     pdf.setFontSize(7.5);
     pdf.setTextColor(20, 20, 20);
-    pdf.text(card.powerToughness, x + w - 10, y + 76.4, { align: 'center' });
+    pdf.text(pdfSafeText(card.powerToughness), x + w - 10, y + 76.4, { align: 'center' });
   }
 
   // Bottom Footer / Artist & Pack Index
   pdf.setFont('helvetica', 'normal');
   pdf.setFontSize(4.8);
   pdf.setTextColor(100, 100, 100);
-  const artistText = card.artist ? `Illus. ${card.artist}` : 'CardForge';
+  const artistText = card.artist ? `Illus. ${pdfSafeText(card.artist)}` : 'CardForge';
   pdf.text(artistText, x + 4, y + 80);
   pdf.text(`Pack #${packNum} • ${getRarityLabel(card.rarity)}`, x + 4, y + 83);
 }
@@ -406,7 +410,7 @@ function drawCardBack(pdf: jsPDF, x: number, y: number, backTitle: string): void
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(8.5);
   pdf.setTextColor(230, 200, 110);
-  pdf.text(backTitle, x + w / 2, y + h / 2 - 2, { align: 'center' });
+  pdf.text(pdfSafeText(backTitle), x + w / 2, y + h / 2 - 2, { align: 'center' });
 
   pdf.setFontSize(5.5);
   pdf.setTextColor(170, 185, 205);
